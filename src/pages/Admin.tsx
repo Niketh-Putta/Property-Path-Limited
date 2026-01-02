@@ -135,7 +135,7 @@ export default function Admin() {
     const base =
       env.publicSiteUrl?.trim().replace(/\/+$/, '/') ??
       `${window.location.origin}${window.location.pathname.replace(/\/?$/, '/')}`
-    const redirectTo = `${base}#/auth/callback`
+    const redirectTo = base
 
     const { error: signInError } = await supabase!.auth.signInWithOtp({
       email: trimmed,

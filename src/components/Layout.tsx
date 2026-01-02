@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import AuthCodeHandler from './AuthCodeHandler'
 
 export default function Layout() {
   const location = useLocation()
@@ -19,6 +20,7 @@ export default function Layout() {
 
       <Navbar />
       <main>
+        <AuthCodeHandler />
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}

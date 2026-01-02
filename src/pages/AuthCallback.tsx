@@ -7,7 +7,10 @@ import { supabase, supabaseConfigured } from '../lib/supabase'
 export default function AuthCallback() {
   const navigate = useNavigate()
   const url = new URL(window.location.href)
-  const code = url.searchParams.get('code')
+  const hash = url.hash ?? ''
+  const hashQuery = hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : ''
+  const hashParams = new URLSearchParams(hashQuery)
+  const code = url.searchParams.get('code') ?? hashParams.get('code')
   const initialError = !supabaseConfigured()
     ? 'Authentication is not configured.'
     : !code
@@ -26,6 +29,7 @@ export default function AuthCallback() {
           setError(error.message)
           return
         }
+        window.history.replaceState({}, '', `${window.location.pathname}${window.location.hash}`)
         navigate('/admin', { replace: true })
       })
       .catch((err) => {
