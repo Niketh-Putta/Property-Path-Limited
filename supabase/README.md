@@ -18,6 +18,8 @@ In Supabase: **Authentication → URL Configuration**
   - `https://niketh-putta.github.io/Property-Path-Limited/`
   - `http://localhost:5173/` (for local dev)
 
+Note: The admin login flow uses a callback route at `/#/auth/callback`.
+
 ## 3) Set env vars
 
 Locally: copy `.env.example` → `.env.local` and fill:

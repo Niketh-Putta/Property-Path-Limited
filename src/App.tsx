@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import Admin from './pages/Admin'
+import AuthCallback from './pages/AuthCallback'
 import VerifyAgent from './pages/VerifyAgent'
 import ProjectBangaloreEastVillas from './pages/ProjectBangaloreEastVillas'
 import NotFound from './pages/NotFound'
@@ -12,6 +13,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/verify-agent" element={<VerifyAgent />} />
         <Route
           path="/projects/bangalore-east-villas"

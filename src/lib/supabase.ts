@@ -16,10 +16,16 @@ export type ConsultationRow = ConsultationInsert & {
 
 export const supabase =
   env.supabaseUrl && env.supabaseAnonKey
-    ? createClient(env.supabaseUrl, env.supabaseAnonKey)
+    ? createClient(env.supabaseUrl, env.supabaseAnonKey, {
+        auth: {
+          flowType: 'pkce',
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: true,
+        },
+      })
     : null
 
 export function supabaseConfigured() {
   return Boolean(supabase)
 }
-
