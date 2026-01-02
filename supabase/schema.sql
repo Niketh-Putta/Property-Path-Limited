@@ -12,6 +12,11 @@ create table if not exists public.consultations (
 
 create index if not exists consultations_created_at_idx on public.consultations (created_at desc);
 
+-- Ensure API roles have table privileges (RLS policies alone are not enough).
+grant usage on schema public to anon, authenticated;
+grant insert on table public.consultations to anon;
+grant select, insert on table public.consultations to authenticated;
+
 alter table public.consultations enable row level security;
 
 -- Allow anyone (anon) to insert consultation requests.
