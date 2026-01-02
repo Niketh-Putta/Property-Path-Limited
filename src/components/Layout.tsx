@@ -1,8 +1,12 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 
 export default function Layout() {
+  const location = useLocation()
+  const reduceMotion = useReducedMotion()
+
   return (
     <div className="min-h-screen overflow-x-hidden">
       <div id="top" />
@@ -15,7 +19,21 @@ export default function Layout() {
 
       <Navbar />
       <main>
-        <Outlet />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={reduceMotion ? false : { opacity: 0, y: 10, filter: 'blur(6px)' }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }}
+            transition={
+              reduceMotion
+                ? { duration: 0.1 }
+                : { duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }
+            }
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
       </main>
       <Footer />
     </div>

@@ -41,6 +41,9 @@ export default function VerifyAgent() {
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Reveal>
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-white/70 ring-1 ring-white/10">
+              SAFE INVESTMENTS. STRONG RETURNS.
+            </p>
             <SectionHeading
               eyebrow="AGENT VERIFICATION"
               title="Verify an agent before you commit"

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import LinkButton from './LinkButton'
 import Button from './Button'
+import BrandMark from './BrandMark'
 import { cn } from '../lib/cn'
 
 type NavItem = { label: string; sectionId: string }
@@ -51,11 +52,7 @@ export default function Navbar() {
             else navigate('/')
           }}
         >
-          <span className="h-10 w-10 rounded-xl bg-gradient-to-br from-gold-300/90 to-gold-700/70 shadow-soft ring-1 ring-gold-100/20" />
-          <span className="whitespace-nowrap text-sm font-semibold tracking-tight text-canvas-50">
-            PropertyPath
-            <span className="text-white/55"> LTD</span>
-          </span>
+          <BrandMark showWordmark className="select-none" />
         </button>
 
         <nav className="hidden items-center gap-1 md:flex">

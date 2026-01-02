@@ -8,6 +8,7 @@ import {
   Headset,
   ShieldCheck,
 } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
 import LinkButton from '../components/LinkButton'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
@@ -93,6 +94,8 @@ const services = [
 ]
 
 export default function Home() {
+  const reduceMotion = useReducedMotion()
+
   return (
     <div>
       <section className="relative overflow-hidden">
@@ -102,12 +105,17 @@ export default function Home() {
               <Reveal>
                 <p className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-white/70 ring-1 ring-white/10">
                   <ClipboardCheck className="h-4 w-4 text-gold-300/90" />
-                  Verified listings. Transparent support. Long-term accountability.
+                  SAFE INVESTMENTS. STRONG RETURNS.
                 </p>
               </Reveal>
               <Reveal delay={0.06}>
                 <h1 className="mt-5 text-3xl font-semibold leading-tight tracking-tight text-canvas-50 sm:text-5xl">
-                  India’s Most Trusted Real Estate Digital Marketing Partner
+                  <span className="bg-gradient-to-r from-gold-100 via-gold-300 to-gold-700 bg-clip-text text-transparent">
+                    Property Path LTD
+                  </span>
+                  <span className="block text-white/80">
+                    India’s Most Trusted Real Estate Digital Marketing Partner
+                  </span>
                 </h1>
               </Reveal>
               <Reveal delay={0.12}>
@@ -177,7 +185,25 @@ export default function Home() {
 
             <div className="lg:col-span-5">
               <Reveal delay={0.1}>
-                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-soft">
+                <motion.div
+                  className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-soft"
+                  animate={
+                    reduceMotion
+                      ? undefined
+                      : {
+                          y: [0, -6, 0],
+                        }
+                  }
+                  transition={
+                    reduceMotion
+                      ? undefined
+                      : {
+                          duration: 6,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        }
+                  }
+                >
                   <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full bg-gold-300/14 blur-2xl" />
                   <div className="absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-white/8 blur-2xl" />
 
@@ -188,6 +214,23 @@ export default function Home() {
                     A premium operating standard for buyers, investors, and developers:
                     verified data, documented communication, and accountability that lasts.
                   </p>
+                  <div className="mt-5 grid grid-cols-3 gap-3">
+                    {[
+                      { k: '10+', v: 'Years expertise' },
+                      { k: '100%', v: 'Verified focus' },
+                      { k: '0', v: 'Misinformation' },
+                    ].map((s) => (
+                      <div
+                        key={s.k}
+                        className="rounded-2xl border border-white/10 bg-ink-950/30 p-3 text-center"
+                      >
+                        <p className="text-lg font-semibold tracking-tight text-canvas-50">
+                          {s.k}
+                        </p>
+                        <p className="mt-0.5 text-xs text-white/60">{s.v}</p>
+                      </div>
+                    ))}
+                  </div>
 
                   <div className="mt-6 grid gap-3">
                     {differentiators.slice(0, 3).map((item) => {
@@ -220,7 +263,7 @@ export default function Home() {
                       Verify an agent now <ArrowRight className="h-4 w-4" />
                     </LinkButton>
                   </div>
-                </div>
+                </motion.div>
               </Reveal>
             </div>
           </div>

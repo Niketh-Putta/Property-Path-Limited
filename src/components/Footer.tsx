@@ -1,4 +1,5 @@
 import LinkButton from './LinkButton'
+import BrandMark from './BrandMark'
 
 export default function Footer() {
   return (
@@ -6,21 +7,14 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="h-10 w-10 rounded-xl bg-gradient-to-br from-gold-300/90 to-gold-700/70 shadow-soft ring-1 ring-gold-100/20" />
-              <div>
-                <p className="text-sm font-semibold text-canvas-50">
-                  PropertyPath <span className="text-white/55">LTD</span>
-                </p>
-                <p className="mt-0.5 text-xs text-white/55">
-                  India’s most trusted real estate digital marketing partner
-                </p>
-              </div>
-            </div>
+            <BrandMark showWordmark className="select-none" />
             <p className="mt-4 text-sm leading-7 text-white/70">
               We take complete ownership of every property we represent —
               including post-sale queries and dispute-related clarifications —
               so customers always have a trusted partner.
+            </p>
+            <p className="mt-4 text-xs font-semibold tracking-[0.18em] text-white/55">
+              SAFE INVESTMENTS. STRONG RETURNS.
             </p>
           </div>
 
