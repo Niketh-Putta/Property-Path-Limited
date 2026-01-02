@@ -2,6 +2,13 @@
 
 Premium marketing site for PropertyPath LTD, built with React + TypeScript + Vite, styled with Tailwind, and animated with Framer Motion.
 
+## Supabase (optional)
+
+You can store consultation requests in Supabase and view them at `/admin`.
+
+Setup docs:
+- `supabase/README.md`
+
 ## Local development
 
 ```bash

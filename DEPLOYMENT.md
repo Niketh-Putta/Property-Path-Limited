@@ -8,6 +8,13 @@ This site deploys via GitHub Actions to GitHub Pages on every push to `main` usi
 2. In GitHub: **Repo → Settings → Pages**
 3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
 
+## Environment variables (Supabase)
+
+If you enable Supabase storage, add these **GitHub repo secrets** so the build can embed them:
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `VITE_ADMIN_EMAILS` (comma-separated)
+
 ## Deployed URL
 
 GitHub Pages URL format:
@@ -15,4 +22,3 @@ GitHub Pages URL format:
 `https://<github-username>.github.io/<repo-name>/`
 
 After the first push, watch **Actions → “Deploy to GitHub Pages”** until it completes, then open the URL above.
-

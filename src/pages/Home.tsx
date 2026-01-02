@@ -8,11 +8,13 @@ import {
   Headset,
   ShieldCheck,
 } from 'lucide-react'
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import LinkButton from '../components/LinkButton'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import { cn } from '../lib/cn'
+import { supabase, supabaseConfigured } from '../lib/supabase'
 
 const differentiators = [
   { icon: BadgeCheck, title: '100% verified listings', desc: 'No shortcuts — every listing is checked for credibility and compliance.' },
@@ -550,22 +552,54 @@ export default function Home() {
 }
 
 function ContactForm() {
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [error, setError] = useState<string | null>(null)
+
   return (
     <form
       className="mt-6 grid gap-3"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault()
+        setStatus('submitting')
+        setError(null)
+
         const formData = new FormData(e.currentTarget)
         const name = String(formData.get('name') ?? '').trim()
         const email = String(formData.get('email') ?? '').trim()
         const phone = String(formData.get('phone') ?? '').trim()
         const message = String(formData.get('message') ?? '').trim()
 
-        const subject = encodeURIComponent('PropertyPath Consultation Request')
-        const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}\n`,
-        )
-        window.location.href = `mailto:info@property-path.in?subject=${subject}&body=${body}`
+        try {
+          if (supabaseConfigured()) {
+            const { error: insertError } = await supabase!
+              .from('consultations')
+              .insert([
+                {
+                  name,
+                  email,
+                  phone: phone.length ? phone : null,
+                  message,
+                  source: 'web',
+                },
+              ])
+
+            if (insertError) throw insertError
+
+            setStatus('success')
+            e.currentTarget.reset()
+            return
+          }
+
+          const subject = encodeURIComponent('PropertyPath Consultation Request')
+          const body = encodeURIComponent(
+            `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}\n`,
+          )
+          window.location.href = `mailto:info@property-path.in?subject=${subject}&body=${body}`
+          setStatus('success')
+        } catch (err) {
+          setStatus('error')
+          setError(err instanceof Error ? err.message : 'Failed to submit request')
+        }
       }}
     >
       <div className="grid gap-3 sm:grid-cols-2">
@@ -591,9 +625,11 @@ function ContactForm() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
+          disabled={status === 'submitting'}
           className="inline-flex h-12 items-center justify-center rounded-xl bg-gold-300 px-5 text-sm font-medium text-ink-950 shadow-glow transition hover:bg-gold-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/40"
         >
-          Book a Consultation <ArrowRight className="ml-2 h-4 w-4" />
+          {status === 'submitting' ? 'Submitting…' : 'Book a Consultation'}{' '}
+          <ArrowRight className="ml-2 h-4 w-4" />
         </button>
         <a
           className="inline-flex h-12 items-center justify-center rounded-xl bg-white/10 px-5 text-sm font-medium text-white/85 ring-1 ring-white/15 transition hover:bg-white/14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/30"
@@ -604,9 +640,21 @@ function ContactForm() {
           WhatsApp Us <ArrowRight className="ml-2 h-4 w-4" />
         </a>
       </div>
+      {status === 'success' ? (
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+          Received. Our team will get back to you shortly.
+        </div>
+      ) : null}
+      {status === 'error' ? (
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+          Couldn’t submit right now. {error ? <span className="text-white/60">{error}</span> : null}
+        </div>
+      ) : null}
       <p className="text-xs leading-6 text-white/45">
-        By submitting, you’ll open your email client to send your request to{' '}
-        <span className="text-white/70">info@property-path.in</span>.
+        {supabaseConfigured()
+          ? 'By submitting, your request is stored securely for our team to review.'
+          : 'By submitting, you’ll open your email client to send your request to '}
+        {supabaseConfigured() ? null : <span className="text-white/70">info@property-path.in</span>}
       </p>
     </form>
   )
