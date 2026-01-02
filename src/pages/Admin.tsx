@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { LogOut, ShieldCheck } from 'lucide-react'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
@@ -8,9 +8,16 @@ import { supabase, supabaseConfigured, type ConsultationRow } from '../lib/supab
 
 type AuthView = 'loading' | 'signed_out' | 'signed_in' | 'unauthorized'
 
+const adminAllowlist = new Set(env.adminEmails)
+const adminAllowlistReady = adminAllowlist.size > 0
+
 export default function Admin() {
   const [authView, setAuthView] = useState<AuthView>(() =>
-    supabaseConfigured() ? 'loading' : 'signed_out',
+    supabaseConfigured()
+      ? adminAllowlistReady
+        ? 'loading'
+        : 'unauthorized'
+      : 'signed_out',
   )
   const [email, setEmail] = useState('')
   const [notice, setNotice] = useState<string | null>(null)
@@ -18,10 +25,9 @@ export default function Admin() {
   const [rows, setRows] = useState<ConsultationRow[]>([])
   const [loadingRows, setLoadingRows] = useState(false)
 
-  const allowlist = useMemo(() => new Set(env.adminEmails), [])
-
   useEffect(() => {
     if (!supabaseConfigured()) return
+    if (!adminAllowlistReady) return
 
     let active = true
     const load = async () => {
@@ -30,8 +36,7 @@ export default function Admin() {
       const session = data.session
       const sessionEmail = session?.user?.email?.toLowerCase()
       if (!session) setAuthView('signed_out')
-      else if (sessionEmail && allowlist.size > 0 && !allowlist.has(sessionEmail))
-        setAuthView('unauthorized')
+      else if (!sessionEmail || !adminAllowlist.has(sessionEmail)) setAuthView('unauthorized')
       else setAuthView('signed_in')
     }
 
@@ -40,8 +45,7 @@ export default function Admin() {
     const { data: sub } = supabase!.auth.onAuthStateChange((_evt, session) => {
       const sessionEmail = session?.user?.email?.toLowerCase()
       if (!session) setAuthView('signed_out')
-      else if (sessionEmail && allowlist.size > 0 && !allowlist.has(sessionEmail))
-        setAuthView('unauthorized')
+      else if (!sessionEmail || !adminAllowlist.has(sessionEmail)) setAuthView('unauthorized')
       else setAuthView('signed_in')
     })
 
@@ -49,7 +53,7 @@ export default function Admin() {
       active = false
       sub.subscription.unsubscribe()
     }
-  }, [allowlist])
+  }, [])
 
   useEffect(() => {
     if (authView !== 'signed_in' || !supabaseConfigured()) return
@@ -141,8 +145,9 @@ export default function Admin() {
                 </div>
               ) : authView === 'unauthorized' ? (
                 <div className="text-sm leading-7 text-white/70">
-                  This account is not authorized. Add your email to `VITE_ADMIN_EMAILS`
-                  and redeploy.
+                  {adminAllowlistReady
+                    ? 'This account is not authorized. Ask an admin to add your email to VITE_ADMIN_EMAILS and redeploy.'
+                    : 'Admin allowlist is not configured. Set VITE_ADMIN_EMAILS (comma-separated) and redeploy.'}
                 </div>
               ) : (
                 <div className="grid gap-3">
