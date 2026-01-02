@@ -20,10 +20,9 @@ export default function Admin() {
       : 'signed_out',
   )
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [notice, setNotice] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [sendingLink, setSendingLink] = useState(false)
-  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null)
   const [rows, setRows] = useState<ConsultationRow[]>([])
   const [loadingRows, setLoadingRows] = useState(false)
   const [setupHint, setSetupHint] = useState<string | null>(null)
@@ -123,49 +122,27 @@ export default function Admin() {
     setLoadingRows(false)
   }
 
-  async function sendMagicLink() {
+  async function signIn() {
     setError(null)
     setNotice(null)
 
     const trimmed = email.trim()
-    if (!trimmed) return
+    if (!trimmed || !password) return
     if (!supabaseConfigured()) {
       setError('Supabase is not configured yet.')
       return
     }
-    if (sendingLink) return
-    if (cooldownUntil && Date.now() < cooldownUntil) {
-      const seconds = Math.ceil((cooldownUntil - Date.now()) / 1000)
-      setNotice(`Please wait ${seconds}s before requesting another login link.`)
-      return
-    }
 
-    const base =
-      env.publicSiteUrl?.trim().replace(/\/+$/, '/') ??
-      `${window.location.origin}${window.location.pathname.replace(/\/?$/, '/')}`
-    const redirectTo = base
-
-    setSendingLink(true)
-    const { error: signInError } = await supabase!.auth.signInWithOtp({
+    const { error: signInError } = await supabase!.auth.signInWithPassword({
       email: trimmed,
-      options: { emailRedirectTo: redirectTo },
+      password,
     })
-    setSendingLink(false)
 
     if (signInError) {
-      const status = (signInError as unknown as { status?: number }).status
-      if (status === 429) {
-        setError(
-          'Too many login requests. Please wait a few minutes and try again.',
-        )
-        setCooldownUntil(Date.now() + 5 * 60 * 1000)
-      } else {
-        setError(signInError.message)
-      }
+      setError(signInError.message)
       return
     }
-    setNotice('Login link sent. Check your inbox (and spam/junk).')
-    setCooldownUntil(Date.now() + 60 * 1000)
+    setNotice('Signed in successfully.')
   }
 
   async function signOut() {
@@ -226,15 +203,24 @@ export default function Admin() {
                     placeholder="you@company.com"
                     className="h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
                   />
-                  <Button
-                    variant="primary"
-                    onClick={sendMagicLink}
-                    disabled={!email.trim() || sendingLink}
-                  >
-                    {sendingLink ? 'Sending…' : 'Send magic link'}
+                  <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                    PASSWORD
+                  </label>
+                  <input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    type="password"
+                    className="h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                  />
+                  <Button variant="primary" onClick={signIn} disabled={!email.trim() || !password}>
+                    Sign in
                   </Button>
                   <p className="text-xs leading-6 text-white/45">
-                    You’ll receive an email login link. Only approved admin emails can access this dashboard.
+                    Only approved admin emails can access this dashboard.
+                  </p>
+                  <p className="text-xs leading-6 text-white/45">
+                    If you haven’t set a password yet, create the user in Supabase → Authentication → Users.
                   </p>
                   {notice ? (
                     <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
