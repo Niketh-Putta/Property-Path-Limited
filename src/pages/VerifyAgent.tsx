@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react'
 import { BadgeCheck, Search, ShieldCheck, UserCheck } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import LinkButton from '../components/LinkButton'
 import { cn } from '../lib/cn'
+import { quickFade } from '../lib/motion'
 
 type Agent = {
   agentId: string
@@ -23,6 +25,7 @@ const sampleAgents: Agent[] = [
 
 export default function VerifyAgent() {
   const [query, setQuery] = useState('')
+  const reduceMotion = useReducedMotion()
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -95,73 +98,134 @@ export default function VerifyAgent() {
               </div>
 
               <div className="mt-6 grid gap-3">
-                {query.trim().length === 0 ? (
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70">
-                    Enter a name, phone number, or Agent ID to verify.
-                  </div>
-                ) : results.length === 0 ? (
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                    <p className="text-sm font-semibold text-canvas-50">
-                      No matching agent found
-                    </p>
-                    <p className="mt-2 text-sm leading-7 text-white/70">
-                      Share the agent details with our team and we’ll confirm registration
-                      status.
-                    </p>
-                    <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-                      <LinkButton
-                        href="mailto:info@property-path.in?subject=Agent%20Verification%20Request"
-                        variant="primary"
-                      >
-                        Email Verification Request
-                      </LinkButton>
-                      <LinkButton
-                        href="https://wa.me/?text=Hi%20PropertyPath%2C%20please%20help%20me%20verify%20an%20agent."
-                        variant="secondary"
-                        external
-                      >
-                        WhatsApp Us
-                      </LinkButton>
-                    </div>
-                  </div>
-                ) : (
-                  results.map((agent) => (
-                    <div
-                      key={agent.agentId}
-                      className={cn(
-                        'rounded-2xl border border-white/10 bg-white/5 p-5',
-                        'transition hover:bg-white/8',
-                      )}
+                <AnimatePresence mode="wait" initial={false}>
+                  {query.trim().length === 0 ? (
+                    <motion.div
+                      key="verify-empty"
+                      initial={
+                        reduceMotion ? false : { opacity: 0, y: 10, filter: 'blur(6px)' }
+                      }
+                      animate={
+                        reduceMotion
+                          ? { opacity: 1 }
+                          : { opacity: 1, y: 0, filter: 'blur(0px)' }
+                      }
+                      exit={
+                        reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }
+                      }
+                      transition={reduceMotion ? { duration: 0.1 } : quickFade}
+                      className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70"
                     >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="min-w-0">
-                          <p className="text-sm font-semibold text-canvas-50">{agent.name}</p>
-                          <p className="mt-1 text-sm text-white/70">
-                            Agent ID:{' '}
-                            <span className="break-words font-medium text-white/85">
-                              {agent.agentId}
-                            </span>
-                          </p>
-                          <p className="mt-1 text-sm text-white/70">
-                            Phone:{' '}
-                            <span className="break-words font-medium text-white/85">
-                              {agent.phone}
-                            </span>
-                          </p>
-                        </div>
-                        <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gold-300/15 px-3 py-1 text-xs font-semibold text-gold-100 ring-1 ring-gold-300/20">
-                          <BadgeCheck className="h-4 w-4" />
-                          {agent.status}
-                        </span>
-                      </div>
-                      <p className="mt-4 text-sm leading-7 text-white/65">
-                        Verified partners are bound by our transparency code and compliance
-                        standards. PropertyPath LTD remains accountable for dispute resolution
-                        and query clarifications.
+                      Enter a name, phone number, or Agent ID to verify.
+                    </motion.div>
+                  ) : results.length === 0 ? (
+                    <motion.div
+                      key="verify-none"
+                      initial={
+                        reduceMotion ? false : { opacity: 0, y: 10, filter: 'blur(6px)' }
+                      }
+                      animate={
+                        reduceMotion
+                          ? { opacity: 1 }
+                          : { opacity: 1, y: 0, filter: 'blur(0px)' }
+                      }
+                      exit={
+                        reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }
+                      }
+                      transition={reduceMotion ? { duration: 0.1 } : quickFade}
+                      className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                    >
+                      <p className="text-sm font-semibold text-canvas-50">
+                        No matching agent found
                       </p>
-                    </div>
-                  ))
-                )}
+                      <p className="mt-2 text-sm leading-7 text-white/70">
+                        Share the agent details with our team and we’ll confirm registration
+                        status.
+                      </p>
+                      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                        <LinkButton
+                          href="mailto:info@property-path.in?subject=Agent%20Verification%20Request"
+                          variant="primary"
+                        >
+                          Email Verification Request
+                        </LinkButton>
+                        <LinkButton
+                          href="https://wa.me/?text=Hi%20PropertyPath%2C%20please%20help%20me%20verify%20an%20agent."
+                          variant="secondary"
+                          external
+                        >
+                          WhatsApp Us
+                        </LinkButton>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="verify-results"
+                      layout
+                      initial={reduceMotion ? false : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={reduceMotion ? { opacity: 0 } : { opacity: 0 }}
+                      transition={reduceMotion ? { duration: 0.1 } : quickFade}
+                      className="grid gap-3"
+                    >
+                      <AnimatePresence initial={false}>
+                        {results.map((agent) => (
+                          <motion.div
+                            key={agent.agentId}
+                            layout
+                            initial={
+                              reduceMotion ? false : { opacity: 0, y: 10, scale: 0.99 }
+                            }
+                            animate={
+                              reduceMotion
+                                ? { opacity: 1 }
+                                : { opacity: 1, y: 0, scale: 1 }
+                            }
+                            exit={
+                              reduceMotion
+                                ? { opacity: 0 }
+                                : { opacity: 0, y: -10, scale: 0.99 }
+                            }
+                            transition={reduceMotion ? { duration: 0.1 } : quickFade}
+                            className={cn(
+                              'rounded-2xl border border-white/10 bg-white/5 p-5',
+                              'transition hover:bg-white/8',
+                            )}
+                          >
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="min-w-0">
+                                <p className="text-sm font-semibold text-canvas-50">
+                                  {agent.name}
+                                </p>
+                                <p className="mt-1 text-sm text-white/70">
+                                  Agent ID:{' '}
+                                  <span className="break-words font-medium text-white/85">
+                                    {agent.agentId}
+                                  </span>
+                                </p>
+                                <p className="mt-1 text-sm text-white/70">
+                                  Phone:{' '}
+                                  <span className="break-words font-medium text-white/85">
+                                    {agent.phone}
+                                  </span>
+                                </p>
+                              </div>
+                              <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gold-300/15 px-3 py-1 text-xs font-semibold text-gold-100 ring-1 ring-gold-300/20">
+                                <BadgeCheck className="h-4 w-4" />
+                                {agent.status}
+                              </span>
+                            </div>
+                            <p className="mt-4 text-sm leading-7 text-white/65">
+                              Verified partners are bound by our transparency code and
+                              compliance standards. PropertyPath LTD remains accountable for
+                              dispute resolution and query clarifications.
+                            </p>
+                          </motion.div>
+                        ))}
+                      </AnimatePresence>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <p className="mt-6 text-xs leading-6 text-white/45">

@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import LinkButton from './LinkButton'
 import Button from './Button'
 import BrandMark from './BrandMark'
-import { cn } from '../lib/cn'
+import { quickFade } from '../lib/motion'
 
 type NavItem = { label: string; sectionId: string }
 
@@ -26,6 +27,7 @@ export default function Navbar() {
   const navigate = useNavigate()
   const location = useLocation()
   const [open, setOpen] = useState(false)
+  const reduceMotion = useReducedMotion()
 
   const onHome = location.pathname === '/'
   const ctaTo = '/verify-agent'
@@ -90,37 +92,66 @@ export default function Navbar() {
         </button>
       </div>
 
-      <div
-        className={cn(
-          'md:hidden',
-          open ? 'block' : 'hidden',
-        )}
-      >
-        <div className="mx-auto max-w-6xl px-4 pb-4 sm:px-6">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
-            <div className="grid gap-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.sectionId}
-                  type="button"
-                  className="rounded-xl px-3 py-3 text-left text-sm font-medium text-white/80 hover:bg-white/8"
-                  onClick={() => handleSection(item.sectionId)}
+      <AnimatePresence initial={false}>
+        {open ? (
+          <motion.div
+            key="mobile-menu"
+            className="md:hidden"
+            initial={reduceMotion ? false : { opacity: 0, y: -8 }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={reduceMotion ? { duration: 0.1 } : quickFade}
+          >
+            <div className="mx-auto max-w-6xl px-4 pb-4 sm:px-6">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
+                <motion.div
+                  className="grid gap-1"
+                  initial={reduceMotion ? false : 'hidden'}
+                  animate={reduceMotion ? undefined : 'visible'}
+                  variants={
+                    reduceMotion
+                      ? undefined
+                      : {
+                          hidden: {},
+                          visible: {
+                            transition: { staggerChildren: 0.04, delayChildren: 0.02 },
+                          },
+                        }
+                  }
                 >
-                  {item.label}
-                </button>
-              ))}
+                  {navItems.map((item) => (
+                    <motion.button
+                      key={item.sectionId}
+                      type="button"
+                      className="rounded-xl px-3 py-3 text-left text-sm font-medium text-white/80 hover:bg-white/8"
+                      onClick={() => handleSection(item.sectionId)}
+                      variants={
+                        reduceMotion
+                          ? undefined
+                          : {
+                              hidden: { opacity: 0, y: 6 },
+                              visible: { opacity: 1, y: 0 },
+                            }
+                      }
+                      transition={reduceMotion ? undefined : quickFade}
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                </motion.div>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  <LinkButton to={ctaTo} variant="secondary">
+                    Verify an Agent
+                  </LinkButton>
+                  <Button variant="primary" onClick={() => handleSection('projects')}>
+                    Explore Projects
+                  </Button>
+                </div>
+              </div>
             </div>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              <LinkButton to={ctaTo} variant="secondary">
-                Verify an Agent
-              </LinkButton>
-              <Button variant="primary" onClick={() => handleSection('projects')}>
-                Explore Projects
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   )
 }

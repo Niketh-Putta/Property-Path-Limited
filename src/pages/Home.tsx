@@ -9,12 +9,13 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import { useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import LinkButton from '../components/LinkButton'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import { cn } from '../lib/cn'
 import { supabase, supabaseConfigured } from '../lib/supabase'
+import { quickFade } from '../lib/motion'
 
 const differentiators = [
   { icon: BadgeCheck, title: '100% verified listings', desc: 'No shortcuts — every listing is checked for credibility and compliance.' },
@@ -554,6 +555,7 @@ export default function Home() {
 function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [error, setError] = useState<string | null>(null)
+  const reduceMotion = useReducedMotion()
 
   return (
     <form
@@ -640,16 +642,36 @@ function ContactForm() {
           WhatsApp Us <ArrowRight className="ml-2 h-4 w-4" />
         </a>
       </div>
-      {status === 'success' ? (
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
-          Received. Our team will get back to you shortly.
-        </div>
-      ) : null}
-      {status === 'error' ? (
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
-          Couldn’t submit right now. {error ? <span className="text-white/60">{error}</span> : null}
-        </div>
-      ) : null}
+      <AnimatePresence mode="popLayout" initial={false}>
+        {status === 'success' ? (
+          <motion.div
+            key="contact-success"
+            initial={reduceMotion ? false : { opacity: 0, y: 10, filter: 'blur(6px)' }}
+            animate={
+              reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, filter: 'blur(0px)' }
+            }
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }}
+            transition={reduceMotion ? { duration: 0.1 } : quickFade}
+            className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75"
+          >
+            Received. Our team will get back to you shortly.
+          </motion.div>
+        ) : status === 'error' ? (
+          <motion.div
+            key="contact-error"
+            initial={reduceMotion ? false : { opacity: 0, y: 10, filter: 'blur(6px)' }}
+            animate={
+              reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, filter: 'blur(0px)' }
+            }
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }}
+            transition={reduceMotion ? { duration: 0.1 } : quickFade}
+            className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75"
+          >
+            Couldn’t submit right now.{' '}
+            {error ? <span className="text-white/60">{error}</span> : null}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
       <p className="text-xs leading-6 text-white/45">
         {supabaseConfigured()
           ? 'By submitting, your request is stored securely for our team to review.'
