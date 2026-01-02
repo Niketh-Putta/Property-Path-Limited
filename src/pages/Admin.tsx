@@ -22,6 +22,8 @@ export default function Admin() {
   const [email, setEmail] = useState('')
   const [notice, setNotice] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [sendingLink, setSendingLink] = useState(false)
+  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null)
   const [rows, setRows] = useState<ConsultationRow[]>([])
   const [loadingRows, setLoadingRows] = useState(false)
   const [setupHint, setSetupHint] = useState<string | null>(null)
@@ -131,22 +133,39 @@ export default function Admin() {
       setError('Supabase is not configured yet.')
       return
     }
+    if (sendingLink) return
+    if (cooldownUntil && Date.now() < cooldownUntil) {
+      const seconds = Math.ceil((cooldownUntil - Date.now()) / 1000)
+      setNotice(`Please wait ${seconds}s before requesting another login link.`)
+      return
+    }
 
     const base =
       env.publicSiteUrl?.trim().replace(/\/+$/, '/') ??
       `${window.location.origin}${window.location.pathname.replace(/\/?$/, '/')}`
     const redirectTo = base
 
+    setSendingLink(true)
     const { error: signInError } = await supabase!.auth.signInWithOtp({
       email: trimmed,
       options: { emailRedirectTo: redirectTo },
     })
+    setSendingLink(false)
 
     if (signInError) {
-      setError(signInError.message)
+      const status = (signInError as unknown as { status?: number }).status
+      if (status === 429) {
+        setError(
+          'Too many login requests. Please wait a few minutes and try again.',
+        )
+        setCooldownUntil(Date.now() + 5 * 60 * 1000)
+      } else {
+        setError(signInError.message)
+      }
       return
     }
-    setNotice('Check your inbox for the login link.')
+    setNotice('Login link sent. Check your inbox (and spam/junk).')
+    setCooldownUntil(Date.now() + 60 * 1000)
   }
 
   async function signOut() {
@@ -207,8 +226,12 @@ export default function Admin() {
                     placeholder="you@company.com"
                     className="h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
                   />
-                  <Button variant="primary" onClick={sendMagicLink} disabled={!email.trim()}>
-                    Send magic link
+                  <Button
+                    variant="primary"
+                    onClick={sendMagicLink}
+                    disabled={!email.trim() || sendingLink}
+                  >
+                    {sendingLink ? 'Sending…' : 'Send magic link'}
                   </Button>
                   <p className="text-xs leading-6 text-white/45">
                     You’ll receive an email login link. Only approved admin emails can access this dashboard.
