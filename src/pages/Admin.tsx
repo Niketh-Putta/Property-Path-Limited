@@ -132,7 +132,10 @@ export default function Admin() {
       return
     }
 
-    const redirectTo = `${window.location.origin}${window.location.pathname}#/admin`
+    const base =
+      env.publicSiteUrl?.trim().replace(/\/+$/, '/') ??
+      `${window.location.origin}${window.location.pathname.replace(/\/?$/, '/')}`
+    const redirectTo = `${base}#/admin`
 
     const { error: signInError } = await supabase!.auth.signInWithOtp({
       email: trimmed,
@@ -190,8 +193,8 @@ export default function Admin() {
               ) : authView === 'unauthorized' ? (
                 <div className="text-sm leading-7 text-white/70">
                   {adminAllowlistReady
-                    ? 'This account is not authorized. Ask an admin to add your email to VITE_ADMIN_EMAILS and redeploy.'
-                    : 'Admin allowlist is not configured. Set VITE_ADMIN_EMAILS (comma-separated) and redeploy.'}
+                    ? 'This email is not authorized for admin access.'
+                    : 'Admin access is not configured for this site.'}
                 </div>
               ) : (
                 <div className="grid gap-3">
@@ -208,8 +211,7 @@ export default function Admin() {
                     Send magic link
                   </Button>
                   <p className="text-xs leading-6 text-white/45">
-                    You’ll receive an email login link. Only emails in `VITE_ADMIN_EMAILS`
-                    can access the dashboard.
+                    You’ll receive an email login link. Only approved admin emails can access this dashboard.
                   </p>
                   {notice ? (
                     <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
