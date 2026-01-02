@@ -26,7 +26,7 @@ export default function Footer() {
 
           <div className="text-sm text-white/70">
             <p className="font-semibold text-canvas-50">Contact</p>
-            <p className="mt-3">
+            <p className="mt-3 break-words">
               PropertyPath LTD D.No: F1 &amp; F2, Sarovi #72, 1st Floor Sunshine
               Paradise Layout Kurudusonnenahalli, Virgonagar Post Bangalore –
               560049
@@ -72,4 +72,3 @@ export default function Footer() {
     </footer>
   )
 }
-

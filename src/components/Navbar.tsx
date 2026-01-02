@@ -52,7 +52,7 @@ export default function Navbar() {
           }}
         >
           <span className="h-10 w-10 rounded-xl bg-gradient-to-br from-gold-300/90 to-gold-700/70 shadow-soft ring-1 ring-gold-100/20" />
-          <span className="text-sm font-semibold tracking-tight text-canvas-50">
+          <span className="whitespace-nowrap text-sm font-semibold tracking-tight text-canvas-50">
             PropertyPath
             <span className="text-white/55"> LTD</span>
           </span>

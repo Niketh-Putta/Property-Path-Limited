@@ -461,7 +461,7 @@ export default function Home() {
               <Reveal delay={0.06}>
                 <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
                   <p className="text-sm font-semibold text-canvas-50">Office</p>
-                  <p className="mt-2 text-sm leading-7 text-white/70">
+                  <p className="mt-2 break-words text-sm leading-7 text-white/70">
                     PropertyPath LTD D.No: F1 &amp; F2, Sarovi #72, 1st Floor Sunshine
                     Paradise Layout Kurudusonnenahalli, Virgonagar Post Bangalore – 560049
                   </p>
@@ -601,4 +601,3 @@ function Field({
     </div>
   )
 }
-

@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply bg-ink-950 text-canvas-50 antialiased;
+  @apply bg-ink-950 text-canvas-50 antialiased overflow-x-hidden;
 }
 
 ::selection {

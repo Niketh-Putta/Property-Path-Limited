@@ -87,7 +87,7 @@ export default function VerifyAgent() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search by name, phone, or Agent ID (e.g., PP-AG-0001)"
-                  className="w-full bg-transparent text-sm text-white/85 placeholder:text-white/35 focus:outline-none"
+                  className="min-w-0 w-full bg-transparent text-sm text-white/85 placeholder:text-white/35 focus:outline-none"
                 />
               </div>
 
@@ -131,18 +131,22 @@ export default function VerifyAgent() {
                       )}
                     >
                       <div className="flex items-start justify-between gap-4">
-                        <div>
+                        <div className="min-w-0">
                           <p className="text-sm font-semibold text-canvas-50">{agent.name}</p>
                           <p className="mt-1 text-sm text-white/70">
                             Agent ID:{' '}
-                            <span className="font-medium text-white/85">{agent.agentId}</span>
+                            <span className="break-words font-medium text-white/85">
+                              {agent.agentId}
+                            </span>
                           </p>
                           <p className="mt-1 text-sm text-white/70">
                             Phone:{' '}
-                            <span className="font-medium text-white/85">{agent.phone}</span>
+                            <span className="break-words font-medium text-white/85">
+                              {agent.phone}
+                            </span>
                           </p>
                         </div>
-                        <span className="inline-flex items-center gap-2 rounded-full bg-gold-300/15 px-3 py-1 text-xs font-semibold text-gold-100 ring-1 ring-gold-300/20">
+                        <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gold-300/15 px-3 py-1 text-xs font-semibold text-gold-100 ring-1 ring-gold-300/20">
                           <BadgeCheck className="h-4 w-4" />
                           {agent.status}
                         </span>
@@ -168,4 +172,3 @@ export default function VerifyAgent() {
     </div>
   )
 }
-
