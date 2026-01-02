@@ -24,6 +24,7 @@ export default function Admin() {
   const [error, setError] = useState<string | null>(null)
   const [rows, setRows] = useState<ConsultationRow[]>([])
   const [loadingRows, setLoadingRows] = useState(false)
+  const [setupHint, setSetupHint] = useState<string | null>(null)
 
   useEffect(() => {
     if (!supabaseConfigured()) return
@@ -60,6 +61,7 @@ export default function Admin() {
     ;(async () => {
       setLoadingRows(true)
       setError(null)
+      setSetupHint(null)
 
       const { data, error: fetchError } = await supabase!
         .from('consultations')
@@ -69,6 +71,15 @@ export default function Admin() {
 
       if (fetchError) {
         setError(fetchError.message)
+        const lower = fetchError.message.toLowerCase()
+        if (
+          lower.includes('could not find the table') ||
+          lower.includes('schema cache') ||
+          lower.includes('relation') ||
+          lower.includes('does not exist')
+        ) {
+          setSetupHint('Run `supabase/schema.sql` in Supabase SQL editor to create the table + policies.')
+        }
         setLoadingRows(false)
         return
       }
@@ -76,6 +87,39 @@ export default function Admin() {
       setLoadingRows(false)
     })()
   }, [authView])
+
+  async function createTestSubmission() {
+    if (!supabaseConfigured()) return
+    setError(null)
+    setSetupHint(null)
+    setLoadingRows(true)
+
+    const { error: insertError } = await supabase!.from('consultations').insert([
+      {
+        name: 'Test Consultation',
+        email: 'test@property-path.in',
+        phone: '+91 90000 00000',
+        message: 'This is a test submission to confirm Supabase storage + admin dashboard are working.',
+        source: 'admin_test',
+      },
+    ])
+
+    if (insertError) {
+      setError(insertError.message)
+      setLoadingRows(false)
+      return
+    }
+
+    const { data, error: fetchError } = await supabase!
+      .from('consultations')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(200)
+
+    if (fetchError) setError(fetchError.message)
+    else setRows((data ?? []) as ConsultationRow[])
+    setLoadingRows(false)
+  }
 
   async function sendMagicLink() {
     setError(null)
@@ -189,7 +233,12 @@ export default function Admin() {
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm font-semibold text-canvas-50">Latest submissions</p>
                 {authView === 'signed_in' ? (
-                  <p className="text-xs text-white/55">{rows.length} shown (max 200)</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-xs text-white/55">{rows.length} shown (max 200)</p>
+                    <Button variant="secondary" size="sm" onClick={createTestSubmission}>
+                      Create test submission
+                    </Button>
+                  </div>
                 ) : null}
               </div>
 
@@ -202,6 +251,7 @@ export default function Admin() {
               ) : error ? (
                 <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70">
                   {error}
+                  {setupHint ? <div className="mt-2 text-xs text-white/55">{setupHint}</div> : null}
                 </div>
               ) : rows.length === 0 ? (
                 <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70">

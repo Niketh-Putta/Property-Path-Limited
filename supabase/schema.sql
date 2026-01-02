@@ -21,10 +21,16 @@ for insert
 to anon
 with check (true);
 
+-- Allow authenticated users (admins) to insert (useful for testing).
+create policy "consultations_insert_authenticated"
+on public.consultations
+for insert
+to authenticated
+with check (true);
+
 -- Allow authenticated users to read consultations (admin UI further restricts by email allowlist).
 create policy "consultations_select_authenticated"
 on public.consultations
 for select
 to authenticated
 using (true);
-

@@ -555,6 +555,7 @@ export default function Home() {
 function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [error, setError] = useState<string | null>(null)
+  const [setupHint, setSetupHint] = useState<string | null>(null)
   const reduceMotion = useReducedMotion()
 
   return (
@@ -564,6 +565,7 @@ function ContactForm() {
         e.preventDefault()
         setStatus('submitting')
         setError(null)
+        setSetupHint(null)
 
         const formData = new FormData(e.currentTarget)
         const name = String(formData.get('name') ?? '').trim()
@@ -600,7 +602,17 @@ function ContactForm() {
           setStatus('success')
         } catch (err) {
           setStatus('error')
-          setError(err instanceof Error ? err.message : 'Failed to submit request')
+          const message = err instanceof Error ? err.message : 'Failed to submit request'
+          setError(message)
+          const lower = message.toLowerCase()
+          if (
+            lower.includes('could not find the table') ||
+            lower.includes('schema cache') ||
+            lower.includes('relation') ||
+            lower.includes('does not exist')
+          ) {
+            setSetupHint('Setup required: run `supabase/schema.sql` in Supabase SQL editor.')
+          }
         }
       }}
     >
@@ -669,6 +681,7 @@ function ContactForm() {
           >
             Couldn’t submit right now.{' '}
             {error ? <span className="text-white/60">{error}</span> : null}
+            {setupHint ? <div className="mt-2 text-xs text-white/55">{setupHint}</div> : null}
           </motion.div>
         ) : null}
       </AnimatePresence>
