@@ -161,6 +161,7 @@ export default function Admin() {
               Admin Dashboard
             </p>
             <SectionHeading
+              className="mt-4"
               eyebrow="ADMIN"
               title="Consultation requests"
               description="Sign in to view submitted consultation requests stored in Supabase."

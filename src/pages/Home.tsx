@@ -207,8 +207,14 @@ export default function Home() {
                         }
                   }
                 >
-                  <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full bg-gold-300/14 blur-2xl" />
-                  <div className="absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-white/8 blur-2xl" />
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -right-12 -top-12 h-56 w-56 rounded-full bg-gold-300/14 blur-2xl"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-white/8 blur-2xl"
+                  />
 
                   <p className="text-sm font-semibold text-canvas-50">
                     Trust through transparency

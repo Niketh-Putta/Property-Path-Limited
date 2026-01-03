@@ -48,6 +48,7 @@ export default function VerifyAgent() {
               SAFE INVESTMENTS. STRONG RETURNS.
             </p>
             <SectionHeading
+              className="mt-4"
               eyebrow="AGENT VERIFICATION"
               title="Verify an agent before you commit"
               description="Every marketing partner listed on PropertyPath LTD is identity-verified, trained in compliance, assigned a unique Agent ID, and bound by our transparency code."

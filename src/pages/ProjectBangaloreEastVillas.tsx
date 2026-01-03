@@ -13,6 +13,7 @@ export default function ProjectBangaloreEastVillas() {
               SAFE INVESTMENTS. STRONG RETURNS.
             </p>
             <SectionHeading
+              className="mt-4"
               eyebrow="FEATURED PROJECT"
               title="5-Acre Premium Villa Community — Bangalore East"
               description="A boutique villa development designed for modern families seeking space, greenery, and long-term appreciation."
