@@ -1,13 +1,14 @@
-function getEnv(key: string) {
-  const value = import.meta.env[key]
-  return typeof value === 'string' ? value : undefined
-}
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+const publicSiteUrl = import.meta.env.VITE_PUBLIC_SITE_URL as string | undefined
+const adminEmailsRaw = import.meta.env.VITE_ADMIN_EMAILS as string | undefined
 
 export const env = {
-  supabaseUrl: getEnv('VITE_SUPABASE_URL'),
-  supabaseAnonKey: getEnv('VITE_SUPABASE_ANON_KEY'),
-  publicSiteUrl: getEnv('VITE_PUBLIC_SITE_URL'),
-  adminEmails: (getEnv('VITE_ADMIN_EMAILS') ?? '')
+  supabaseUrl: typeof supabaseUrl === 'string' && supabaseUrl.length ? supabaseUrl : undefined,
+  supabaseAnonKey:
+    typeof supabaseAnonKey === 'string' && supabaseAnonKey.length ? supabaseAnonKey : undefined,
+  publicSiteUrl: typeof publicSiteUrl === 'string' && publicSiteUrl.length ? publicSiteUrl : undefined,
+  adminEmails: (typeof adminEmailsRaw === 'string' ? adminEmailsRaw : '')
     .split(',')
     .map((s) => s.trim().toLowerCase())
     .filter(Boolean),
