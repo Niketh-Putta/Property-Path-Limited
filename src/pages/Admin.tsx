@@ -244,9 +244,14 @@ export default function Admin() {
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm font-semibold text-canvas-50">Latest submissions</p>
                 {authView === 'signed_in' ? (
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end">
                     <p className="text-xs text-white/55">{rows.length} shown (max 200)</p>
-                    <Button variant="secondary" size="sm" onClick={createTestSubmission}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={createTestSubmission}
+                      className="w-full sm:w-auto"
+                    >
                       Create test submission
                     </Button>
                   </div>
@@ -269,43 +274,71 @@ export default function Admin() {
                   No submissions yet.
                 </div>
               ) : (
-                <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-                  <div className="max-h-[560px] overflow-auto">
-                    <table className="w-full border-collapse text-left text-sm">
-                      <thead className="sticky top-0 bg-ink-950/90 backdrop-blur">
-                        <tr className="text-xs font-semibold tracking-[0.14em] text-white/55">
-                          <th className="px-4 py-3">Date</th>
-                          <th className="px-4 py-3">Name</th>
-                          <th className="px-4 py-3">Email</th>
-                          <th className="px-4 py-3">Phone</th>
-                          <th className="px-4 py-3">Message</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {rows.map((r) => (
-                          <tr key={r.id} className="border-t border-white/10 bg-white/5">
-                            <td className="px-4 py-3 text-white/70">
-                              {new Date(r.created_at).toLocaleString()}
-                            </td>
-                            <td className="px-4 py-3 font-medium text-white/85">{r.name}</td>
-                            <td className="px-4 py-3 text-white/70 break-words">{r.email}</td>
-                            <td className="px-4 py-3 text-white/70 break-words">
-                              {r.phone ?? '—'}
-                            </td>
-                            <td className="px-4 py-3 text-white/70">
-                              <div className="max-w-[22rem] truncate">{r.message}</div>
-                            </td>
+                <div className="mt-6">
+                  <div className="grid gap-3 sm:hidden">
+                    {rows.map((r) => (
+                      <div
+                        key={r.id}
+                        className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                      >
+                        <div className="flex flex-col gap-1">
+                          <p className="text-xs text-white/55">
+                            {new Date(r.created_at).toLocaleString()}
+                          </p>
+                          <p className="text-sm font-semibold text-white/85">{r.name}</p>
+                          <p className="text-sm text-white/70 break-words">{r.email}</p>
+                          <p className="text-sm text-white/70 break-words">{r.phone ?? '—'}</p>
+                        </div>
+                        <details className="mt-3 rounded-xl border border-white/10 bg-ink-950/30 p-4">
+                          <summary className="cursor-pointer select-none text-sm font-medium text-white/80">
+                            Message
+                          </summary>
+                          <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-white/70">
+                            {r.message}
+                          </p>
+                        </details>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="hidden sm:block overflow-hidden rounded-2xl border border-white/10">
+                    <div className="max-h-[560px] overflow-x-auto overflow-y-auto">
+                      <table className="min-w-[860px] w-full border-collapse text-left text-sm">
+                        <thead className="sticky top-0 bg-ink-950/90 backdrop-blur">
+                          <tr className="text-xs font-semibold tracking-[0.14em] text-white/55">
+                            <th className="px-4 py-3 whitespace-nowrap">Date</th>
+                            <th className="px-4 py-3 whitespace-nowrap">Name</th>
+                            <th className="px-4 py-3 whitespace-nowrap">Email</th>
+                            <th className="px-4 py-3 whitespace-nowrap">Phone</th>
+                            <th className="px-4 py-3 whitespace-nowrap">Message</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {rows.map((r) => (
+                            <tr key={r.id} className="border-t border-white/10 bg-white/5">
+                              <td className="px-4 py-3 text-white/70">
+                                {new Date(r.created_at).toLocaleString()}
+                              </td>
+                              <td className="px-4 py-3 font-medium text-white/85">{r.name}</td>
+                              <td className="px-4 py-3 text-white/70 break-words">{r.email}</td>
+                              <td className="px-4 py-3 text-white/70 break-words">
+                                {r.phone ?? '—'}
+                              </td>
+                              <td className="px-4 py-3 text-white/70">
+                                <div className="max-w-[22rem] truncate">{r.message}</div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               )}
 
               {authView === 'signed_in' && rows.length > 0 ? (
                 <div className="mt-4 rounded-2xl border border-white/10 bg-ink-950/30 p-4 text-sm text-white/70">
-                  Tip: Hover/copy from the Message column to read the full text, or open the row in Supabase for full details.
+                  Tip: On mobile, open a card’s “Message”. On desktop, hover/copy the Message column for full text.
                 </div>
               ) : null}
             </div>
