@@ -117,7 +117,7 @@ export default function Home() {
                     Property Path LTD
                   </span>
                   <span className="block text-white/80">
-                    India’s Most Trusted Real Estate Digital Marketing Partner
+                    Bangalore’s Most Trusted Real Estate Digital Marketing Partner
                   </span>
                 </h1>
               </Reveal>
