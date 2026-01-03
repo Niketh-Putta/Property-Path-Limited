@@ -563,6 +563,7 @@ function ContactForm() {
   const [error, setError] = useState<string | null>(null)
   const [setupHint, setSetupHint] = useState<string | null>(null)
   const reduceMotion = useReducedMotion()
+  const configured = supabaseConfigured()
 
   return (
     <form
@@ -573,6 +574,15 @@ function ContactForm() {
         setError(null)
         setSetupHint(null)
 
+        if (!configured) {
+          setStatus('error')
+          setError('Consultation submissions are not configured yet.')
+          setSetupHint(
+            'Setup required: configure `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`, then redeploy.',
+          )
+          return
+        }
+
         const formData = new FormData(e.currentTarget)
         const name = String(formData.get('name') ?? '').trim()
         const email = String(formData.get('email') ?? '').trim()
@@ -580,32 +590,22 @@ function ContactForm() {
         const message = String(formData.get('message') ?? '').trim()
 
         try {
-          if (supabaseConfigured()) {
-            const { error: insertError } = await supabase!
-              .from('consultations')
-              .insert([
-                {
-                  name,
-                  email,
-                  phone: phone.length ? phone : null,
-                  message,
-                  source: 'web',
-                },
-              ])
+          const { error: insertError } = await supabase!
+            .from('consultations')
+            .insert([
+              {
+                name,
+                email,
+                phone: phone.length ? phone : null,
+                message,
+                source: 'web',
+              },
+            ])
 
-            if (insertError) throw insertError
+          if (insertError) throw insertError
 
-            setStatus('success')
-            e.currentTarget.reset()
-            return
-          }
-
-          const subject = encodeURIComponent('PropertyPath Consultation Request')
-          const body = encodeURIComponent(
-            `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}\n`,
-          )
-          window.location.href = `mailto:info@property-path.in?subject=${subject}&body=${body}`
           setStatus('success')
+          e.currentTarget.reset()
         } catch (err) {
           setStatus('error')
           const message = err instanceof Error ? err.message : 'Failed to submit request'
@@ -645,7 +645,7 @@ function ContactForm() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
-          disabled={status === 'submitting'}
+          disabled={status === 'submitting' || !configured}
           className="inline-flex h-12 items-center justify-center rounded-xl bg-gold-300 px-5 text-sm font-medium text-ink-950 shadow-glow transition hover:bg-gold-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/40"
         >
           {status === 'submitting' ? 'Submitting…' : 'Book a Consultation'}{' '}
@@ -692,10 +692,9 @@ function ContactForm() {
         ) : null}
       </AnimatePresence>
       <p className="text-xs leading-6 text-white/45">
-        {supabaseConfigured()
+        {configured
           ? 'By submitting, your request is stored securely for our team to review.'
-          : 'By submitting, you’ll open your email client to send your request to '}
-        {supabaseConfigured() ? null : <span className="text-white/70">info@property-path.in</span>}
+          : 'Consultation submissions are temporarily unavailable.'}
       </p>
     </form>
   )
