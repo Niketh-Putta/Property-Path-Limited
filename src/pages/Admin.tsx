@@ -171,8 +171,7 @@ export default function Admin() {
             <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
               {!supabaseConfigured() ? (
                 <div className="text-sm leading-7 text-white/70">
-                  Supabase isn’t configured. Set `VITE_SUPABASE_URL` and
-                  `VITE_SUPABASE_ANON_KEY`, then redeploy.
+                  Admin services are temporarily unavailable. Please try again shortly.
                 </div>
               ) : authView === 'loading' ? (
                 <div className="text-sm text-white/70">Loading…</div>
