@@ -570,6 +570,7 @@ function ContactForm() {
       className="mt-6 grid gap-3"
       onSubmit={async (e) => {
         e.preventDefault()
+        const form = e.currentTarget
         setStatus('submitting')
         setError(null)
         setSetupHint(null)
@@ -583,7 +584,7 @@ function ContactForm() {
           return
         }
 
-        const formData = new FormData(e.currentTarget)
+        const formData = new FormData(form)
         const name = String(formData.get('name') ?? '').trim()
         const email = String(formData.get('email') ?? '').trim()
         const phone = String(formData.get('phone') ?? '').trim()
@@ -605,7 +606,7 @@ function ContactForm() {
           if (insertError) throw insertError
 
           setStatus('success')
-          e.currentTarget.reset()
+          form.reset()
         } catch (err) {
           setStatus('error')
           const message = err instanceof Error ? err.message : 'Failed to submit request'
