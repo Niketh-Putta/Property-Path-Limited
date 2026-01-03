@@ -21,6 +21,7 @@ type Props = CommonProps &
 
 export default function LinkButton(props: Props) {
   const { variant = 'primary', size = 'md' } = props
+  const userClassName = (props as { className?: string }).className
   const className = cn(
     'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/40 active:scale-[0.99]',
     size === 'sm' && 'h-10 px-4 text-sm',
@@ -33,15 +34,17 @@ export default function LinkButton(props: Props) {
       'bg-transparent text-canvas-50 hover:bg-white/8 ring-1 ring-white/10 hover:-translate-y-[1px]',
     'no-underline',
     'w-fit',
-    (props as { className?: string }).className,
+    userClassName,
   )
 
   if ('to' in props) {
-    const { to, ...rest } = props
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { to, className: _className, ...rest } = props
     return <Link to={to} className={className} {...rest} />
   }
 
-  const { href, external, ...rest } = props
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { href, external, className: _className, ...rest } = props
   return (
     <a
       href={href}
