@@ -151,6 +151,12 @@ export default function Admin() {
     setRows([])
   }
 
+  function forceRefresh() {
+    const url = new URL(window.location.href)
+    url.searchParams.set('v', String(Date.now()))
+    window.location.href = url.toString()
+  }
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
       <div className="grid gap-10 lg:grid-cols-12">
@@ -171,8 +177,13 @@ export default function Admin() {
           <Reveal delay={0.06}>
             <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
               {!supabaseConfigured() ? (
-                <div className="text-sm leading-7 text-white/70">
-                  Admin services are temporarily unavailable. Please try again shortly.
+                <div className="grid gap-4 text-sm leading-7 text-white/70">
+                  <div>
+                    Admin services are temporarily unavailable. Please try again shortly.
+                  </div>
+                  <Button variant="secondary" size="sm" onClick={forceRefresh}>
+                    Reload latest version
+                  </Button>
                 </div>
               ) : authView === 'loading' ? (
                 <div className="text-sm text-white/70">Loading…</div>
