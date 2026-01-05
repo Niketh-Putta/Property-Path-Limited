@@ -2,7 +2,6 @@ import {
   ArrowRight,
   BadgeCheck,
   Building2,
-  ClipboardCheck,
   Gavel,
   Handshake,
   Headset,
@@ -106,12 +105,6 @@ export default function Home() {
           <div className="grid items-center gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <Reveal>
-                <p className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-white/70 ring-1 ring-white/10">
-                  <ClipboardCheck className="h-4 w-4 text-gold-300/90" />
-                  SAFE INVESTMENTS. STRONG RETURNS.
-                </p>
-              </Reveal>
-              <Reveal delay={0.06}>
                 <h1 className="mt-5 text-3xl font-semibold leading-tight tracking-tight text-canvas-50 sm:text-5xl">
                   <span className="bg-gradient-to-r from-gold-100 via-gold-300 to-gold-700 bg-clip-text text-transparent">
                     Property Path LTD
@@ -121,7 +114,7 @@ export default function Home() {
                   </span>
                 </h1>
               </Reveal>
-              <Reveal delay={0.12}>
+              <Reveal delay={0.06}>
                 <p className="mt-5 max-w-2xl text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
                   PropertyPath LTD is a next-generation real estate marketing and advisory
                   company based in Bangalore. We combine 10+ years of development expertise
@@ -129,7 +122,7 @@ export default function Home() {
                   real estate opportunities to homebuyers and investors.
                 </p>
               </Reveal>
-              <Reveal delay={0.18}>
+              <Reveal delay={0.12}>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <LinkButton to="/projects/bangalore-east-villas" variant="primary">
                     Explore Projects <ArrowRight className="h-4 w-4" />

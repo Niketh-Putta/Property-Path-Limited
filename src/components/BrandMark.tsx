@@ -51,8 +51,8 @@ export default function BrandMark({
       </svg>
 
       {showWordmark ? (
-        <div className="leading-tight">
-          <p className="text-sm font-semibold tracking-tight text-canvas-50">
+        <div className="text-left leading-tight">
+          <p className="text-base font-semibold tracking-tight text-canvas-50 sm:text-lg">
             Property <span className="text-white/80">Path</span>
           </p>
           <p className="text-[11px] font-semibold tracking-[0.18em] text-white/45">

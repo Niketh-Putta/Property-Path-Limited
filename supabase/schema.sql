@@ -39,3 +39,44 @@ on public.consultations
 for select
 to authenticated
 using (true);
+
+-- Marketing agents
+
+create table if not exists public.marketing_agents (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  agent_id text not null unique,
+  name text not null,
+  phone text,
+  status text not null default 'Verified'
+);
+
+create index if not exists marketing_agents_created_at_idx on public.marketing_agents (created_at desc);
+create index if not exists marketing_agents_agent_id_idx on public.marketing_agents (agent_id);
+create index if not exists marketing_agents_name_idx on public.marketing_agents (name);
+
+grant select on table public.marketing_agents to anon;
+grant select, insert on table public.marketing_agents to authenticated;
+
+alter table public.marketing_agents enable row level security;
+
+-- Allow anyone (anon) to read marketing agents for verification.
+create policy "marketing_agents_select_anon"
+on public.marketing_agents
+for select
+to anon
+using (true);
+
+-- Allow authenticated users (admins) to read marketing agents.
+create policy "marketing_agents_select_authenticated"
+on public.marketing_agents
+for select
+to authenticated
+using (true);
+
+-- Allow authenticated users (admins) to insert marketing agents.
+create policy "marketing_agents_insert_authenticated"
+on public.marketing_agents
+for insert
+to authenticated
+with check (true);

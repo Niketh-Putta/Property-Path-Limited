@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BadgeCheck, Search, ShieldCheck, UserCheck } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Reveal from '../components/Reveal'
@@ -6,12 +6,13 @@ import SectionHeading from '../components/SectionHeading'
 import LinkButton from '../components/LinkButton'
 import { cn } from '../lib/cn'
 import { quickFade } from '../lib/motion'
+import { supabase, supabaseConfigured } from '../lib/supabase'
 
 type Agent = {
   agentId: string
   name: string
   phone: string
-  status: 'Verified'
+  status: string
 }
 
 const sampleAgents: Agent[] = [
@@ -25,19 +26,90 @@ const sampleAgents: Agent[] = [
 
 export default function VerifyAgent() {
   const [query, setQuery] = useState('')
+  const [results, setResults] = useState<Agent[]>([])
+  const [loading, setLoading] = useState(false)
+  const [fetchError, setFetchError] = useState<string | null>(null)
+  const [fetchHint, setFetchHint] = useState<string | null>(null)
   const reduceMotion = useReducedMotion()
+  const configured = supabaseConfigured()
 
-  const results = useMemo(() => {
+  useEffect(() => {
     const q = query.trim().toLowerCase()
-    if (!q) return []
-    return sampleAgents.filter((a) => {
-      return (
-        a.agentId.toLowerCase().includes(q) ||
-        a.name.toLowerCase().includes(q) ||
-        a.phone.toLowerCase().includes(q)
+    if (!q || !configured) return
+
+    let active = true
+    const like = `%${q}%`
+
+    supabase!
+      .from('marketing_agents')
+      .select('agent_id, name, phone, status')
+      .or(`agent_id.ilike.${like},name.ilike.${like},phone.ilike.${like}`)
+      .limit(25)
+      .then(({ data, error }) => {
+        if (!active) return
+        if (error) {
+          setResults([])
+          setFetchError(error.message)
+          const lower = error.message.toLowerCase()
+          if (
+            lower.includes('could not find the table') ||
+            lower.includes('schema cache') ||
+            lower.includes('relation') ||
+            lower.includes('does not exist')
+          ) {
+            setFetchHint('Run `supabase/schema.sql` in Supabase SQL editor to create the table + policies.')
+          }
+          setLoading(false)
+          return
+        }
+
+        const mapped = (data ?? []).map((agent) => ({
+          agentId: agent.agent_id,
+          name: agent.name,
+          phone: agent.phone ?? '—',
+          status: agent.status ?? 'Verified',
+        }))
+        setResults(mapped)
+        setLoading(false)
+      })
+
+    return () => {
+      active = false
+    }
+  }, [query, configured])
+
+  function handleQueryChange(value: string) {
+    setQuery(value)
+    const q = value.trim().toLowerCase()
+
+    if (!q) {
+      setResults([])
+      setLoading(false)
+      setFetchError(null)
+      setFetchHint(null)
+      return
+    }
+
+    if (!configured) {
+      setResults(
+        sampleAgents.filter((a) => {
+          return (
+            a.agentId.toLowerCase().includes(q) ||
+            a.name.toLowerCase().includes(q) ||
+            a.phone.toLowerCase().includes(q)
+          )
+        }),
       )
-    })
-  }, [query])
+      setLoading(false)
+      setFetchError(null)
+      setFetchHint(null)
+      return
+    }
+
+    setLoading(true)
+    setFetchError(null)
+    setFetchHint(null)
+  }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
@@ -92,7 +164,7 @@ export default function VerifyAgent() {
                 <Search className="h-4 w-4 text-white/45" />
                 <input
                   value={query}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(e) => handleQueryChange(e.target.value)}
                   placeholder="Search by name, phone, or Agent ID (e.g., PP-AG-0001)"
                   className="min-w-0 w-full bg-transparent text-sm text-white/85 placeholder:text-white/35 focus:outline-none"
                 />
@@ -118,6 +190,48 @@ export default function VerifyAgent() {
                       className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70"
                     >
                       Enter a name, phone number, or Agent ID to verify.
+                    </motion.div>
+                  ) : loading ? (
+                    <motion.div
+                      key="verify-loading"
+                      initial={
+                        reduceMotion ? false : { opacity: 0, y: 10, filter: 'blur(6px)' }
+                      }
+                      animate={
+                        reduceMotion
+                          ? { opacity: 1 }
+                          : { opacity: 1, y: 0, filter: 'blur(0px)' }
+                      }
+                      exit={
+                        reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }
+                      }
+                      transition={reduceMotion ? { duration: 0.1 } : quickFade}
+                      className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70"
+                    >
+                      Searching verified agents…
+                    </motion.div>
+                  ) : fetchError ? (
+                    <motion.div
+                      key="verify-error"
+                      initial={
+                        reduceMotion ? false : { opacity: 0, y: 10, filter: 'blur(6px)' }
+                      }
+                      animate={
+                        reduceMotion
+                          ? { opacity: 1 }
+                          : { opacity: 1, y: 0, filter: 'blur(0px)' }
+                      }
+                      exit={
+                        reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }
+                      }
+                      transition={reduceMotion ? { duration: 0.1 } : quickFade}
+                      className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70"
+                    >
+                      Could not load agents.{' '}
+                      <span className="text-white/60">{fetchError}</span>
+                      {fetchHint ? (
+                        <div className="mt-2 text-xs text-white/55">{fetchHint}</div>
+                      ) : null}
                     </motion.div>
                   ) : results.length === 0 ? (
                     <motion.div

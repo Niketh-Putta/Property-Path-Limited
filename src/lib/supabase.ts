@@ -14,6 +14,18 @@ export type ConsultationRow = ConsultationInsert & {
   created_at: string
 }
 
+export type MarketingAgentInsert = {
+  agent_id: string
+  name: string
+  phone?: string | null
+  status?: string
+}
+
+export type MarketingAgentRow = MarketingAgentInsert & {
+  id: string
+  created_at: string
+}
+
 export const supabase =
   env.supabaseUrl && env.supabaseAnonKey
     ? createClient(env.supabaseUrl, env.supabaseAnonKey, {

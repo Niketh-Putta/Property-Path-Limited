@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { LogOut, ShieldCheck } from 'lucide-react'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import Button from '../components/Button'
 import { env } from '../lib/env'
-import { supabase, supabaseConfigured, type ConsultationRow } from '../lib/supabase'
+import {
+  supabase,
+  supabaseConfigured,
+  type ConsultationRow,
+  type MarketingAgentInsert,
+} from '../lib/supabase'
 
 type AuthView = 'loading' | 'signed_out' | 'signed_in' | 'unauthorized'
 
@@ -26,6 +31,14 @@ export default function Admin() {
   const [rows, setRows] = useState<ConsultationRow[]>([])
   const [loadingRows, setLoadingRows] = useState(false)
   const [setupHint, setSetupHint] = useState<string | null>(null)
+  const [agentId, setAgentId] = useState('')
+  const [agentName, setAgentName] = useState('')
+  const [agentPhone, setAgentPhone] = useState('')
+  const [agentStatus, setAgentStatus] = useState('Verified')
+  const [agentNotice, setAgentNotice] = useState<string | null>(null)
+  const [agentError, setAgentError] = useState<string | null>(null)
+  const [agentSetupHint, setAgentSetupHint] = useState<string | null>(null)
+  const [savingAgent, setSavingAgent] = useState(false)
 
   useEffect(() => {
     if (!supabaseConfigured()) return
@@ -120,6 +133,60 @@ export default function Admin() {
     if (fetchError) setError(fetchError.message)
     else setRows((data ?? []) as ConsultationRow[])
     setLoadingRows(false)
+  }
+
+  async function addAgent(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setAgentError(null)
+    setAgentNotice(null)
+    setAgentSetupHint(null)
+
+    if (!supabaseConfigured()) {
+      setAgentError('Supabase is not configured yet.')
+      return
+    }
+
+    const trimmedId = agentId.trim()
+    const trimmedName = agentName.trim()
+    const trimmedPhone = agentPhone.trim()
+
+    if (!trimmedId || !trimmedName) {
+      setAgentError('Agent ID and name are required.')
+      return
+    }
+
+    setSavingAgent(true)
+
+    const payload: MarketingAgentInsert = {
+      agent_id: trimmedId,
+      name: trimmedName,
+      phone: trimmedPhone ? trimmedPhone : null,
+      status: agentStatus,
+    }
+
+    const { error: insertError } = await supabase!.from('marketing_agents').insert([payload])
+
+    if (insertError) {
+      setAgentError(insertError.message)
+      const lower = insertError.message.toLowerCase()
+      if (
+        lower.includes('could not find the table') ||
+        lower.includes('schema cache') ||
+        lower.includes('relation') ||
+        lower.includes('does not exist')
+      ) {
+        setAgentSetupHint('Run `supabase/schema.sql` in Supabase SQL editor to create the table + policies.')
+      }
+      setSavingAgent(false)
+      return
+    }
+
+    setAgentNotice('Marketing agent added.')
+    setAgentId('')
+    setAgentName('')
+    setAgentPhone('')
+    setAgentStatus('Verified')
+    setSavingAgent(false)
   }
 
   async function signIn() {
@@ -252,6 +319,94 @@ export default function Admin() {
         <div className="lg:col-span-7">
           <Reveal delay={0.06}>
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-soft">
+              {authView === 'signed_in' ? (
+                <div className="mb-8 rounded-2xl border border-white/10 bg-ink-950/30 p-5">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-sm font-semibold text-canvas-50">
+                      Add marketing agent
+                    </p>
+                    <p className="text-xs text-white/55">Visible on Verify Agent</p>
+                  </div>
+                  <form className="mt-4 grid gap-3" onSubmit={addAgent}>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <div>
+                        <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                          AGENT ID
+                        </label>
+                        <input
+                          value={agentId}
+                          onChange={(e) => setAgentId(e.target.value)}
+                          placeholder="PP-AG-0001"
+                          className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                          NAME
+                        </label>
+                        <input
+                          value={agentName}
+                          onChange={(e) => setAgentName(e.target.value)}
+                          placeholder="Agent name"
+                          className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <div>
+                        <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                          PHONE (OPTIONAL)
+                        </label>
+                        <input
+                          value={agentPhone}
+                          onChange={(e) => setAgentPhone(e.target.value)}
+                          placeholder="+91"
+                          className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                          STATUS
+                        </label>
+                        <select
+                          value={agentStatus}
+                          onChange={(e) => setAgentStatus(e.target.value)}
+                          className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                        >
+                          <option value="Verified">Verified</option>
+                          <option value="Pending">Pending</option>
+                          <option value="Inactive">Inactive</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        disabled={savingAgent || !agentId.trim() || !agentName.trim()}
+                      >
+                        {savingAgent ? 'Adding…' : 'Add agent'}
+                      </Button>
+                      <p className="text-xs text-white/55">
+                        Agents added here can be verified on the public page.
+                      </p>
+                    </div>
+                    {agentNotice ? (
+                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+                        {agentNotice}
+                      </div>
+                    ) : null}
+                    {agentError ? (
+                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+                        {agentError}
+                        {agentSetupHint ? (
+                          <div className="mt-2 text-xs text-white/55">{agentSetupHint}</div>
+                        ) : null}
+                      </div>
+                    ) : null}
+                  </form>
+                </div>
+              ) : null}
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm font-semibold text-canvas-50">Latest submissions</p>
                 {authView === 'signed_in' ? (
