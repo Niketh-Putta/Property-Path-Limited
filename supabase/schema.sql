@@ -51,6 +51,26 @@ create table if not exists public.marketing_agents (
   status text not null default 'Verified'
 );
 
+create sequence if not exists public.marketing_agents_agent_id_seq;
+
+alter table public.marketing_agents
+  alter column agent_id set default (
+    'PP-AG-' || lpad(nextval('public.marketing_agents_agent_id_seq')::text, 4, '0')
+  );
+
+do $$
+declare
+  max_id int;
+begin
+  select max(nullif(regexp_replace(agent_id, '[^0-9]', '', 'g'), '')::int)
+    into max_id
+  from public.marketing_agents;
+
+  if max_id is not null then
+    perform setval('public.marketing_agents_agent_id_seq', max_id);
+  end if;
+end $$;
+
 create index if not exists marketing_agents_created_at_idx on public.marketing_agents (created_at desc);
 create index if not exists marketing_agents_agent_id_idx on public.marketing_agents (agent_id);
 create index if not exists marketing_agents_name_idx on public.marketing_agents (name);

@@ -15,7 +15,7 @@ export type ConsultationRow = ConsultationInsert & {
 }
 
 export type MarketingAgentInsert = {
-  agent_id: string
+  agent_id?: string
   name: string
   phone?: string | null
   status?: string
@@ -24,6 +24,7 @@ export type MarketingAgentInsert = {
 export type MarketingAgentRow = MarketingAgentInsert & {
   id: string
   created_at: string
+  agent_id: string
 }
 
 export const supabase =

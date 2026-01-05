@@ -31,7 +31,6 @@ export default function Admin() {
   const [rows, setRows] = useState<ConsultationRow[]>([])
   const [loadingRows, setLoadingRows] = useState(false)
   const [setupHint, setSetupHint] = useState<string | null>(null)
-  const [agentId, setAgentId] = useState('')
   const [agentName, setAgentName] = useState('')
   const [agentPhone, setAgentPhone] = useState('')
   const [agentStatus, setAgentStatus] = useState('Verified')
@@ -146,25 +145,27 @@ export default function Admin() {
       return
     }
 
-    const trimmedId = agentId.trim()
     const trimmedName = agentName.trim()
     const trimmedPhone = agentPhone.trim()
 
-    if (!trimmedId || !trimmedName) {
-      setAgentError('Agent ID and name are required.')
+    if (!trimmedName) {
+      setAgentError('Agent name is required.')
       return
     }
 
     setSavingAgent(true)
 
     const payload: MarketingAgentInsert = {
-      agent_id: trimmedId,
       name: trimmedName,
       phone: trimmedPhone ? trimmedPhone : null,
       status: agentStatus,
     }
 
-    const { error: insertError } = await supabase!.from('marketing_agents').insert([payload])
+    const { data, error: insertError } = await supabase!
+      .from('marketing_agents')
+      .insert([payload])
+      .select('agent_id')
+      .single()
 
     if (insertError) {
       setAgentError(insertError.message)
@@ -181,8 +182,9 @@ export default function Admin() {
       return
     }
 
-    setAgentNotice('Marketing agent added.')
-    setAgentId('')
+    setAgentNotice(
+      data?.agent_id ? `Marketing agent added. ID: ${data.agent_id}` : 'Marketing agent added.',
+    )
     setAgentName('')
     setAgentPhone('')
     setAgentStatus('Verified')
@@ -329,18 +331,7 @@ export default function Admin() {
                   </div>
                   <form className="mt-4 grid gap-3" onSubmit={addAgent}>
                     <div className="grid gap-3 sm:grid-cols-2">
-                      <div>
-                        <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
-                          AGENT ID
-                        </label>
-                        <input
-                          value={agentId}
-                          onChange={(e) => setAgentId(e.target.value)}
-                          placeholder="PP-AG-0001"
-                          className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
-                        />
-                      </div>
-                      <div>
+                      <div className="sm:col-span-2">
                         <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
                           NAME
                         </label>
@@ -383,12 +374,12 @@ export default function Admin() {
                       <Button
                         variant="primary"
                         type="submit"
-                        disabled={savingAgent || !agentId.trim() || !agentName.trim()}
+                        disabled={savingAgent || !agentName.trim()}
                       >
                         {savingAgent ? 'Adding…' : 'Add agent'}
                       </Button>
                       <p className="text-xs text-white/55">
-                        Agents added here can be verified on the public page.
+                        Agent ID is auto-generated on save.
                       </p>
                     </div>
                     {agentNotice ? (
