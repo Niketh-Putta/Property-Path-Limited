@@ -7,14 +7,19 @@ html {
 }
 
 body {
-  @apply bg-ink-950 text-canvas-50 antialiased overflow-x-hidden;
+  @apply bg-canvas-50 text-ink-950 antialiased overflow-x-hidden font-sans;
 }
 
 ::selection {
-  background: rgba(246, 196, 94, 0.25);
+  background: rgba(197, 160, 89, 0.35);
 }
 
 .noise {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
   background-size: 240px 240px;
+}
+
+.botanical {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420' fill='none'%3E%3Cg stroke='%23003322' stroke-opacity='0.06' stroke-width='1.2'%3E%3Cpath d='M70 320c40-90 110-150 180-180'/%3E%3Cpath d='M120 300c20-50 55-90 100-115'/%3E%3Cpath d='M210 140c18-8 34-6 48 6'/%3E%3Cpath d='M200 155c-10-22-8-42 6-60'/%3E%3Cpath d='M230 165c22-12 42-10 60 4'/%3E%3Cpath d='M250 190c-24-4-40 8-48 28'/%3E%3Cpath d='M310 80c35 55 40 120 18 185'/%3E%3Cpath d='M330 120c-28 18-42 48-40 82'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 420px 420px;
 }

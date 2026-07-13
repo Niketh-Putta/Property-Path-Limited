@@ -50,11 +50,11 @@ export default function AuthCallback() {
           }
         />
         {error ? (
-          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+          <div className="mt-6 rounded-2xl border border-ink-950/10 bg-white/80 p-4 text-sm text-ink-950/75">
             {error}
           </div>
         ) : (
-          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
+          <div className="mt-6 rounded-2xl border border-ink-950/10 bg-white/80 p-4 text-sm text-ink-950/70">
             Working…
           </div>
         )}

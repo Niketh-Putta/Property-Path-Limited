@@ -23,15 +23,15 @@ export default function LinkButton(props: Props) {
   const { variant = 'primary', size = 'md' } = props
   const userClassName = (props as { className?: string }).className
   const className = cn(
-    'inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/40 active:scale-[0.99]',
+    'inline-flex items-center justify-center gap-2 rounded-xl font-medium tracking-wide transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/50 active:scale-[0.99]',
     size === 'sm' && 'h-10 px-4 text-sm',
     size === 'md' && 'h-12 px-5 text-sm',
     variant === 'primary' &&
-      'bg-gold-300 text-ink-950 shadow-glow hover:bg-gold-100 hover:-translate-y-[1px]',
+      'bg-ink-950 text-gold-300 shadow-glow ring-1 ring-gold-300/80 hover:bg-ink-900 hover:-translate-y-[1px]',
     variant === 'secondary' &&
-      'bg-white/10 text-canvas-50 ring-1 ring-white/15 hover:bg-white/14 hover:-translate-y-[1px]',
+      'bg-transparent text-ink-950 ring-1 ring-gold-300/70 hover:bg-gold-50 hover:-translate-y-[1px]',
     variant === 'ghost' &&
-      'bg-transparent text-canvas-50 hover:bg-white/8 ring-1 ring-white/10 hover:-translate-y-[1px]',
+      'bg-transparent text-ink-950 ring-1 ring-ink-950/15 hover:bg-ink-950/[0.04] hover:-translate-y-[1px]',
     'no-underline',
     'w-fit',
     userClassName,

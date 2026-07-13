@@ -105,17 +105,17 @@ export default function Home() {
           <div className="grid items-center gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <Reveal>
-                <h1 className="mt-5 text-3xl font-semibold leading-tight tracking-tight text-canvas-50 sm:text-5xl">
-                  <span className="bg-gradient-to-r from-gold-100 via-gold-300 to-gold-700 bg-clip-text text-transparent">
-                    Property Path LTD
+                <h1 className="mt-5 text-3xl font-semibold leading-tight tracking-tight text-ink-950 sm:text-5xl">
+                  <span className="font-serif text-4xl tracking-[0.04em] text-ink-950 sm:text-6xl">
+                    PROPERTY PATH
                   </span>
-                  <span className="block text-white/80">
+                  <span className="mt-3 block text-base font-medium uppercase tracking-[0.18em] text-ink-950/75 sm:text-lg">
                     Bangalore’s Most Trusted Real Estate Digital Marketing Partner
                   </span>
                 </h1>
               </Reveal>
               <Reveal delay={0.06}>
-                <p className="mt-5 max-w-2xl text-sm leading-7 text-white/72 sm:text-base sm:leading-8">
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-ink-950/70 sm:text-base sm:leading-8">
                   PropertyPath LTD is a next-generation real estate marketing and advisory
                   company based in Bangalore. We combine 10+ years of development expertise
                   with cutting-edge digital marketing to deliver verified, high-growth
@@ -134,21 +134,21 @@ export default function Home() {
               </Reveal>
 
               <Reveal delay={0.24}>
-                <div className="mt-10 grid gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 shadow-soft sm:grid-cols-3">
+                <div className="mt-10 grid gap-3 rounded-2xl border border-gold-300/40 bg-white/80 p-5 shadow-soft sm:grid-cols-3">
                   <div>
-                    <p className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                    <p className="text-xs font-semibold tracking-[0.16em] text-gold-500">
                       OUR COMMITMENT
                     </p>
-                    <p className="mt-2 text-sm leading-7 text-white/75">
+                    <p className="mt-2 text-sm leading-7 text-ink-950/75">
                       We take complete ownership of every property we represent — including
                       all future queries and dispute-related clarifications.
                     </p>
                   </div>
                   <div className="sm:col-span-2">
-                    <p className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                    <p className="text-xs font-semibold tracking-[0.16em] text-gold-500">
                       WHAT MAKES US DIFFERENT
                     </p>
-                    <ul className="mt-3 grid gap-2 text-sm text-white/75 sm:grid-cols-2">
+                    <ul className="mt-3 grid gap-2 text-sm text-ink-950/75 sm:grid-cols-2">
                       <li className="inline-flex items-center gap-2">
                         <BadgeCheck className="h-4 w-4 text-gold-300/90" />
                         100% verified listings
@@ -182,7 +182,7 @@ export default function Home() {
             <div className="lg:col-span-5">
               <Reveal delay={0.1}>
                 <motion.div
-                  className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-soft"
+                  className="relative overflow-hidden rounded-3xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-6 shadow-soft"
                   animate={
                     reduceMotion
                       ? undefined
@@ -206,13 +206,13 @@ export default function Home() {
                   />
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-white/8 blur-2xl"
+                    className="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-ink-950/[0.05] blur-2xl"
                   />
 
-                  <p className="text-sm font-semibold text-canvas-50">
+                  <p className="text-sm font-semibold text-ink-950">
                     Trust through transparency
                   </p>
-                  <p className="mt-2 text-sm leading-7 text-white/70">
+                  <p className="mt-2 text-sm leading-7 text-ink-950/70">
                     A premium operating standard for buyers, investors, and developers:
                     verified data, documented communication, and accountability that lasts.
                   </p>
@@ -224,12 +224,12 @@ export default function Home() {
                     ].map((s) => (
                       <div
                         key={s.k}
-                        className="rounded-2xl border border-white/10 bg-ink-950/30 p-3 text-center"
+                        className="rounded-2xl border border-ink-950/10 bg-canvas-100 p-3 text-center"
                       >
-                        <p className="text-lg font-semibold tracking-tight text-canvas-50">
+                        <p className="text-lg font-semibold tracking-tight text-ink-950">
                           {s.k}
                         </p>
-                        <p className="mt-0.5 text-xs text-white/60">{s.v}</p>
+                        <p className="mt-0.5 text-xs text-ink-950/60">{s.v}</p>
                       </div>
                     ))}
                   </div>
@@ -240,17 +240,17 @@ export default function Home() {
                       return (
                         <div
                           key={item.title}
-                          className="rounded-2xl border border-white/10 bg-ink-950/30 p-4"
+                          className="rounded-2xl border border-ink-950/10 bg-canvas-100 p-4"
                         >
                           <div className="flex items-start gap-3">
-                            <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/8 ring-1 ring-white/10">
+                            <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-ink-950/[0.05] ring-1 ring-ink-950/10">
                               <Icon className="h-4 w-4 text-gold-300/90" />
                             </span>
                             <div>
-                              <p className="text-sm font-semibold text-canvas-50">
+                              <p className="text-sm font-semibold text-ink-950">
                                 {item.title}
                               </p>
-                              <p className="mt-1 text-sm leading-7 text-white/65">
+                              <p className="mt-1 text-sm leading-7 text-ink-950/65">
                                 {item.desc}
                               </p>
                             </div>
@@ -286,8 +286,8 @@ export default function Home() {
             </div>
             <div className="lg:col-span-7">
               <Reveal delay={0.06}>
-                <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
-                  <p className="text-sm leading-7 text-white/72">
+                <div className="rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+                  <p className="text-sm leading-7 text-ink-950/70">
                     With over a decade of experience in developing villas and residential
                     layouts across Bangalore and Hyderabad, we understand the importance
                     of accuracy, compliance, and long-term customer support.
@@ -314,10 +314,10 @@ export default function Home() {
                     ].map((item) => (
                       <div
                         key={item.title}
-                        className="rounded-2xl border border-white/10 bg-ink-950/30 p-5"
+                        className="rounded-2xl border border-ink-950/10 bg-canvas-100 p-5"
                       >
-                        <p className="text-sm font-semibold text-canvas-50">{item.title}</p>
-                        <p className="mt-2 text-sm leading-7 text-white/70">{item.body}</p>
+                        <p className="text-sm font-semibold text-ink-950">{item.title}</p>
+                        <p className="mt-2 text-sm leading-7 text-ink-950/70">{item.body}</p>
                       </div>
                     ))}
                   </div>
@@ -340,9 +340,9 @@ export default function Home() {
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {services.map((service, idx) => (
               <Reveal key={service.title} delay={0.04 * idx}>
-                <div className="h-full rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
-                  <p className="text-sm font-semibold text-canvas-50">{service.title}</p>
-                  <ul className="mt-4 grid gap-2 text-sm text-white/70">
+                <div className="h-full rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+                  <p className="text-sm font-semibold text-ink-950">{service.title}</p>
+                  <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
                     {service.points.map((point) => (
                       <li key={point} className="inline-flex gap-2">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
@@ -371,14 +371,14 @@ export default function Home() {
             </div>
             <div className="lg:col-span-7">
               <Reveal delay={0.06}>
-                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+                <div className="relative overflow-hidden rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
                   <div className="absolute -right-16 -top-16 h-60 w-60 rounded-full bg-gold-300/12 blur-3xl" />
-                  <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-white/6 blur-3xl" />
+                  <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-ink-950/[0.04] blur-3xl" />
 
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
-                      <p className="text-sm font-semibold text-canvas-50">Project highlights</p>
-                      <ul className="mt-4 grid gap-2 text-sm text-white/70">
+                      <p className="text-sm font-semibold text-ink-950">Project highlights</p>
+                      <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
                         {[
                           '3 BHK Duplex Villas',
                           '1500 sqft built-up area',
@@ -401,10 +401,10 @@ export default function Home() {
                       </ul>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-canvas-50">
+                      <p className="text-sm font-semibold text-ink-950">
                         Why this project stands out
                       </p>
-                      <ul className="mt-4 grid gap-2 text-sm text-white/70">
+                      <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
                         {[
                           'Zero land acquisition cost',
                           'High-demand micro-market',
@@ -470,12 +470,12 @@ export default function Home() {
               const Icon = item.icon
               return (
                 <Reveal key={item.title} delay={0.04 * idx}>
-                  <div className="h-full rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/8 ring-1 ring-white/10">
+                  <div className="h-full rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-ink-950/[0.05] ring-1 ring-ink-950/10">
                       <Icon className="h-5 w-5 text-gold-300/90" />
                     </span>
-                    <p className="mt-4 text-sm font-semibold text-canvas-50">{item.title}</p>
-                    <p className="mt-2 text-sm leading-7 text-white/70">{item.body}</p>
+                    <p className="mt-4 text-sm font-semibold text-ink-950">{item.title}</p>
+                    <p className="mt-2 text-sm leading-7 text-ink-950/70">{item.body}</p>
                   </div>
                 </Reveal>
               )
@@ -504,22 +504,22 @@ export default function Home() {
                 />
               </Reveal>
               <Reveal delay={0.06}>
-                <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
-                  <p className="text-sm font-semibold text-canvas-50">Office</p>
-                  <p className="mt-2 break-words text-sm leading-7 text-white/70">
+                <div className="mt-6 rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+                  <p className="text-sm font-semibold text-ink-950">Office</p>
+                  <p className="mt-2 break-words text-sm leading-7 text-ink-950/70">
                     PropertyPath LTD D.No: F1 &amp; F2, Sarovi #72, 1st Floor Sunshine
                     Paradise Layout Kurudusonnenahalli, Virgonagar Post Bangalore – 560049
                   </p>
-                  <p className="mt-4 text-sm text-white/70">
-                    <span className="font-semibold text-canvas-50">Email</span>{' '}
-                    <a className="text-white/80 hover:text-white" href="mailto:info@property-path.in">
+                  <p className="mt-4 text-sm text-ink-950/70">
+                    <span className="font-semibold text-ink-950">Email</span>{' '}
+                    <a className="text-ink-950/80 hover:text-ink-950" href="mailto:info@property-path.in">
                       info@property-path.in
                     </a>
                   </p>
-                  <p className="mt-2 text-sm text-white/70">
-                    <span className="font-semibold text-canvas-50">Website</span>{' '}
+                  <p className="mt-2 text-sm text-ink-950/70">
+                    <span className="font-semibold text-ink-950">Website</span>{' '}
                     <a
-                      className="text-white/80 hover:text-white"
+                      className="text-ink-950/80 hover:text-ink-950"
                       href="https://www.property-path.in"
                       target="_blank"
                       rel="noreferrer"
@@ -533,9 +533,9 @@ export default function Home() {
 
             <div className="lg:col-span-7">
               <Reveal delay={0.06}>
-                <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-soft">
-                  <p className="text-sm font-semibold text-canvas-50">Book a consultation</p>
-                  <p className="mt-2 text-sm leading-7 text-white/70">
+                <div className="rounded-3xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-6 shadow-soft">
+                  <p className="text-sm font-semibold text-ink-950">Book a consultation</p>
+                  <p className="mt-2 text-sm leading-7 text-ink-950/70">
                     Share your requirements and we’ll coordinate next steps with the right
                     team and verified developers.
                   </p>
@@ -622,7 +622,7 @@ function ContactForm() {
       </div>
       <Field label="Phone (optional)" name="phone" placeholder="+91" />
       <div>
-        <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+        <label className="text-xs font-semibold tracking-[0.16em] text-ink-950/55">
           MESSAGE
         </label>
         <textarea
@@ -631,7 +631,7 @@ function ContactForm() {
           placeholder="Tell us what you’re looking for (location, budget, timeline)…"
           rows={5}
           className={cn(
-            'mt-2 w-full resize-none rounded-2xl border border-white/10 bg-ink-950/30 px-4 py-3 text-sm text-white/85 placeholder:text-white/35',
+            'mt-2 w-full resize-none rounded-2xl border border-ink-950/10 bg-white/90 px-4 py-3 text-sm text-ink-950/85 placeholder:text-ink-950/35',
             'focus:outline-none focus:ring-2 focus:ring-gold-300/30',
           )}
         />
@@ -640,13 +640,13 @@ function ContactForm() {
         <button
           type="submit"
           disabled={status === 'submitting' || !configured}
-          className="inline-flex h-12 items-center justify-center rounded-xl bg-gold-300 px-5 text-sm font-medium text-ink-950 shadow-glow transition hover:bg-gold-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/40"
+          className="inline-flex h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-medium tracking-wide text-gold-300 shadow-glow ring-1 ring-gold-300/80 transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/50"
         >
           {status === 'submitting' ? 'Submitting…' : 'Book a Consultation'}{' '}
           <ArrowRight className="ml-2 h-4 w-4" />
         </button>
         <a
-          className="inline-flex h-12 items-center justify-center rounded-xl bg-white/10 px-5 text-sm font-medium text-white/85 ring-1 ring-white/15 transition hover:bg-white/14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/30"
+          className="inline-flex h-12 items-center justify-center rounded-xl bg-transparent px-5 text-sm font-medium tracking-wide text-ink-950 ring-1 ring-gold-300/70 transition hover:bg-gold-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/40"
           href="https://wa.me/?text=Hi%20PropertyPath%2C%20I%27d%20like%20to%20book%20a%20consultation."
           target="_blank"
           rel="noreferrer"
@@ -664,7 +664,7 @@ function ContactForm() {
             }
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }}
             transition={reduceMotion ? { duration: 0.1 } : quickFade}
-            className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75"
+            className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 text-sm text-ink-950/75"
           >
             Received. Our team will get back to you shortly.
           </motion.div>
@@ -677,15 +677,15 @@ function ContactForm() {
             }
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }}
             transition={reduceMotion ? { duration: 0.1 } : quickFade}
-            className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75"
+            className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 text-sm text-ink-950/75"
           >
             Couldn’t submit right now.{' '}
-            {error ? <span className="text-white/60">{error}</span> : null}
-            {setupHint ? <div className="mt-2 text-xs text-white/55">{setupHint}</div> : null}
+            {error ? <span className="text-ink-950/60">{error}</span> : null}
+            {setupHint ? <div className="mt-2 text-xs text-ink-950/55">{setupHint}</div> : null}
           </motion.div>
         ) : null}
       </AnimatePresence>
-      <p className="text-xs leading-6 text-white/45">
+      <p className="text-xs leading-6 text-ink-950/45">
         {configured
           ? 'By submitting, your request is stored securely for our team to review.'
           : 'Consultation submissions are temporarily unavailable.'}
@@ -709,7 +709,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="text-xs font-semibold tracking-[0.16em] text-white/55" htmlFor={name}>
+      <label className="text-xs font-semibold tracking-[0.16em] text-ink-950/55" htmlFor={name}>
         {label.toUpperCase()}
       </label>
       <input
@@ -719,7 +719,7 @@ function Field({
         required={required}
         placeholder={placeholder}
         className={cn(
-          'mt-2 h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35',
+          'mt-2 h-12 w-full rounded-2xl border border-ink-950/10 bg-white/90 px-4 text-sm text-ink-950/85 placeholder:text-ink-950/35',
           'focus:outline-none focus:ring-2 focus:ring-gold-300/30',
         )}
       />

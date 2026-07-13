@@ -116,7 +116,7 @@ export default function VerifyAgent() {
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-white/70 ring-1 ring-white/10">
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-ink-950/70 ring-1 ring-ink-950/10">
               SAFE INVESTMENTS. STRONG RETURNS.
             </p>
             <SectionHeading
@@ -127,9 +127,9 @@ export default function VerifyAgent() {
             />
           </Reveal>
           <Reveal delay={0.06}>
-            <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
-              <p className="text-sm font-semibold text-canvas-50">Verify using</p>
-              <ul className="mt-4 grid gap-2 text-sm text-white/70">
+            <div className="mt-6 rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+              <p className="text-sm font-semibold text-ink-950">Verify using</p>
+              <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
                 <li className="inline-flex items-center gap-2">
                   <BadgeCheck className="h-4 w-4 text-gold-300/90" />
                   Name
@@ -143,7 +143,7 @@ export default function VerifyAgent() {
                   Agent ID
                 </li>
               </ul>
-              <p className="mt-4 text-sm leading-7 text-white/65">
+              <p className="mt-4 text-sm leading-7 text-ink-950/65">
                 If you don’t find a match, share details with our team — we’ll confirm
                 registration status and guide you to verified partners.
               </p>
@@ -153,20 +153,20 @@ export default function VerifyAgent() {
 
         <div className="lg:col-span-7">
           <Reveal delay={0.06}>
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-soft">
+            <div className="rounded-3xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-6 shadow-soft">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm font-semibold text-canvas-50">Search</p>
+                <p className="text-sm font-semibold text-ink-950">Search</p>
                 <LinkButton to="/" variant="ghost" size="sm">
                   Back to Home
                 </LinkButton>
               </div>
-              <div className="mt-4 flex items-center gap-2 rounded-2xl border border-white/10 bg-ink-950/30 px-4 py-3">
-                <Search className="h-4 w-4 text-white/45" />
+              <div className="mt-4 flex items-center gap-2 rounded-2xl border border-gold-300/30 bg-white/90 px-4 py-3">
+                <Search className="h-4 w-4 text-ink-950/45" />
                 <input
                   value={query}
                   onChange={(e) => handleQueryChange(e.target.value)}
                   placeholder="Search by name, phone, or Agent ID (e.g., PP-AG-0001)"
-                  className="min-w-0 w-full bg-transparent text-sm text-white/85 placeholder:text-white/35 focus:outline-none"
+                  className="min-w-0 w-full bg-transparent text-sm text-ink-950/85 placeholder:text-ink-950/35 focus:outline-none"
                 />
               </div>
 
@@ -187,7 +187,7 @@ export default function VerifyAgent() {
                         reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }
                       }
                       transition={reduceMotion ? { duration: 0.1 } : quickFade}
-                      className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70"
+                      className="rounded-2xl border border-ink-950/10 bg-white/80 p-5 text-sm text-ink-950/70"
                     >
                       Enter a name, phone number, or Agent ID to verify.
                     </motion.div>
@@ -206,7 +206,7 @@ export default function VerifyAgent() {
                         reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }
                       }
                       transition={reduceMotion ? { duration: 0.1 } : quickFade}
-                      className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70"
+                      className="rounded-2xl border border-ink-950/10 bg-white/80 p-5 text-sm text-ink-950/70"
                     >
                       Searching verified agents…
                     </motion.div>
@@ -225,12 +225,12 @@ export default function VerifyAgent() {
                         reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }
                       }
                       transition={reduceMotion ? { duration: 0.1 } : quickFade}
-                      className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70"
+                      className="rounded-2xl border border-ink-950/10 bg-white/80 p-5 text-sm text-ink-950/70"
                     >
                       Could not load agents.{' '}
-                      <span className="text-white/60">{fetchError}</span>
+                      <span className="text-ink-950/60">{fetchError}</span>
                       {fetchHint ? (
-                        <div className="mt-2 text-xs text-white/55">{fetchHint}</div>
+                        <div className="mt-2 text-xs text-ink-950/55">{fetchHint}</div>
                       ) : null}
                     </motion.div>
                   ) : results.length === 0 ? (
@@ -248,12 +248,12 @@ export default function VerifyAgent() {
                         reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, filter: 'blur(6px)' }
                       }
                       transition={reduceMotion ? { duration: 0.1 } : quickFade}
-                      className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                      className="rounded-2xl border border-ink-950/10 bg-white/80 p-5"
                     >
-                      <p className="text-sm font-semibold text-canvas-50">
+                      <p className="text-sm font-semibold text-ink-950">
                         No matching agent found
                       </p>
-                      <p className="mt-2 text-sm leading-7 text-white/70">
+                      <p className="mt-2 text-sm leading-7 text-ink-950/70">
                         Share the agent details with our team and we’ll confirm registration
                         status.
                       </p>
@@ -303,24 +303,24 @@ export default function VerifyAgent() {
                             }
                             transition={reduceMotion ? { duration: 0.1 } : quickFade}
                             className={cn(
-                              'rounded-2xl border border-white/10 bg-white/5 p-5',
-                              'transition hover:bg-white/8',
+                              'rounded-2xl border border-ink-950/10 bg-white/80 p-5',
+                              'transition hover:bg-ink-950/[0.06]',
                             )}
                           >
                             <div className="flex items-start justify-between gap-4">
                               <div className="min-w-0">
-                                <p className="text-sm font-semibold text-canvas-50">
+                                <p className="text-sm font-semibold text-ink-950">
                                   {agent.name}
                                 </p>
-                                <p className="mt-1 text-sm text-white/70">
+                                <p className="mt-1 text-sm text-ink-950/70">
                                   Agent ID:{' '}
-                                  <span className="break-words font-medium text-white/85">
+                                  <span className="break-words font-medium text-ink-950/85">
                                     {agent.agentId}
                                   </span>
                                 </p>
-                                <p className="mt-1 text-sm text-white/70">
+                                <p className="mt-1 text-sm text-ink-950/70">
                                   Phone:{' '}
-                                  <span className="break-words font-medium text-white/85">
+                                  <span className="break-words font-medium text-ink-950/85">
                                     {agent.phone}
                                   </span>
                                 </p>
@@ -330,7 +330,7 @@ export default function VerifyAgent() {
                                 {agent.status}
                               </span>
                             </div>
-                            <p className="mt-4 text-sm leading-7 text-white/65">
+                            <p className="mt-4 text-sm leading-7 text-ink-950/65">
                               Verified partners are bound by our transparency code and
                               compliance standards. PropertyPath LTD remains accountable for
                               dispute resolution and query clarifications.
@@ -343,7 +343,7 @@ export default function VerifyAgent() {
                 </AnimatePresence>
               </div>
 
-              <p className="mt-6 text-xs leading-6 text-white/45">
+              <p className="mt-6 text-xs leading-6 text-ink-950/45">
                 Note: This page currently includes a sample verified agent entry. Replace
                 sample data with your registered partner database when ready.
               </p>

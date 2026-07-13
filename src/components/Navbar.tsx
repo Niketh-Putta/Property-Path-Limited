@@ -43,7 +43,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-ink-950/75 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-ink-950/10 bg-canvas-50/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <button
           type="button"
@@ -62,7 +62,7 @@ export default function Navbar() {
             <button
               key={item.sectionId}
               type="button"
-              className="rounded-lg px-3 py-2 text-sm font-medium text-white/70 transition hover:bg-white/8 hover:text-white"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-ink-950/70 transition hover:bg-ink-950/[0.06] hover:text-ink-950"
               onClick={() => handleSection(item.sectionId)}
             >
               {item.label}
@@ -84,7 +84,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-xl p-2 text-white/80 ring-1 ring-white/12 hover:bg-white/8 md:hidden"
+          className="inline-flex items-center justify-center rounded-xl p-2 text-ink-950/80 ring-1 ring-ink-950/12 hover:bg-ink-950/[0.06] md:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={() => setOpen((v) => !v)}
         >
@@ -103,7 +103,7 @@ export default function Navbar() {
             transition={reduceMotion ? { duration: 0.1 } : quickFade}
           >
             <div className="mx-auto max-w-6xl px-4 pb-4 sm:px-6">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
+              <div className="rounded-2xl border border-ink-950/10 bg-white/80 p-3 backdrop-blur">
                 <motion.div
                   className="grid gap-1"
                   initial={reduceMotion ? false : 'hidden'}
@@ -123,7 +123,7 @@ export default function Navbar() {
                     <motion.button
                       key={item.sectionId}
                       type="button"
-                      className="rounded-xl px-3 py-3 text-left text-sm font-medium text-white/80 hover:bg-white/8"
+                      className="rounded-xl px-3 py-3 text-left text-sm font-medium text-ink-950/80 hover:bg-ink-950/[0.06]"
                       onClick={() => handleSection(item.sectionId)}
                       variants={
                         reduceMotion

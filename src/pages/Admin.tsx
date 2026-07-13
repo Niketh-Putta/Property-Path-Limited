@@ -231,7 +231,7 @@ export default function Admin() {
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-white/70 ring-1 ring-white/10">
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-ink-950/70 ring-1 ring-ink-950/10">
               <ShieldCheck className="h-4 w-4 text-gold-300/90" />
               Admin Dashboard
             </p>
@@ -244,9 +244,9 @@ export default function Admin() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-soft">
+            <div className="mt-6 rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
               {!supabaseConfigured() ? (
-                <div className="grid gap-4 text-sm leading-7 text-white/70">
+                <div className="grid gap-4 text-sm leading-7 text-ink-950/70">
                   <div>
                     Admin services are temporarily unavailable. Please try again shortly.
                   </div>
@@ -255,10 +255,10 @@ export default function Admin() {
                   </Button>
                 </div>
               ) : authView === 'loading' ? (
-                <div className="text-sm text-white/70">Loading…</div>
+                <div className="text-sm text-ink-950/70">Loading…</div>
               ) : authView === 'signed_in' ? (
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="text-sm text-white/70">
+                  <div className="text-sm text-ink-950/70">
                     Signed in. Showing the latest submissions.
                   </div>
                   <Button variant="secondary" size="sm" onClick={signOut}>
@@ -267,23 +267,23 @@ export default function Admin() {
                   </Button>
                 </div>
               ) : authView === 'unauthorized' ? (
-                <div className="text-sm leading-7 text-white/70">
+                <div className="text-sm leading-7 text-ink-950/70">
                   {adminAllowlistReady
                     ? 'This email is not authorized for admin access.'
                     : 'Admin access is not configured for this site.'}
                 </div>
               ) : (
                 <div className="grid gap-3">
-                  <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                  <label className="text-xs font-semibold tracking-[0.16em] text-ink-950/55">
                     EMAIL
                   </label>
                   <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                    className="h-12 w-full rounded-2xl border border-ink-950/10 bg-white/90 px-4 text-sm text-ink-950/85 placeholder:text-ink-950/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
                   />
-                  <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                  <label className="text-xs font-semibold tracking-[0.16em] text-ink-950/55">
                     PASSWORD
                   </label>
                   <input
@@ -291,24 +291,24 @@ export default function Admin() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     type="password"
-                    className="h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                    className="h-12 w-full rounded-2xl border border-ink-950/10 bg-white/90 px-4 text-sm text-ink-950/85 placeholder:text-ink-950/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
                   />
                   <Button variant="primary" onClick={signIn} disabled={!email.trim() || !password}>
                     Sign in
                   </Button>
-                  <p className="text-xs leading-6 text-white/45">
+                  <p className="text-xs leading-6 text-ink-950/45">
                     Only approved admin emails can access this dashboard.
                   </p>
-                  <p className="text-xs leading-6 text-white/45">
+                  <p className="text-xs leading-6 text-ink-950/45">
                     If you haven’t set a password yet, create the user in Supabase → Authentication → Users.
                   </p>
                   {notice ? (
-                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+                    <div className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 text-sm text-ink-950/75">
                       {notice}
                     </div>
                   ) : null}
                   {error ? (
-                    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+                    <div className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 text-sm text-ink-950/75">
                       {error}
                     </div>
                   ) : null}
@@ -320,49 +320,49 @@ export default function Admin() {
 
         <div className="lg:col-span-7">
           <Reveal delay={0.06}>
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-6 shadow-soft">
+            <div className="rounded-3xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-6 shadow-soft">
               {authView === 'signed_in' ? (
-                <div className="mb-8 rounded-2xl border border-white/10 bg-ink-950/30 p-5">
+                <div className="mb-8 rounded-2xl border border-ink-950/10 bg-canvas-100 p-5">
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-sm font-semibold text-canvas-50">
+                    <p className="text-sm font-semibold text-ink-950">
                       Add marketing agent
                     </p>
-                    <p className="text-xs text-white/55">Visible on Verify Agent</p>
+                    <p className="text-xs text-ink-950/55">Visible on Verify Agent</p>
                   </div>
                   <form className="mt-4 grid gap-3" onSubmit={addAgent}>
                     <div className="grid gap-3 sm:grid-cols-2">
                       <div className="sm:col-span-2">
-                        <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                        <label className="text-xs font-semibold tracking-[0.16em] text-ink-950/55">
                           NAME
                         </label>
                         <input
                           value={agentName}
                           onChange={(e) => setAgentName(e.target.value)}
                           placeholder="Agent name"
-                          className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                          className="mt-2 h-12 w-full rounded-2xl border border-ink-950/10 bg-white/90 px-4 text-sm text-ink-950/85 placeholder:text-ink-950/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
                         />
                       </div>
                     </div>
                     <div className="grid gap-3 sm:grid-cols-2">
                       <div>
-                        <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                        <label className="text-xs font-semibold tracking-[0.16em] text-ink-950/55">
                           PHONE (OPTIONAL)
                         </label>
                         <input
                           value={agentPhone}
                           onChange={(e) => setAgentPhone(e.target.value)}
                           placeholder="+91"
-                          className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                          className="mt-2 h-12 w-full rounded-2xl border border-ink-950/10 bg-white/90 px-4 text-sm text-ink-950/85 placeholder:text-ink-950/35 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-semibold tracking-[0.16em] text-white/55">
+                        <label className="text-xs font-semibold tracking-[0.16em] text-ink-950/55">
                           STATUS
                         </label>
                         <select
                           value={agentStatus}
                           onChange={(e) => setAgentStatus(e.target.value)}
-                          className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-ink-950/30 px-4 text-sm text-white/85 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
+                          className="mt-2 h-12 w-full rounded-2xl border border-gold-300/30 bg-white/90 px-4 text-sm text-ink-950/85 focus:outline-none focus:ring-2 focus:ring-gold-300/30"
                         >
                           <option value="Verified">Verified</option>
                           <option value="Pending">Pending</option>
@@ -378,20 +378,20 @@ export default function Admin() {
                       >
                         {savingAgent ? 'Adding…' : 'Add agent'}
                       </Button>
-                      <p className="text-xs text-white/55">
+                      <p className="text-xs text-ink-950/55">
                         Agent ID is auto-generated on save.
                       </p>
                     </div>
                     {agentNotice ? (
-                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+                      <div className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 text-sm text-ink-950/75">
                         {agentNotice}
                       </div>
                     ) : null}
                     {agentError ? (
-                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">
+                      <div className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 text-sm text-ink-950/75">
                         {agentError}
                         {agentSetupHint ? (
-                          <div className="mt-2 text-xs text-white/55">{agentSetupHint}</div>
+                          <div className="mt-2 text-xs text-ink-950/55">{agentSetupHint}</div>
                         ) : null}
                       </div>
                     ) : null}
@@ -399,10 +399,10 @@ export default function Admin() {
                 </div>
               ) : null}
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm font-semibold text-canvas-50">Latest submissions</p>
+                <p className="text-sm font-semibold text-ink-950">Latest submissions</p>
                 {authView === 'signed_in' ? (
                   <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end">
-                    <p className="text-xs text-white/55">{rows.length} shown (max 200)</p>
+                    <p className="text-xs text-ink-950/55">{rows.length} shown (max 200)</p>
                     <Button
                       variant="secondary"
                       size="sm"
@@ -416,18 +416,18 @@ export default function Admin() {
               </div>
 
               {authView !== 'signed_in' ? (
-                <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70">
+                <div className="mt-6 rounded-2xl border border-ink-950/10 bg-white/80 p-5 text-sm text-ink-950/70">
                   Sign in to view submissions.
                 </div>
               ) : loadingRows ? (
-                <div className="mt-6 text-sm text-white/70">Loading submissions…</div>
+                <div className="mt-6 text-sm text-ink-950/70">Loading submissions…</div>
               ) : error ? (
-                <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70">
+                <div className="mt-6 rounded-2xl border border-ink-950/10 bg-white/80 p-5 text-sm text-ink-950/70">
                   {error}
-                  {setupHint ? <div className="mt-2 text-xs text-white/55">{setupHint}</div> : null}
+                  {setupHint ? <div className="mt-2 text-xs text-ink-950/55">{setupHint}</div> : null}
                 </div>
               ) : rows.length === 0 ? (
-                <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/70">
+                <div className="mt-6 rounded-2xl border border-ink-950/10 bg-white/80 p-5 text-sm text-ink-950/70">
                   No submissions yet.
                 </div>
               ) : (
@@ -436,21 +436,21 @@ export default function Admin() {
                     {rows.map((r) => (
                       <div
                         key={r.id}
-                        className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                        className="rounded-2xl border border-ink-950/10 bg-white/80 p-5"
                       >
                         <div className="flex flex-col gap-1">
-                          <p className="text-xs text-white/55">
+                          <p className="text-xs text-ink-950/55">
                             {new Date(r.created_at).toLocaleString()}
                           </p>
-                          <p className="text-sm font-semibold text-white/85">{r.name}</p>
-                          <p className="text-sm text-white/70 break-words">{r.email}</p>
-                          <p className="text-sm text-white/70 break-words">{r.phone ?? '—'}</p>
+                          <p className="text-sm font-semibold text-ink-950/85">{r.name}</p>
+                          <p className="text-sm text-ink-950/70 break-words">{r.email}</p>
+                          <p className="text-sm text-ink-950/70 break-words">{r.phone ?? '—'}</p>
                         </div>
-                        <details className="mt-3 rounded-xl border border-white/10 bg-ink-950/30 p-4">
-                          <summary className="cursor-pointer select-none text-sm font-medium text-white/80">
+                        <details className="mt-3 rounded-xl border border-ink-950/10 bg-canvas-100 p-4">
+                          <summary className="cursor-pointer select-none text-sm font-medium text-ink-950/80">
                             Message
                           </summary>
-                          <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-white/70">
+                          <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-ink-950/70">
                             {r.message}
                           </p>
                         </details>
@@ -458,11 +458,11 @@ export default function Admin() {
                     ))}
                   </div>
 
-                  <div className="hidden sm:block overflow-hidden rounded-2xl border border-white/10">
+                  <div className="hidden sm:block overflow-hidden rounded-2xl border border-ink-950/10">
                     <div className="max-h-[560px] overflow-x-auto overflow-y-auto">
                       <table className="min-w-[860px] w-full border-collapse text-left text-sm">
-                        <thead className="sticky top-0 bg-ink-950/90 backdrop-blur">
-                          <tr className="text-xs font-semibold tracking-[0.14em] text-white/55">
+                        <thead className="sticky top-0 bg-canvas-50/95 backdrop-blur">
+                          <tr className="text-xs font-semibold tracking-[0.14em] text-ink-950/55">
                             <th className="px-4 py-3 whitespace-nowrap">Date</th>
                             <th className="px-4 py-3 whitespace-nowrap">Name</th>
                             <th className="px-4 py-3 whitespace-nowrap">Email</th>
@@ -472,16 +472,16 @@ export default function Admin() {
                         </thead>
                         <tbody>
                           {rows.map((r) => (
-                            <tr key={r.id} className="border-t border-white/10 bg-white/5">
-                              <td className="px-4 py-3 text-white/70">
+                            <tr key={r.id} className="border-t border-ink-950/10 bg-white/80">
+                              <td className="px-4 py-3 text-ink-950/70">
                                 {new Date(r.created_at).toLocaleString()}
                               </td>
-                              <td className="px-4 py-3 font-medium text-white/85">{r.name}</td>
-                              <td className="px-4 py-3 text-white/70 break-words">{r.email}</td>
-                              <td className="px-4 py-3 text-white/70 break-words">
+                              <td className="px-4 py-3 font-medium text-ink-950/85">{r.name}</td>
+                              <td className="px-4 py-3 text-ink-950/70 break-words">{r.email}</td>
+                              <td className="px-4 py-3 text-ink-950/70 break-words">
                                 {r.phone ?? '—'}
                               </td>
-                              <td className="px-4 py-3 text-white/70">
+                              <td className="px-4 py-3 text-ink-950/70">
                                 <div className="max-w-[22rem] truncate">{r.message}</div>
                               </td>
                             </tr>
@@ -494,7 +494,7 @@ export default function Admin() {
               )}
 
               {authView === 'signed_in' && rows.length > 0 ? (
-                <div className="mt-4 rounded-2xl border border-white/10 bg-ink-950/30 p-4 text-sm text-white/70">
+                <div className="mt-4 rounded-2xl border border-ink-950/10 bg-canvas-100 p-4 text-sm text-ink-950/70">
                   Tip: On mobile, open a card’s “Message”. On desktop, hover/copy the Message column for full text.
                 </div>
               ) : null}

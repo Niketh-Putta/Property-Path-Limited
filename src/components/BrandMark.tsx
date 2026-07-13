@@ -31,8 +31,8 @@ export default function BrandMark({
             y2="120"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#F08A3C" />
-            <stop offset="1" stopColor="#B84A1A" />
+            <stop stopColor="#C5A059" />
+            <stop offset="1" stopColor="#003322" />
           </linearGradient>
         </defs>
         <path
@@ -41,21 +41,21 @@ export default function BrandMark({
         />
         <path
           d="M64 30c16 0 29 11.7 29 26.2 0 8.7-5.1 15.7-12.5 22.7l-2.5 2.4H50l-2.5-2.4C40.1 71.9 35 64.9 35 56.2 35 41.7 48 30 64 30Z"
-          fill="#141B22"
+          fill="#003322"
           opacity="0.92"
         />
-        <path d="M63.8 40.5 76 33v44H51V41l12.8-.5Z" fill="#F2C24E" />
+        <path d="M63.8 40.5 76 33v44H51V41l12.8-.5Z" fill="#C5A059" />
         <path d="M51 48 42 52v25h9V48Z" fill="#7B8A85" />
         <path d="M85 52 78 49v28h7V52Z" fill="#7B8A85" opacity="0.85" />
-        <path d="M60 56h6v10h-6V56Z" fill="#141B22" />
+        <path d="M60 56h6v10h-6V56Z" fill="#F9F9F4" />
       </svg>
 
       {showWordmark ? (
         <div className="text-left leading-tight">
-          <p className="text-base font-semibold tracking-tight text-canvas-50 sm:text-lg">
-            Property <span className="text-white/80">Path</span>
+          <p className="font-serif text-lg font-semibold tracking-tight text-ink-950 sm:text-xl">
+            PROPERTY <span className="text-ink-950">PATH</span>
           </p>
-          <p className="text-[11px] font-semibold tracking-[0.18em] text-white/45">
+          <p className="text-[11px] font-semibold tracking-[0.18em] text-gold-500">
             SAFE INVESTMENTS. STRONG RETURNS.
           </p>
         </div>
