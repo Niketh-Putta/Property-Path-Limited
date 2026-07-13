@@ -9,7 +9,7 @@ export default function Layout() {
   const reduceMotion = useReducedMotion()
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen max-w-[100vw] overflow-x-hidden">
       <div id="top" />
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-canvas-50 via-canvas-50 to-canvas-100" />
@@ -21,7 +21,7 @@ export default function Layout() {
       </div>
 
       <Navbar />
-      <main>
+      <main className="min-w-0 overflow-x-hidden">
         <AuthCodeHandler />
         <AnimatePresence mode="wait">
           <motion.div

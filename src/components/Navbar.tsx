@@ -44,10 +44,10 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-950/10 bg-canvas-50/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
         <button
           type="button"
-          className="group inline-flex items-center gap-2"
+          className="group inline-flex min-w-0 max-w-[calc(100%-3.25rem)] items-center gap-2"
           onClick={() => {
             setOpen(false)
             if (onHome) scrollToSection('top')
@@ -57,18 +57,18 @@ export default function Navbar() {
           <BrandMark showWordmark className="select-none" />
         </button>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden min-w-0 items-center gap-0.5 lg:flex">
           {navItems.map((item) => (
             <button
               key={item.sectionId}
               type="button"
-              className="rounded-lg px-3 py-2 text-sm font-medium text-ink-950/70 transition hover:bg-ink-950/[0.06] hover:text-ink-950"
+              className="rounded-lg px-2.5 py-2 text-sm font-medium text-ink-950/70 transition hover:bg-ink-950/[0.06] hover:text-ink-950 xl:px-3"
               onClick={() => handleSection(item.sectionId)}
             >
               {item.label}
             </button>
           ))}
-          <div className="ml-2 flex items-center gap-2">
+          <div className="ml-2 flex shrink-0 items-center gap-2">
             <LinkButton to={ctaTo} variant="secondary" size="sm">
               Verify an Agent
             </LinkButton>
@@ -84,7 +84,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-xl p-2 text-ink-950/80 ring-1 ring-ink-950/12 hover:bg-ink-950/[0.06] md:hidden"
+          className="inline-flex shrink-0 items-center justify-center rounded-xl p-2 text-ink-950/80 ring-1 ring-ink-950/12 hover:bg-ink-950/[0.06] lg:hidden"
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={() => setOpen((v) => !v)}
         >
@@ -96,7 +96,7 @@ export default function Navbar() {
         {open ? (
           <motion.div
             key="mobile-menu"
-            className="md:hidden"
+            className="lg:hidden"
             initial={reduceMotion ? false : { opacity: 0, y: -8 }}
             animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
@@ -140,10 +140,14 @@ export default function Navbar() {
                   ))}
                 </motion.div>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                  <LinkButton to={ctaTo} variant="secondary">
+                  <LinkButton to={ctaTo} variant="secondary" className="w-full">
                     Verify an Agent
                   </LinkButton>
-                  <Button variant="primary" onClick={() => handleSection('projects')}>
+                  <Button
+                    variant="primary"
+                    className="w-full"
+                    onClick={() => handleSection('projects')}
+                  >
                     Explore Projects
                   </Button>
                 </div>

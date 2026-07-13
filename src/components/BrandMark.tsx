@@ -13,9 +13,12 @@ export default function BrandMark({
   const gradientId = useId()
 
   return (
-    <div className={cn('inline-flex items-center gap-2', className)} aria-label={label}>
+    <div
+      className={cn('inline-flex min-w-0 max-w-full items-center gap-2', className)}
+      aria-label={label}
+    >
       <svg
-        className="h-10 w-10"
+        className="h-9 w-9 shrink-0 sm:h-10 sm:w-10"
         viewBox="0 0 128 128"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -51,11 +54,11 @@ export default function BrandMark({
       </svg>
 
       {showWordmark ? (
-        <div className="text-left leading-tight">
-          <p className="font-serif text-lg font-semibold tracking-tight text-ink-950 sm:text-xl">
-            PROPERTY <span className="text-ink-950">PATH</span>
+        <div className="min-w-0 text-left leading-tight">
+          <p className="truncate font-serif text-base font-semibold tracking-tight text-ink-950 sm:text-lg md:text-xl">
+            PROPERTY PATH
           </p>
-          <p className="text-[11px] font-semibold tracking-[0.18em] text-gold-500">
+          <p className="mt-0.5 hidden max-w-[14rem] truncate text-[10px] font-semibold tracking-[0.12em] text-gold-500 sm:block sm:tracking-[0.14em] md:max-w-none md:text-[11px]">
             SAFE INVESTMENTS. STRONG RETURNS.
           </p>
         </div>

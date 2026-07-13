@@ -112,11 +112,11 @@ export default function VerifyAgent() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
-      <div className="grid gap-10 lg:grid-cols-12">
-        <div className="lg:col-span-5">
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:py-20">
+      <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
+        <div className="min-w-0 lg:col-span-5">
           <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-ink-950/70 ring-1 ring-ink-950/10">
+            <p className="inline-flex max-w-full items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-[10px] font-medium tracking-[0.08em] text-ink-950/70 ring-1 ring-ink-950/10 sm:text-xs sm:tracking-[0.12em]">
               SAFE INVESTMENTS. STRONG RETURNS.
             </p>
             <SectionHeading
@@ -127,18 +127,18 @@ export default function VerifyAgent() {
             />
           </Reveal>
           <Reveal delay={0.06}>
-            <div className="mt-6 rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+            <div className="mt-6 rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
               <p className="text-sm font-semibold text-ink-950">Verify using</p>
               <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
-                <li className="inline-flex items-center gap-2">
+                <li className="flex items-start gap-2">
                   <BadgeCheck className="h-4 w-4 text-gold-300/90" />
                   Name
                 </li>
-                <li className="inline-flex items-center gap-2">
+                <li className="flex items-start gap-2">
                   <ShieldCheck className="h-4 w-4 text-gold-300/90" />
                   Phone number
                 </li>
-                <li className="inline-flex items-center gap-2">
+                <li className="flex items-start gap-2">
                   <UserCheck className="h-4 w-4 text-gold-300/90" />
                   Agent ID
                 </li>
@@ -151,9 +151,9 @@ export default function VerifyAgent() {
           </Reveal>
         </div>
 
-        <div className="lg:col-span-7">
+        <div className="min-w-0 lg:col-span-7">
           <Reveal delay={0.06}>
-            <div className="rounded-3xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-6 shadow-soft">
+            <div className="rounded-2xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-4 shadow-soft sm:rounded-3xl sm:p-6">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm font-semibold text-ink-950">Search</p>
                 <LinkButton to="/" variant="ghost" size="sm">

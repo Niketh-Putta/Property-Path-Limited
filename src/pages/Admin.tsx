@@ -227,11 +227,11 @@ export default function Admin() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
-      <div className="grid gap-10 lg:grid-cols-12">
-        <div className="lg:col-span-5">
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:py-20">
+      <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
+        <div className="min-w-0 lg:col-span-5">
           <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-ink-950/70 ring-1 ring-ink-950/10">
+            <p className="inline-flex max-w-full items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-[10px] font-medium tracking-[0.08em] text-ink-950/70 ring-1 ring-ink-950/10 sm:text-xs sm:tracking-[0.12em]">
               <ShieldCheck className="h-4 w-4 text-gold-300/90" />
               Admin Dashboard
             </p>
@@ -244,7 +244,7 @@ export default function Admin() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <div className="mt-6 rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+            <div className="mt-6 rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
               {!supabaseConfigured() ? (
                 <div className="grid gap-4 text-sm leading-7 text-ink-950/70">
                   <div>
@@ -318,9 +318,9 @@ export default function Admin() {
           </Reveal>
         </div>
 
-        <div className="lg:col-span-7">
+        <div className="min-w-0 lg:col-span-7">
           <Reveal delay={0.06}>
-            <div className="rounded-3xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-6 shadow-soft">
+            <div className="rounded-2xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-4 shadow-soft sm:rounded-3xl sm:p-6">
               {authView === 'signed_in' ? (
                 <div className="mb-8 rounded-2xl border border-ink-950/10 bg-canvas-100 p-5">
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
@@ -459,7 +459,7 @@ export default function Admin() {
                   </div>
 
                   <div className="hidden sm:block overflow-hidden rounded-2xl border border-ink-950/10">
-                    <div className="max-h-[560px] overflow-x-auto overflow-y-auto">
+                    <div className="max-h-[560px] max-w-full overflow-x-auto overflow-y-auto rounded-xl">
                       <table className="min-w-[860px] w-full border-collapse text-left text-sm">
                         <thead className="sticky top-0 bg-canvas-50/95 backdrop-blur">
                           <tr className="text-xs font-semibold tracking-[0.14em] text-ink-950/55">

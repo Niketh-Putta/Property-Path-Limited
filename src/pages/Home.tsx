@@ -101,21 +101,21 @@ export default function Home() {
   return (
     <div>
       <section className="relative overflow-hidden">
-        <div className="mx-auto max-w-6xl px-4 pb-14 pt-16 sm:px-6 sm:pb-20 sm:pt-20">
-          <div className="grid items-center gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-7">
+        <div className="mx-auto max-w-6xl px-4 pb-12 pt-10 sm:px-6 sm:pb-20 sm:pt-16 lg:pt-20">
+          <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="min-w-0 lg:col-span-7">
               <Reveal>
-                <h1 className="mt-5 text-3xl font-semibold leading-tight tracking-tight text-ink-950 sm:text-5xl">
-                  <span className="font-serif text-4xl tracking-[0.04em] text-ink-950 sm:text-6xl">
+                <h1 className="mt-2 min-w-0 sm:mt-5">
+                  <span className="block break-words font-serif text-[clamp(1.75rem,8vw,3.75rem)] font-semibold leading-[1.1] tracking-[0.02em] text-ink-950 sm:tracking-[0.04em]">
                     PROPERTY PATH
                   </span>
-                  <span className="mt-3 block text-base font-medium uppercase tracking-[0.18em] text-ink-950/75 sm:text-lg">
+                  <span className="mt-3 block max-w-xl text-sm font-medium leading-relaxed tracking-[0.08em] text-ink-950/75 uppercase sm:text-base sm:tracking-[0.14em] sm:leading-7">
                     Bangalore’s Most Trusted Real Estate Digital Marketing Partner
                   </span>
                 </h1>
               </Reveal>
               <Reveal delay={0.06}>
-                <p className="mt-5 max-w-2xl text-sm leading-7 text-ink-950/70 sm:text-base sm:leading-8">
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-ink-950/70 text-pretty sm:text-base sm:leading-8">
                   PropertyPath LTD is a next-generation real estate marketing and advisory
                   company based in Bangalore. We combine 10+ years of development expertise
                   with cutting-edge digital marketing to deliver verified, high-growth
@@ -123,55 +123,59 @@ export default function Home() {
                 </p>
               </Reveal>
               <Reveal delay={0.12}>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <LinkButton to="/projects/bangalore-east-villas" variant="primary">
+                <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                  <LinkButton
+                    to="/projects/bangalore-east-villas"
+                    variant="primary"
+                    className="w-full sm:w-auto"
+                  >
                     Explore Projects <ArrowRight className="h-4 w-4" />
                   </LinkButton>
-                  <LinkButton to="/verify-agent" variant="secondary">
+                  <LinkButton to="/verify-agent" variant="secondary" className="w-full sm:w-auto">
                     Verify an Agent <ShieldCheck className="h-4 w-4" />
                   </LinkButton>
                 </div>
               </Reveal>
 
               <Reveal delay={0.24}>
-                <div className="mt-10 grid gap-3 rounded-2xl border border-gold-300/40 bg-white/80 p-5 shadow-soft sm:grid-cols-3">
-                  <div>
-                    <p className="text-xs font-semibold tracking-[0.16em] text-gold-500">
+                <div className="mt-8 grid gap-5 rounded-2xl border border-gold-300/40 bg-white/80 p-4 shadow-soft sm:mt-10 sm:gap-6 sm:p-5 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.6fr)]">
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
                       OUR COMMITMENT
                     </p>
-                    <p className="mt-2 text-sm leading-7 text-ink-950/75">
+                    <p className="mt-2 text-sm leading-7 text-ink-950/75 text-pretty">
                       We take complete ownership of every property we represent — including
                       all future queries and dispute-related clarifications.
                     </p>
                   </div>
-                  <div className="sm:col-span-2">
-                    <p className="text-xs font-semibold tracking-[0.16em] text-gold-500">
+                  <div className="min-w-0 border-t border-gold-300/25 pt-5 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+                    <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
                       WHAT MAKES US DIFFERENT
                     </p>
-                    <ul className="mt-3 grid gap-2 text-sm text-ink-950/75 sm:grid-cols-2">
-                      <li className="inline-flex items-center gap-2">
-                        <BadgeCheck className="h-4 w-4 text-gold-300/90" />
-                        100% verified listings
+                    <ul className="mt-3 grid gap-2.5 text-sm text-ink-950/75 sm:grid-cols-2">
+                      <li className="flex items-start gap-2">
+                        <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold-300/90" />
+                        <span className="min-w-0 leading-6">100% verified listings</span>
                       </li>
-                      <li className="inline-flex items-center gap-2">
-                        <Building2 className="h-4 w-4 text-gold-300/90" />
-                        Direct developer access
+                      <li className="flex items-start gap-2">
+                        <Building2 className="mt-0.5 h-4 w-4 shrink-0 text-gold-300/90" />
+                        <span className="min-w-0 leading-6">Direct developer access</span>
                       </li>
-                      <li className="inline-flex items-center gap-2">
-                        <ShieldCheck className="h-4 w-4 text-gold-300/90" />
-                        Zero misinformation
+                      <li className="flex items-start gap-2">
+                        <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold-300/90" />
+                        <span className="min-w-0 leading-6">Zero misinformation</span>
                       </li>
-                      <li className="inline-flex items-center gap-2">
-                        <Handshake className="h-4 w-4 text-gold-300/90" />
-                        Registered marketing partners
+                      <li className="flex items-start gap-2">
+                        <Handshake className="mt-0.5 h-4 w-4 shrink-0 text-gold-300/90" />
+                        <span className="min-w-0 leading-6">Registered marketing partners</span>
                       </li>
-                      <li className="inline-flex items-center gap-2">
-                        <Gavel className="h-4 w-4 text-gold-300/90" />
-                        Legal & compliance support
+                      <li className="flex items-start gap-2">
+                        <Gavel className="mt-0.5 h-4 w-4 shrink-0 text-gold-300/90" />
+                        <span className="min-w-0 leading-6">Legal & compliance support</span>
                       </li>
-                      <li className="inline-flex items-center gap-2">
-                        <Headset className="h-4 w-4 text-gold-300/90" />
-                        Post-sale assistance
+                      <li className="flex items-start gap-2">
+                        <Headset className="mt-0.5 h-4 w-4 shrink-0 text-gold-300/90" />
+                        <span className="min-w-0 leading-6">Post-sale assistance</span>
                       </li>
                     </ul>
                   </div>
@@ -179,10 +183,10 @@ export default function Home() {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-5">
+            <div className="min-w-0 lg:col-span-5">
               <Reveal delay={0.1}>
                 <motion.div
-                  className="relative overflow-hidden rounded-3xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-6 shadow-soft"
+                  className="relative overflow-hidden rounded-2xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-4 shadow-soft sm:rounded-3xl sm:p-6"
                   animate={
                     reduceMotion
                       ? undefined
@@ -212,11 +216,11 @@ export default function Home() {
                   <p className="text-sm font-semibold text-ink-950">
                     Trust through transparency
                   </p>
-                  <p className="mt-2 text-sm leading-7 text-ink-950/70">
+                  <p className="mt-2 text-sm leading-7 text-ink-950/70 text-pretty">
                     A premium operating standard for buyers, investors, and developers:
                     verified data, documented communication, and accountability that lasts.
                   </p>
-                  <div className="mt-5 grid grid-cols-3 gap-3">
+                  <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-3">
                     {[
                       { k: '10+', v: 'Years expertise' },
                       { k: '100%', v: 'Verified focus' },
@@ -224,12 +228,14 @@ export default function Home() {
                     ].map((s) => (
                       <div
                         key={s.k}
-                        className="rounded-2xl border border-ink-950/10 bg-canvas-100 p-3 text-center"
+                        className="min-w-0 rounded-xl border border-ink-950/10 bg-canvas-100 p-2.5 text-center sm:rounded-2xl sm:p-3"
                       >
-                        <p className="text-lg font-semibold tracking-tight text-ink-950">
+                        <p className="text-base font-semibold tracking-tight text-ink-950 sm:text-lg">
                           {s.k}
                         </p>
-                        <p className="mt-0.5 text-xs text-ink-950/60">{s.v}</p>
+                        <p className="mt-0.5 text-[10px] leading-snug text-ink-950/60 sm:text-xs">
+                          {s.v}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -240,17 +246,17 @@ export default function Home() {
                       return (
                         <div
                           key={item.title}
-                          className="rounded-2xl border border-ink-950/10 bg-canvas-100 p-4"
+                          className="rounded-2xl border border-ink-950/10 bg-canvas-100 p-3.5 sm:p-4"
                         >
                           <div className="flex items-start gap-3">
-                            <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-ink-950/[0.05] ring-1 ring-ink-950/10">
+                            <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-ink-950/[0.05] ring-1 ring-ink-950/10">
                               <Icon className="h-4 w-4 text-gold-300/90" />
                             </span>
-                            <div>
+                            <div className="min-w-0">
                               <p className="text-sm font-semibold text-ink-950">
                                 {item.title}
                               </p>
-                              <p className="mt-1 text-sm leading-7 text-ink-950/65">
+                              <p className="mt-1 text-sm leading-6 text-ink-950/65 text-pretty sm:leading-7">
                                 {item.desc}
                               </p>
                             </div>
@@ -273,7 +279,7 @@ export default function Home() {
       </section>
 
       <section id="about" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <Reveal>
@@ -286,7 +292,7 @@ export default function Home() {
             </div>
             <div className="lg:col-span-7">
               <Reveal delay={0.06}>
-                <div className="rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+                <div className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
                   <p className="text-sm leading-7 text-ink-950/70">
                     With over a decade of experience in developing villas and residential
                     layouts across Bangalore and Hyderabad, we understand the importance
@@ -329,7 +335,7 @@ export default function Home() {
       </section>
 
       <section id="services" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
           <Reveal>
             <SectionHeading
               eyebrow="SERVICES"
@@ -340,11 +346,11 @@ export default function Home() {
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {services.map((service, idx) => (
               <Reveal key={service.title} delay={0.04 * idx}>
-                <div className="h-full rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+                <div className="h-full rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
                   <p className="text-sm font-semibold text-ink-950">{service.title}</p>
                   <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
                     {service.points.map((point) => (
-                      <li key={point} className="inline-flex gap-2">
+                      <li key={point} className="flex items-start gap-2">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
                         <span className="leading-7">{point}</span>
                       </li>
@@ -358,7 +364,7 @@ export default function Home() {
       </section>
 
       <section id="projects" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <Reveal>
@@ -371,7 +377,7 @@ export default function Home() {
             </div>
             <div className="lg:col-span-7">
               <Reveal delay={0.06}>
-                <div className="relative overflow-hidden rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+                <div className="relative overflow-hidden rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
                   <div className="absolute -right-16 -top-16 h-60 w-60 rounded-full bg-gold-300/12 blur-3xl" />
                   <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-ink-950/[0.04] blur-3xl" />
 
@@ -393,7 +399,7 @@ export default function Home() {
                           '15 KM to Whitefield',
                           '10 KM to Malur',
                         ].map((t) => (
-                          <li key={t} className="inline-flex gap-2">
+                          <li key={t} className="flex items-start gap-2">
                             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
                             <span className="leading-7">{t}</span>
                           </li>
@@ -412,7 +418,7 @@ export default function Home() {
                           'Developer with proven track record',
                           'Post-sale support & dispute assistance guaranteed by PropertyPath LTD',
                         ].map((t) => (
-                          <li key={t} className="inline-flex gap-2">
+                          <li key={t} className="flex items-start gap-2">
                             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
                             <span className="leading-7">{t}</span>
                           </li>
@@ -421,13 +427,14 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-                    <LinkButton to="/projects/bangalore-east-villas" variant="primary">
+                  <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                    <LinkButton to="/projects/bangalore-east-villas" variant="primary" className="w-full sm:w-auto">
                       View Full Project Details <ArrowRight className="h-4 w-4" />
                     </LinkButton>
                     <LinkButton
                       href="mailto:info@property-path.in?subject=Interested%20in%20Bangalore%20East%20Villa%20Community"
                       variant="secondary"
+                      className="w-full sm:w-auto"
                     >
                       Book a Site Visit
                     </LinkButton>
@@ -440,7 +447,7 @@ export default function Home() {
       </section>
 
       <section id="partners" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
           <Reveal>
             <SectionHeading
               eyebrow="MARKETING PARTNERS"
@@ -470,7 +477,7 @@ export default function Home() {
               const Icon = item.icon
               return (
                 <Reveal key={item.title} delay={0.04 * idx}>
-                  <div className="h-full rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+                  <div className="h-full rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
                     <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-ink-950/[0.05] ring-1 ring-ink-950/10">
                       <Icon className="h-5 w-5 text-gold-300/90" />
                     </span>
@@ -484,7 +491,7 @@ export default function Home() {
 
           <Reveal delay={0.12}>
             <div className="mt-8">
-              <LinkButton to="/verify-agent" variant="primary">
+              <LinkButton to="/verify-agent" variant="primary" className="w-full sm:w-auto">
                 Verify an Agent <ArrowRight className="h-4 w-4" />
               </LinkButton>
             </div>
@@ -493,7 +500,7 @@ export default function Home() {
       </section>
 
       <section id="contact" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-4 pb-20 pt-14 sm:px-6 sm:pb-28 sm:pt-20">
+        <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <Reveal>
@@ -504,7 +511,7 @@ export default function Home() {
                 />
               </Reveal>
               <Reveal delay={0.06}>
-                <div className="mt-6 rounded-3xl border border-ink-950/10 bg-white/80 p-6 shadow-soft">
+                <div className="mt-6 rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
                   <p className="text-sm font-semibold text-ink-950">Office</p>
                   <p className="mt-2 break-words text-sm leading-7 text-ink-950/70">
                     PropertyPath LTD D.No: F1 &amp; F2, Sarovi #72, 1st Floor Sunshine
@@ -533,7 +540,7 @@ export default function Home() {
 
             <div className="lg:col-span-7">
               <Reveal delay={0.06}>
-                <div className="rounded-3xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-6 shadow-soft">
+                <div className="rounded-2xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-4 shadow-soft sm:rounded-3xl sm:p-6">
                   <p className="text-sm font-semibold text-ink-950">Book a consultation</p>
                   <p className="mt-2 text-sm leading-7 text-ink-950/70">
                     Share your requirements and we’ll coordinate next steps with the right
@@ -636,17 +643,17 @@ function ContactForm() {
           )}
         />
       </div>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <button
           type="submit"
           disabled={status === 'submitting' || !configured}
-          className="inline-flex h-12 items-center justify-center rounded-xl bg-ink-950 px-5 text-sm font-medium tracking-wide text-gold-300 shadow-glow ring-1 ring-gold-300/80 transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/50"
+          className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-ink-950 px-4 sm:h-12 sm:w-auto sm:px-5 text-sm font-medium tracking-wide text-gold-300 shadow-glow ring-1 ring-gold-300/80 transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/50"
         >
           {status === 'submitting' ? 'Submitting…' : 'Book a Consultation'}{' '}
           <ArrowRight className="ml-2 h-4 w-4" />
         </button>
         <a
-          className="inline-flex h-12 items-center justify-center rounded-xl bg-transparent px-5 text-sm font-medium tracking-wide text-ink-950 ring-1 ring-gold-300/70 transition hover:bg-gold-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/40"
+          className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-transparent px-4 sm:h-12 sm:w-auto sm:px-5 text-sm font-medium tracking-wide text-ink-950 ring-1 ring-gold-300/70 transition hover:bg-gold-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/40"
           href="https://wa.me/?text=Hi%20PropertyPath%2C%20I%27d%20like%20to%20book%20a%20consultation."
           target="_blank"
           rel="noreferrer"

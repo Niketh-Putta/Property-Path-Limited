@@ -18,9 +18,9 @@ export default function Button({
   return (
     <button
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-xl font-medium tracking-wide transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/50 disabled:opacity-60 disabled:pointer-events-none active:scale-[0.99]',
-        size === 'sm' && 'h-10 px-4 text-sm',
-        size === 'md' && 'h-12 px-5 text-sm',
+        'inline-flex max-w-full items-center justify-center gap-2 rounded-xl font-medium tracking-wide transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/50 disabled:opacity-60 disabled:pointer-events-none active:scale-[0.99] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:shrink-0',
+        size === 'sm' && 'h-10 px-3 text-sm sm:px-4',
+        size === 'md' && 'h-11 px-4 text-sm sm:h-12 sm:px-5',
         variant === 'primary' &&
           'bg-ink-950 text-gold-300 shadow-glow ring-1 ring-gold-300/80 hover:bg-ink-900 hover:-translate-y-[1px]',
         variant === 'secondary' &&
