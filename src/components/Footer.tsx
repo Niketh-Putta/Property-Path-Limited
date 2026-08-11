@@ -25,6 +25,14 @@ export default function Footer() {
               Paradise Layout Kurudusonnenahalli, Virgonagar Post Bangalore –
               560049
             </p>
+            <p className="mt-3 flex flex-col gap-1 break-words">
+              <a className="text-ink-950/80 hover:text-ink-950" href="tel:+916364467941">
+                +91 6364467941
+              </a>
+              <a className="text-ink-950/80 hover:text-ink-950" href="tel:+916364467942">
+                +91 63644 67942
+              </a>
+            </p>
             <p className="mt-3 flex flex-col gap-1 break-words sm:block">
               <a className="text-ink-950/80 hover:text-ink-950" href="mailto:info@property-path.in">
                 info@property-path.in

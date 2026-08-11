@@ -518,6 +518,18 @@ export default function Home() {
                     Paradise Layout Kurudusonnenahalli, Virgonagar Post Bangalore – 560049
                   </p>
                   <p className="mt-4 text-sm text-ink-950/70">
+                    <span className="font-semibold text-ink-950">Phone</span>{' '}
+                    <span className="inline-flex flex-col gap-1 sm:inline">
+                      <a className="text-ink-950/80 hover:text-ink-950" href="tel:+916364467941">
+                        +91 6364467941
+                      </a>
+                      <span className="hidden text-ink-950/35 sm:inline"> · </span>
+                      <a className="text-ink-950/80 hover:text-ink-950" href="tel:+916364467942">
+                        +91 63644 67942
+                      </a>
+                    </span>
+                  </p>
+                  <p className="mt-2 text-sm text-ink-950/70">
                     <span className="font-semibold text-ink-950">Email</span>{' '}
                     <a className="text-ink-950/80 hover:text-ink-950" href="mailto:info@property-path.in">
                       info@property-path.in
@@ -654,7 +666,7 @@ function ContactForm() {
         </button>
         <a
           className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-transparent px-4 sm:h-12 sm:w-auto sm:px-5 text-sm font-medium tracking-wide text-ink-950 ring-1 ring-gold-300/70 transition hover:bg-gold-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/40"
-          href="https://wa.me/?text=Hi%20PropertyPath%2C%20I%27d%20like%20to%20book%20a%20consultation."
+          href="https://wa.me/916364467941?text=Hi%20PropertyPath%2C%20I%27d%20like%20to%20book%20a%20consultation."
           target="_blank"
           rel="noreferrer"
         >
