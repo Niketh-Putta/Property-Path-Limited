@@ -2,6 +2,7 @@ import {
   ArrowRight,
   BadgeCheck,
   Building2,
+  Download,
   Gavel,
   Handshake,
   Headset,
@@ -370,8 +371,8 @@ export default function Home() {
               <Reveal>
                 <SectionHeading
                   eyebrow="PROJECTS"
-                  title="Featured Project: 5-Acre Premium Villa Community — Bangalore East"
-                  description="A boutique villa development designed for modern families seeking space, greenery, and long-term appreciation."
+                  title="Vanam — Featured 5-Acre Premium Villa Community, Bangalore East"
+                  description="Our flagship boutique villa development for families seeking space, greenery, and long-term appreciation. Explore details or download the latest brochure."
                 />
               </Reveal>
             </div>
@@ -380,6 +381,27 @@ export default function Home() {
                 <div className="relative overflow-hidden rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
                   <div className="absolute -right-16 -top-16 h-60 w-60 rounded-full bg-gold-300/12 blur-3xl" />
                   <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-ink-950/[0.04] blur-3xl" />
+
+                  <div className="mb-6 rounded-2xl border border-gold-300/40 bg-gradient-to-br from-gold-50/80 to-white/90 p-4 sm:p-5">
+                    <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
+                      LATEST BROCHURE
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-ink-950">Vanam Premium Brochure</p>
+                    <p className="mt-1 text-sm leading-7 text-ink-950/70">
+                      Layouts, amenities, connectivity, and investment highlights — ready to
+                      download.
+                    </p>
+                    <div className="mt-4">
+                      <LinkButton
+                        href="/brochures/vanam-premium-brochure.pdf"
+                        download="Vanam_Premium_Brochure_Property_Path.pdf"
+                        variant="primary"
+                        className="w-full sm:w-auto"
+                      >
+                        Download Brochure <Download className="h-4 w-4" />
+                      </LinkButton>
+                    </div>
+                  </div>
 
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
@@ -432,8 +454,16 @@ export default function Home() {
                       View Full Project Details <ArrowRight className="h-4 w-4" />
                     </LinkButton>
                     <LinkButton
-                      href="mailto:info@property-path.in?subject=Interested%20in%20Bangalore%20East%20Villa%20Community"
+                      href="/brochures/vanam-premium-brochure.pdf"
+                      download="Vanam_Premium_Brochure_Property_Path.pdf"
                       variant="secondary"
+                      className="w-full sm:w-auto"
+                    >
+                      Download Brochure <Download className="h-4 w-4" />
+                    </LinkButton>
+                    <LinkButton
+                      href="mailto:info@property-path.in?subject=Interested%20in%20Vanam%20Bangalore%20East"
+                      variant="ghost"
                       className="w-full sm:w-auto"
                     >
                       Book a Site Visit
