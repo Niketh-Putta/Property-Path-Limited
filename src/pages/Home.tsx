@@ -475,7 +475,7 @@ export default function Home() {
                           <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
                             {[
                               '3 and 4 BHK Duplex Villas',
-                              '1500 sqft built-up area',
+                              '1800 to 2200 SQFT built up area',
                               '1200 sqft plot size',
                               'Forest-side location',
                               'Clubhouse with pool',
@@ -523,13 +523,17 @@ export default function Home() {
                         >
                           View Full Project Details <ArrowRight className="h-4 w-4" />
                         </LinkButton>
-                        <LinkButton
-                          href="mailto:info@property-path.in?subject=Interested%20in%20Aranya%20Bangalore%20East"
+                        <Button
                           variant="ghost"
                           className="w-full sm:w-auto"
+                          onClick={() => {
+                            document
+                              .getElementById('contact')
+                              ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                          }}
                         >
                           Book a Site Visit
-                        </LinkButton>
+                        </Button>
                       </div>
                     </div>
                   </div>
