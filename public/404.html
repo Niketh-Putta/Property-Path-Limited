@@ -6,14 +6,31 @@
     <meta name="robots" content="noindex" />
     <title>Redirecting…</title>
     <script>
+      // GitHub Pages SPA fallback: preserve deep links like /Vanam
       ;(() => {
-        const path = window.location.pathname
-        const search = window.location.search
-        const hash = window.location.hash
-        window.location.replace(`/#${path}${search}${hash}`)
+        const pathSegmentsToKeep = 0
+        const l = window.location
+        l.replace(
+          l.protocol +
+            '//' +
+            l.hostname +
+            (l.port ? ':' + l.port : '') +
+            l.pathname
+              .split('/')
+              .slice(0, 1 + pathSegmentsToKeep)
+              .join('/') +
+            '/?/' +
+            l.pathname
+              .slice(1)
+              .split('/')
+              .slice(pathSegmentsToKeep)
+              .join('/')
+              .replace(/&/g, '~and~') +
+            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+            l.hash,
+        )
       })()
     </script>
   </head>
   <body></body>
 </html>
-

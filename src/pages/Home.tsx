@@ -441,7 +441,7 @@ export default function Home() {
                         Integrated Township.
                       </p>
                       <div className="mt-4 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
-                        <LinkButton to="/vanam" variant="primary" className="w-full sm:w-auto">
+                        <LinkButton to="/Vanam" variant="primary" className="w-full sm:w-auto">
                           More Details <ArrowRight className="h-4 w-4" />
                         </LinkButton>
                         <LinkButton

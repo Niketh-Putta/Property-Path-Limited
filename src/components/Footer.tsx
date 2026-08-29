@@ -55,7 +55,7 @@ export default function Footer() {
               Verify an Agent
             </LinkButton>
             <LinkButton
-              to="/vanam"
+              to="/Vanam"
               variant="ghost"
               className="w-full sm:w-auto"
             >

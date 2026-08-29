@@ -12,9 +12,8 @@ const WHATSAPP_HREF =
   'https://wa.me/919989544728?text=Hi%20PropertyPath%2C%20I%27d%20like%20to%20book%20a%20consultation.'
 
 function successRedirectUrl() {
-  if (typeof window === 'undefined') return 'https://www.property-path.in/#/consultation?sent=1'
-  const { origin, pathname } = window.location
-  return `${origin}${pathname}#/consultation?sent=1`
+  if (typeof window === 'undefined') return 'https://www.property-path.in/consultation?sent=1'
+  return `${window.location.origin}/consultation?sent=1`
 }
 
 export default function ContactForm() {
