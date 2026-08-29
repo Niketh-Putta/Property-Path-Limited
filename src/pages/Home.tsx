@@ -372,7 +372,7 @@ export default function Home() {
                 <SectionHeading
                   eyebrow="PROJECTS"
                   title="Aranya — Featured 9-Acre Premium Villa Community, Bangalore East"
-                  description="Our flagship boutique villa development for families seeking space, greenery, and long-term appreciation. Explore details or download the latest brochure."
+                  description="Our flagship boutique villa development for families seeking space, greenery, and long-term appreciation. Explore details or book a site visit."
                 />
               </Reveal>
             </div>
@@ -384,17 +384,17 @@ export default function Home() {
 
                   <div className="mb-6 rounded-2xl border border-gold-300/40 bg-gradient-to-br from-gold-50/80 to-white/90 p-4 sm:p-5">
                     <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
-                      LATEST BROCHURE
+                      ONGOING PROJECT
                     </p>
-                    <p className="mt-2 text-sm font-semibold text-ink-950">Aranya Premium Brochure</p>
+                    <p className="mt-2 text-sm font-semibold text-ink-950">Vanam</p>
                     <p className="mt-1 text-sm leading-7 text-ink-950/70">
-                      Layouts, amenities, connectivity, and investment highlights — ready to
-                      download.
+                      2.5 Acre premium plotted development — Initial phase of 11.5 acre
+                      Integrated Township.
                     </p>
                     <div className="mt-4">
                       <LinkButton
-                        href="/brochures/aranya-premium-brochure.pdf"
-                        download="Aranya_Premium_Brochure_Property_Path.pdf"
+                        href="/brochures/vanam-premium-brochure.pdf"
+                        download="Vanam_Premium_Brochure_Property_Path.pdf"
                         variant="primary"
                         className="w-full sm:w-auto"
                       >
@@ -452,14 +452,6 @@ export default function Home() {
                   <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                     <LinkButton to="/projects/bangalore-east-villas" variant="primary" className="w-full sm:w-auto">
                       View Full Project Details <ArrowRight className="h-4 w-4" />
-                    </LinkButton>
-                    <LinkButton
-                      href="/brochures/aranya-premium-brochure.pdf"
-                      download="Aranya_Premium_Brochure_Property_Path.pdf"
-                      variant="secondary"
-                      className="w-full sm:w-auto"
-                    >
-                      Download Brochure <Download className="h-4 w-4" />
                     </LinkButton>
                     <LinkButton
                       href="mailto:info@property-path.in?subject=Interested%20in%20Aranya%20Bangalore%20East"
