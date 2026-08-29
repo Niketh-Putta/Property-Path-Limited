@@ -1,76 +1,76 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { useSearchParams } from 'react-router-dom'
 import { cn } from '../lib/cn'
-import { supabase, supabaseConfigured } from '../lib/supabase'
 import { quickFade } from '../lib/motion'
 
-const CONSULTATION_MAILTO =
-  'mailto:info@property-path.in,propertypath9@gmail.com'
+const CONSULTATION_EMAIL = 'info@property-path.in'
+const CONSULTATION_CC = 'propertypath9@gmail.com'
+const FORMSUBMIT_ACTION = `https://formsubmit.co/${CONSULTATION_EMAIL}`
 const WHATSAPP_HREF =
   'https://wa.me/919989544728?text=Hi%20PropertyPath%2C%20I%27d%20like%20to%20book%20a%20consultation.'
 
+function successRedirectUrl() {
+  if (typeof window === 'undefined') return 'https://www.property-path.in/#/consultation?sent=1'
+  const { origin, pathname } = window.location
+  return `${origin}${pathname}#/consultation?sent=1`
+}
+
 export default function ContactForm() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
-  const [error, setError] = useState<string | null>(null)
+  const [searchParams] = useSearchParams()
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
+  const [nextUrl] = useState(() => successRedirectUrl())
   const reduceMotion = useReducedMotion()
-  const configured = supabaseConfigured()
+
+  useEffect(() => {
+    if (searchParams.get('sent') === '1') {
+      setStatus('success')
+    }
+  }, [searchParams])
 
   return (
     <form
       className="mt-6 grid gap-3"
-      onSubmit={async (e) => {
-        e.preventDefault()
+      action={FORMSUBMIT_ACTION}
+      method="POST"
+      onSubmit={(e) => {
         const form = e.currentTarget
-        setStatus('submitting')
-        setError(null)
+        const data = new FormData(form)
+        const name = String(data.get('name') ?? '').trim() || 'Website visitor'
+        const email = String(data.get('email') ?? '').trim()
 
-        const formData = new FormData(form)
-        const name = String(formData.get('name') ?? '').trim()
-        const email = String(formData.get('email') ?? '').trim()
-        const phone = String(formData.get('phone') ?? '').trim()
-        const message = String(formData.get('message') ?? '').trim()
-
-        const body = [
-          `Name: ${name}`,
-          `Email: ${email}`,
-          `Phone: ${phone || 'Not provided'}`,
-          '',
-          'Message:',
-          message,
-        ].join('\n')
-
-        const mailtoHref = `${CONSULTATION_MAILTO}?subject=${encodeURIComponent(
-          `PropertyPath Consultation Request — ${name}`,
-        )}&body=${encodeURIComponent(body)}`
-
-        try {
-          if (configured) {
-            const { error: insertError } = await supabase!.from('consultations').insert([
-              {
-                name,
-                email,
-                phone: phone.length ? phone : null,
-                message,
-                source: 'web',
-              },
-            ])
-            if (insertError) throw insertError
-          }
-
-          window.location.href = mailtoHref
-          setStatus('success')
-          form.reset()
-        } catch (err) {
-          // Still open mail even if optional storage fails
-          window.location.href = mailtoHref
-          setStatus('success')
-          form.reset()
-          const msg = err instanceof Error ? err.message : 'Could not store request'
-          setError(msg)
+        const subjectInput = form.elements.namedItem('_subject') as HTMLInputElement | null
+        const replyToInput = form.elements.namedItem('_replyto') as HTMLInputElement | null
+        if (subjectInput) {
+          subjectInput.value = `PropertyPath Consultation Request — ${name}`
         }
+        if (replyToInput) {
+          replyToInput.value = email
+        }
+
+        setStatus('submitting')
+        // Native browser POST continues (no preventDefault) so mail is sent
+        // server-side by FormSubmit on desktop and mobile browsers.
       }}
     >
+      <input type="hidden" name="_cc" value={CONSULTATION_CC} />
+      <input type="hidden" name="_subject" defaultValue="PropertyPath Consultation Request" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value={nextUrl} />
+      <input type="hidden" name="_replyto" defaultValue="" />
+
+      {/* Honeypot field for spam bots */}
+      <input
+        type="text"
+        name="_honey"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
+
       <div className="grid gap-3 sm:grid-cols-2">
         <Field label="Full name" name="name" placeholder="Your name" required />
         <Field label="Email" name="email" placeholder="you@company.com" type="email" required />
@@ -95,9 +95,9 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-ink-950 px-4 sm:h-12 sm:w-auto sm:px-5 text-sm font-medium tracking-wide text-gold-300 shadow-glow ring-1 ring-gold-300/80 transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/50"
+          className="inline-flex h-11 w-full items-center justify-center rounded-xl bg-ink-950 px-4 sm:h-12 sm:w-auto sm:px-5 text-sm font-medium tracking-wide text-gold-300 shadow-glow ring-1 ring-gold-300/80 transition hover:bg-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300/50 disabled:opacity-60"
         >
-          {status === 'submitting' ? 'Opening mail…' : 'Book a Consultation'}{' '}
+          {status === 'submitting' ? 'Sending…' : 'Book a Consultation'}{' '}
           <ArrowRight className="ml-2 h-4 w-4" />
         </button>
         <a
@@ -121,17 +121,15 @@ export default function ContactForm() {
             transition={reduceMotion ? { duration: 0.1 } : quickFade}
             className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 text-sm text-ink-950/75"
           >
-            Opening your email app to send this request to info@property-path.in and
-            propertypath9@gmail.com.
-            {error ? (
-              <div className="mt-2 text-xs text-ink-950/55">Note: {error}</div>
-            ) : null}
+            Request sent to info@property-path.in and propertypath9@gmail.com. Our team will get
+            back to you shortly.
           </motion.div>
         ) : null}
       </AnimatePresence>
       <p className="text-xs leading-6 text-ink-950/45">
-        Submitting opens an email to info@property-path.in and propertypath9@gmail.com with your
-        details.
+        Submitting emails our team directly from desktop and mobile browsers. If this is the first
+        submission, open the FormSubmit activation email at info@property-path.in and click
+        Activate once.
       </p>
     </form>
   )
