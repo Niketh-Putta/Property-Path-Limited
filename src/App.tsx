@@ -5,6 +5,7 @@ import Admin from './pages/Admin'
 import AuthCallback from './pages/AuthCallback'
 import VerifyAgent from './pages/VerifyAgent'
 import ProjectBangaloreEastVillas from './pages/ProjectBangaloreEastVillas'
+import ProjectSkhEchium from './pages/ProjectSkhEchium'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           path="/projects/bangalore-east-villas"
           element={<ProjectBangaloreEastVillas />}
         />
+        <Route path="/projects/skh-echium" element={<ProjectSkhEchium />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

@@ -98,6 +98,7 @@ const services = [
 
 export default function Home() {
   const reduceMotion = useReducedMotion()
+  const [projectTab, setProjectTab] = useState<'ongoing' | 'completed'>('ongoing')
 
   return (
     <div>
@@ -366,105 +367,257 @@ export default function Home() {
 
       <section id="projects" className="scroll-mt-24">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-5">
-              <Reveal>
-                <SectionHeading
-                  eyebrow="PROJECTS"
-                  title="Aranya — Featured 9-Acre Premium Villa Community, Bangalore East"
-                  description="Our flagship boutique villa development for families seeking space, greenery, and long-term appreciation. Explore details or book a site visit."
-                />
-              </Reveal>
-            </div>
-            <div className="lg:col-span-7">
-              <Reveal delay={0.06}>
-                <div className="relative overflow-hidden rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
-                  <div className="absolute -right-16 -top-16 h-60 w-60 rounded-full bg-gold-300/12 blur-3xl" />
-                  <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-ink-950/[0.04] blur-3xl" />
+          <Reveal>
+            <SectionHeading
+              eyebrow="PROJECTS"
+              title="Ongoing developments and completed communities"
+              description="Explore featured and ongoing opportunities, plus completed projects with verified PropertyPath support for resale enquiries."
+            />
+          </Reveal>
 
-                  <div className="mb-6 rounded-2xl border border-gold-300/40 bg-gradient-to-br from-gold-50/80 to-white/90 p-4 sm:p-5">
-                    <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
-                      ONGOING PROJECT
-                    </p>
-                    <p className="mt-2 text-sm font-semibold text-ink-950">Vanam</p>
-                    <p className="mt-1 text-sm leading-7 text-ink-950/70">
-                      2.5 Acre premium plotted development — Initial phase of 11.5 acre
-                      Integrated Township.
-                    </p>
-                    <div className="mt-4">
+          <div
+            className="mt-8 inline-flex w-full max-w-md rounded-2xl border border-ink-950/10 bg-white/80 p-1 shadow-soft sm:w-auto"
+            role="tablist"
+            aria-label="Project categories"
+          >
+            {(
+              [
+                { id: 'ongoing' as const, label: 'Ongoing' },
+                { id: 'completed' as const, label: 'Completed' },
+              ] as const
+            ).map((tab) => {
+              const active = projectTab === tab.id
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  className={cn(
+                    'flex-1 rounded-xl px-4 py-2.5 text-sm font-medium transition sm:flex-none sm:px-5',
+                    active
+                      ? 'bg-ink-950 text-gold-300 shadow-glow ring-1 ring-gold-300/80'
+                      : 'text-ink-950/70 hover:bg-ink-950/[0.04] hover:text-ink-950',
+                  )}
+                  onClick={() => setProjectTab(tab.id)}
+                >
+                  {tab.label}
+                </button>
+              )
+            })}
+          </div>
+
+          <AnimatePresence mode="wait" initial={false}>
+            {projectTab === 'ongoing' ? (
+              <motion.div
+                key="ongoing-projects"
+                initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+                animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+                transition={reduceMotion ? { duration: 0.1 } : quickFade}
+                className="mt-10 grid gap-10 lg:grid-cols-12"
+                role="tabpanel"
+              >
+                <div className="lg:col-span-5">
+                  <SectionHeading
+                    title="Aranya — Featured 9-Acre Premium Villa Community, Bangalore East"
+                    description="Our flagship boutique villa development for families seeking space, greenery, and long-term appreciation. Explore details or book a site visit."
+                  />
+                </div>
+                <div className="lg:col-span-7">
+                  <div className="relative overflow-hidden rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
+                    <div className="absolute -right-16 -top-16 h-60 w-60 rounded-full bg-gold-300/12 blur-3xl" />
+                    <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-ink-950/[0.04] blur-3xl" />
+
+                    <div className="mb-6 rounded-2xl border border-gold-300/40 bg-gradient-to-br from-gold-50/80 to-white/90 p-4 sm:p-5">
+                      <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
+                        ONGOING PROJECT
+                      </p>
+                      <p className="mt-2 text-sm font-semibold text-ink-950">Vanam</p>
+                      <p className="mt-1 text-sm leading-7 text-ink-950/70">
+                        2.5 Acre premium plotted development — Initial phase of 11.5 acre
+                        Integrated Township.
+                      </p>
+                      <div className="mt-4">
+                        <LinkButton
+                          href="/brochures/vanam-premium-brochure.pdf"
+                          download="Vanam_Premium_Brochure_Property_Path.pdf"
+                          variant="primary"
+                          className="w-full sm:w-auto"
+                        >
+                          Download Brochure <Download className="h-4 w-4" />
+                        </LinkButton>
+                      </div>
+                    </div>
+
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      <div>
+                        <p className="text-sm font-semibold text-ink-950">Project highlights</p>
+                        <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
+                          {[
+                            '3 BHK Duplex Villas',
+                            '1500 sqft built-up area',
+                            '1200 sqft plot size',
+                            'Forest-side location',
+                            'Clubhouse with pool',
+                            'Indoor & outdoor sports',
+                            'Parks & open spaces',
+                            'Underground utilities',
+                            'Cement roads',
+                            '1 KM from STRR',
+                            '15 KM to Whitefield',
+                            '10 KM to Malur',
+                          ].map((t) => (
+                            <li key={t} className="flex items-start gap-2">
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
+                              <span className="leading-7">{t}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-ink-950">
+                          Why this project stands out
+                        </p>
+                        <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
+                          {[
+                            'Zero land acquisition cost',
+                            'High-demand micro-market',
+                            'Strong rental & resale potential',
+                            'Developer with proven track record',
+                            'Post-sale support & dispute assistance guaranteed by PropertyPath LTD',
+                          ].map((t) => (
+                            <li key={t} className="flex items-start gap-2">
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
+                              <span className="leading-7">{t}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                       <LinkButton
-                        href="/brochures/vanam-premium-brochure.pdf"
-                        download="Vanam_Premium_Brochure_Property_Path.pdf"
+                        to="/projects/bangalore-east-villas"
                         variant="primary"
                         className="w-full sm:w-auto"
                       >
-                        Download Brochure <Download className="h-4 w-4" />
+                        View Full Project Details <ArrowRight className="h-4 w-4" />
+                      </LinkButton>
+                      <LinkButton
+                        href="mailto:info@property-path.in?subject=Interested%20in%20Aranya%20Bangalore%20East"
+                        variant="ghost"
+                        className="w-full sm:w-auto"
+                      >
+                        Book a Site Visit
                       </LinkButton>
                     </div>
                   </div>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="completed-projects"
+                initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+                animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+                transition={reduceMotion ? { duration: 0.1 } : quickFade}
+                className="mt-10 grid gap-10 lg:grid-cols-12"
+                role="tabpanel"
+              >
+                <div className="lg:col-span-5">
+                  <SectionHeading
+                    title="SKH Echium — Completed 24-Acre Residential Villa Plots"
+                    description="A RERA- and MPA-approved gated community near Whitefield. Fully sold out — PropertyPath supports verified resale enquiries."
+                  />
+                </div>
+                <div className="lg:col-span-7">
+                  <div className="relative overflow-hidden rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
+                    <div className="absolute -right-16 -top-16 h-60 w-60 rounded-full bg-gold-300/12 blur-3xl" />
+                    <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-ink-950/[0.04] blur-3xl" />
 
-                  <div className="grid gap-6 sm:grid-cols-2">
-                    <div>
-                      <p className="text-sm font-semibold text-ink-950">Project highlights</p>
-                      <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
-                        {[
-                          '3 BHK Duplex Villas',
-                          '1500 sqft built-up area',
-                          '1200 sqft plot size',
-                          'Forest-side location',
-                          'Clubhouse with pool',
-                          'Indoor & outdoor sports',
-                          'Parks & open spaces',
-                          'Underground utilities',
-                          'Cement roads',
-                          '1 KM from STRR',
-                          '15 KM to Whitefield',
-                          '10 KM to Malur',
-                        ].map((t) => (
-                          <li key={t} className="flex items-start gap-2">
-                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
-                            <span className="leading-7">{t}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-ink-950">
-                        Why this project stands out
+                    <div className="mb-6 rounded-2xl border border-gold-300/40 bg-gradient-to-br from-gold-50/80 to-white/90 p-4 sm:p-5">
+                      <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
+                        COMPLETED PROJECT
                       </p>
-                      <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
-                        {[
-                          'Zero land acquisition cost',
-                          'High-demand micro-market',
-                          'Strong rental & resale potential',
-                          'Developer with proven track record',
-                          'Post-sale support & dispute assistance guaranteed by PropertyPath LTD',
-                        ].map((t) => (
-                          <li key={t} className="flex items-start gap-2">
-                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
-                            <span className="leading-7">{t}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <p className="mt-2 text-sm font-semibold text-ink-950">SKH Echium</p>
+                      <p className="mt-1 text-sm leading-7 text-ink-950/70">
+                        24-acre residential villa plots near Whitefield. Quoted price ₹3,200 per
+                        sqft. All sold out — for resale, contact the PropertyPath team.
+                      </p>
                     </div>
-                  </div>
 
-                  <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                    <LinkButton to="/projects/bangalore-east-villas" variant="primary" className="w-full sm:w-auto">
-                      View Full Project Details <ArrowRight className="h-4 w-4" />
-                    </LinkButton>
-                    <LinkButton
-                      href="mailto:info@property-path.in?subject=Interested%20in%20Aranya%20Bangalore%20East"
-                      variant="ghost"
-                      className="w-full sm:w-auto"
-                    >
-                      Book a Site Visit
-                    </LinkButton>
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      <div>
+                        <p className="text-sm font-semibold text-ink-950">Summary</p>
+                        <p className="mt-4 text-sm leading-7 text-ink-950/70">
+                          Spacious villa plots in a gated layout with easy Whitefield / Soukya
+                          Road access, developed by SKH Estates and Developers LLP, and approved
+                          by MPA and RERA.
+                        </p>
+                        <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
+                          {[
+                            'RERA & MPA approved',
+                            'Gated community with clear title',
+                            '40’ and 30’ BT roads',
+                            'Underground drainage & water to each plot',
+                            '24/7 security · parks · plantation',
+                          ].map((t) => (
+                            <li key={t} className="flex items-start gap-2">
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
+                              <span className="leading-7">{t}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-ink-950">Resale support</p>
+                        <p className="mt-4 text-sm leading-7 text-ink-950/70">
+                          Inventory is fully sold out. For any resale interest, reach PropertyPath
+                          on our contact numbers for verified coordination.
+                        </p>
+                        <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
+                          <li className="flex items-start gap-2">
+                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
+                            <a className="leading-7 hover:text-ink-950" href="tel:+916364467941">
+                              +91 6364467941
+                            </a>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
+                            <a className="leading-7 hover:text-ink-950" href="tel:+916364467942">
+                              +91 63644 67942
+                            </a>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
+                            <span className="leading-7">Quoted rate: ₹3,200 / sqft</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                      <LinkButton
+                        to="/projects/skh-echium"
+                        variant="primary"
+                        className="w-full sm:w-auto"
+                      >
+                        View Full Project Details <ArrowRight className="h-4 w-4" />
+                      </LinkButton>
+                      <LinkButton
+                        href="tel:+916364467941"
+                        variant="secondary"
+                        className="w-full sm:w-auto"
+                      >
+                        Call for Resale
+                      </LinkButton>
+                    </div>
                   </div>
                 </div>
-              </Reveal>
-            </div>
-          </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 

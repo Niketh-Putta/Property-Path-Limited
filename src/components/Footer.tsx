@@ -62,6 +62,13 @@ export default function Footer() {
               View Aranya Project
             </LinkButton>
             <LinkButton
+              to="/projects/skh-echium"
+              variant="ghost"
+              className="w-full sm:w-auto"
+            >
+              View SKH Echium
+            </LinkButton>
+            <LinkButton
               href="/brochures/vanam-premium-brochure.pdf"
               download="Vanam_Premium_Brochure_Property_Path.pdf"
               variant="ghost"
