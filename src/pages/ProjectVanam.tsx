@@ -168,7 +168,7 @@ export default function ProjectVanam() {
                     Download Brochure <Download className="h-4 w-4" />
                   </LinkButton>
                   <LinkButton
-                    href="mailto:info@property-path.in?subject=Vanam%20Site%20Visit%20Request"
+                    to="/consultation"
                     variant="secondary"
                     className="w-full sm:w-auto"
                   >

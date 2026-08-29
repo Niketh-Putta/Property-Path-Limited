@@ -7,6 +7,7 @@ import VerifyAgent from './pages/VerifyAgent'
 import ProjectBangaloreEastVillas from './pages/ProjectBangaloreEastVillas'
 import ProjectSkhEchium from './pages/ProjectSkhEchium'
 import ProjectVanam from './pages/ProjectVanam'
+import Consultation from './pages/Consultation'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/verify-agent" element={<VerifyAgent />} />
+        <Route path="/consultation" element={<Consultation />} />
         <Route path="/vanam" element={<ProjectVanam />} />
         <Route
           path="/projects/bangalore-east-villas"

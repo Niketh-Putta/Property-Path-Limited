@@ -1,13 +1,9 @@
 import { ArrowRight, BadgeCheck, MapPin, Trees } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import LinkButton from '../components/LinkButton'
-import Button from '../components/Button'
 
 export default function ProjectBangaloreEastVillas() {
-  const navigate = useNavigate()
-
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:py-20">
       <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
@@ -107,20 +103,9 @@ export default function ProjectBangaloreEastVillas() {
               </div>
 
               <div className="mt-6 grid gap-3">
-                <Button
-                  variant="primary"
-                  className="w-full"
-                  onClick={() => {
-                    navigate('/')
-                    window.setTimeout(() => {
-                      document
-                        .getElementById('contact')
-                        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                    }, 80)
-                  }}
-                >
+                <LinkButton to="/consultation" variant="primary" className="w-full">
                   Book a Consultation <ArrowRight className="h-4 w-4" />
-                </Button>
+                </LinkButton>
                 <LinkButton to="/verify-agent" variant="ghost" className="w-full">
                   Verify an Agent
                 </LinkButton>

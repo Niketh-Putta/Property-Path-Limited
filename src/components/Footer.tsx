@@ -83,11 +83,7 @@ export default function Footer() {
             >
               Download Vanam Brochure
             </LinkButton>
-            <LinkButton
-              href="mailto:info@property-path.in?subject=PropertyPath%20Consultation%20Request"
-              variant="ghost"
-              className="w-full sm:w-auto"
-            >
+            <LinkButton to="/consultation" variant="ghost" className="w-full sm:w-auto">
               Book a Consultation
             </LinkButton>
           </div>
