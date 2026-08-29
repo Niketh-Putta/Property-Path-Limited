@@ -23,7 +23,7 @@ export default function ProjectBangaloreEastVillas() {
             <div className="mt-8 grid gap-3 rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:grid-cols-3 sm:gap-4 sm:rounded-3xl sm:p-6">
               <div className="min-w-0 rounded-2xl border border-ink-950/10 bg-canvas-100 p-4 sm:p-5">
                 <p className="text-xs font-semibold tracking-[0.16em] text-ink-950/55">CONFIG</p>
-                <p className="mt-2 text-sm font-semibold text-ink-950">3 BHK Duplex Villas</p>
+                <p className="mt-2 text-sm font-semibold text-ink-950">3 and 4 BHK Duplex Villas</p>
                 <p className="mt-1 text-sm text-ink-950/70">1500 sqft built-up</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-ink-950/10 bg-canvas-100 p-4 sm:p-5">

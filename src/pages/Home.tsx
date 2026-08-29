@@ -11,6 +11,7 @@ import {
 import { useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import LinkButton from '../components/LinkButton'
+import Button from '../components/Button'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import { cn } from '../lib/cn'
@@ -126,13 +127,17 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                  <LinkButton
-                    to="/projects/bangalore-east-villas"
+                  <Button
                     variant="primary"
                     className="w-full sm:w-auto"
+                    onClick={() => {
+                      document
+                        .getElementById('projects')
+                        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }}
                   >
                     Explore Projects <ArrowRight className="h-4 w-4" />
-                  </LinkButton>
+                  </Button>
                   <LinkButton to="/verify-agent" variant="secondary" className="w-full sm:w-auto">
                     Verify an Agent <ShieldCheck className="h-4 w-4" />
                   </LinkButton>
@@ -469,7 +474,7 @@ export default function Home() {
                           <p className="text-sm font-semibold text-ink-950">Project highlights</p>
                           <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
                             {[
-                              '3 BHK Duplex Villas',
+                              '3 and 4 BHK Duplex Villas',
                               '1500 sqft built-up area',
                               '1200 sqft plot size',
                               'Forest-side location',
