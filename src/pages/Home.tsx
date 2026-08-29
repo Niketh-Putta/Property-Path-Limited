@@ -415,21 +415,18 @@ export default function Home() {
                 animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
                 transition={reduceMotion ? { duration: 0.1 } : quickFade}
-                className="mt-10 grid gap-10 lg:grid-cols-12"
+                className="mt-10 grid gap-8"
                 role="tabpanel"
               >
-                <div className="lg:col-span-5">
-                  <SectionHeading
-                    title="Aranya — Featured 9-Acre Premium Villa Community, Bangalore East"
-                    description="Our flagship boutique villa development for families seeking space, greenery, and long-term appreciation. Explore details or book a site visit."
-                  />
-                </div>
-                <div className="lg:col-span-7">
-                  <div className="relative overflow-hidden rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
-                    <div className="absolute -right-16 -top-16 h-60 w-60 rounded-full bg-gold-300/12 blur-3xl" />
-                    <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-ink-950/[0.04] blur-3xl" />
-
-                    <div className="mb-6 rounded-2xl border border-gold-300/40 bg-gradient-to-br from-gold-50/80 to-white/90 p-4 sm:p-5">
+                <div className="grid gap-10 lg:grid-cols-12">
+                  <div className="lg:col-span-5">
+                    <SectionHeading
+                      title="Vanam — Ongoing Premium Plotted Development"
+                      description="More than a plot — a complete lifestyle. 2.5 acre premium plotted development near STRR & Whitefield Extension."
+                    />
+                  </div>
+                  <div className="lg:col-span-7">
+                    <div className="rounded-2xl border border-gold-300/40 bg-gradient-to-br from-gold-50/80 to-white/90 p-4 sm:p-5">
                       <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
                         ONGOING PROJECT
                       </p>
@@ -438,79 +435,97 @@ export default function Home() {
                         2.5 Acre premium plotted development — Initial phase of 11.5 acre
                         Integrated Township.
                       </p>
-                      <div className="mt-4">
+                      <div className="mt-4 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+                        <LinkButton to="/vanam" variant="primary" className="w-full sm:w-auto">
+                          More Details <ArrowRight className="h-4 w-4" />
+                        </LinkButton>
                         <LinkButton
                           href="/brochures/vanam-premium-brochure.pdf"
                           download="Vanam_Premium_Brochure_Property_Path.pdf"
-                          variant="primary"
+                          variant="secondary"
                           className="w-full sm:w-auto"
                         >
                           Download Brochure <Download className="h-4 w-4" />
                         </LinkButton>
                       </div>
                     </div>
+                  </div>
+                </div>
 
-                    <div className="grid gap-6 sm:grid-cols-2">
-                      <div>
-                        <p className="text-sm font-semibold text-ink-950">Project highlights</p>
-                        <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
-                          {[
-                            '3 BHK Duplex Villas',
-                            '1500 sqft built-up area',
-                            '1200 sqft plot size',
-                            'Forest-side location',
-                            'Clubhouse with pool',
-                            'Indoor & outdoor sports',
-                            'Parks & open spaces',
-                            'Underground utilities',
-                            'Cement roads',
-                            '1 KM from STRR',
-                            '15 KM to Whitefield',
-                            '10 KM to Malur',
-                          ].map((t) => (
-                            <li key={t} className="flex items-start gap-2">
-                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
-                              <span className="leading-7">{t}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-ink-950">
-                          Why this project stands out
-                        </p>
-                        <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
-                          {[
-                            'Zero land acquisition cost',
-                            'High-demand micro-market',
-                            'Strong rental & resale potential',
-                            'Developer with proven track record',
-                            'Post-sale support & dispute assistance guaranteed by PropertyPath LTD',
-                          ].map((t) => (
-                            <li key={t} className="flex items-start gap-2">
-                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
-                              <span className="leading-7">{t}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+                <div className="grid gap-10 lg:grid-cols-12">
+                  <div className="lg:col-span-5">
+                    <SectionHeading
+                      title="Aranya — Featured 9-Acre Premium Villa Community, Bangalore East"
+                      description="Our flagship boutique villa development for families seeking space, greenery, and long-term appreciation. Explore details or book a site visit."
+                    />
+                  </div>
+                  <div className="lg:col-span-7">
+                    <div className="relative overflow-hidden rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
+                      <div className="absolute -right-16 -top-16 h-60 w-60 rounded-full bg-gold-300/12 blur-3xl" />
+                      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-ink-950/[0.04] blur-3xl" />
 
-                    <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                      <LinkButton
-                        to="/projects/bangalore-east-villas"
-                        variant="primary"
-                        className="w-full sm:w-auto"
-                      >
-                        View Full Project Details <ArrowRight className="h-4 w-4" />
-                      </LinkButton>
-                      <LinkButton
-                        href="mailto:info@property-path.in?subject=Interested%20in%20Aranya%20Bangalore%20East"
-                        variant="ghost"
-                        className="w-full sm:w-auto"
-                      >
-                        Book a Site Visit
-                      </LinkButton>
+                      <div className="grid gap-6 sm:grid-cols-2">
+                        <div>
+                          <p className="text-sm font-semibold text-ink-950">Project highlights</p>
+                          <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
+                            {[
+                              '3 BHK Duplex Villas',
+                              '1500 sqft built-up area',
+                              '1200 sqft plot size',
+                              'Forest-side location',
+                              'Clubhouse with pool',
+                              'Indoor & outdoor sports',
+                              'Parks & open spaces',
+                              'Underground utilities',
+                              'Cement roads',
+                              '1 KM from STRR',
+                              '15 KM to Whitefield',
+                              '10 KM to Malur',
+                            ].map((t) => (
+                              <li key={t} className="flex items-start gap-2">
+                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
+                                <span className="leading-7">{t}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-ink-950">
+                            Why this project stands out
+                          </p>
+                          <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
+                            {[
+                              'Zero land acquisition cost',
+                              'High-demand micro-market',
+                              'Strong rental & resale potential',
+                              'Developer with proven track record',
+                              'Post-sale support & dispute assistance guaranteed by PropertyPath LTD',
+                            ].map((t) => (
+                              <li key={t} className="flex items-start gap-2">
+                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
+                                <span className="leading-7">{t}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                        <LinkButton
+                          to="/projects/bangalore-east-villas"
+                          variant="primary"
+                          className="w-full sm:w-auto"
+                        >
+                          View Full Project Details <ArrowRight className="h-4 w-4" />
+                        </LinkButton>
+                        <LinkButton
+                          href="mailto:info@property-path.in?subject=Interested%20in%20Aranya%20Bangalore%20East"
+                          variant="ghost"
+                          className="w-full sm:w-auto"
+                        >
+                          Book a Site Visit
+                        </LinkButton>
+                      </div>
                     </div>
                   </div>
                 </div>

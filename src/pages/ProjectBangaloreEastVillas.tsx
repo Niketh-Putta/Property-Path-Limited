@@ -1,9 +1,7 @@
-import { ArrowRight, BadgeCheck, Download, MapPin, Trees } from 'lucide-react'
+import { ArrowRight, BadgeCheck, MapPin, Trees } from 'lucide-react'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import LinkButton from '../components/LinkButton'
-
-const VANAM_BROCHURE_HREF = '/brochures/vanam-premium-brochure.pdf'
 
 export default function ProjectBangaloreEastVillas() {
   return (
@@ -20,28 +18,6 @@ export default function ProjectBangaloreEastVillas() {
               title="Aranya — 9-Acre Premium Villa Community, Bangalore East"
               description="A boutique villa development designed for modern families seeking space, greenery, and long-term appreciation."
             />
-          </Reveal>
-          <Reveal delay={0.04}>
-            <div className="mt-6 rounded-2xl border border-gold-300/40 bg-gradient-to-br from-gold-50/80 to-white/90 p-4 sm:p-5">
-              <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
-                ONGOING PROJECT
-              </p>
-              <p className="mt-2 text-sm font-semibold text-ink-950">Vanam</p>
-              <p className="mt-1 text-sm leading-7 text-ink-950/70">
-                2.5 Acre premium plotted development — Initial phase of 11.5 acre Integrated
-                Township.
-              </p>
-              <div className="mt-4">
-                <LinkButton
-                  href={VANAM_BROCHURE_HREF}
-                  download="Vanam_Premium_Brochure_Property_Path.pdf"
-                  variant="primary"
-                  className="w-full sm:w-auto"
-                >
-                  Download Brochure <Download className="h-4 w-4" />
-                </LinkButton>
-              </div>
-            </div>
           </Reveal>
           <Reveal delay={0.06}>
             <div className="mt-8 grid gap-3 rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:grid-cols-3 sm:gap-4 sm:rounded-3xl sm:p-6">
