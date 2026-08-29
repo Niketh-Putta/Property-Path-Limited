@@ -59,15 +59,15 @@ export default function Footer() {
               variant="ghost"
               className="w-full sm:w-auto"
             >
-              View Vanam Project
+              View Aranya Project
             </LinkButton>
             <LinkButton
-              href="/brochures/vanam-premium-brochure.pdf"
-              download="Vanam_Premium_Brochure_Property_Path.pdf"
+              href="/brochures/aranya-premium-brochure.pdf"
+              download="Aranya_Premium_Brochure_Property_Path.pdf"
               variant="ghost"
               className="w-full sm:w-auto"
             >
-              Download Vanam Brochure
+              Download Aranya Brochure
             </LinkButton>
             <LinkButton
               href="mailto:info@property-path.in?subject=PropertyPath%20Consultation%20Request"

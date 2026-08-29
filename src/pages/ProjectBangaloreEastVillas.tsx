@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import LinkButton from '../components/LinkButton'
 
-const VANAM_BROCHURE_HREF = '/brochures/vanam-premium-brochure.pdf'
+const ARANYA_BROCHURE_HREF = '/brochures/aranya-premium-brochure.pdf'
 
 export default function ProjectBangaloreEastVillas() {
   return (
@@ -16,8 +16,8 @@ export default function ProjectBangaloreEastVillas() {
             </p>
             <SectionHeading
               className="mt-4"
-              eyebrow="FEATURED PROJECT · VANAM"
-              title="Vanam — 5-Acre Premium Villa Community, Bangalore East"
+              eyebrow="FEATURED PROJECT · ARANYA"
+              title="Aranya — 9-Acre Premium Villa Community, Bangalore East"
               description="A boutique villa development designed for modern families seeking space, greenery, and long-term appreciation. Download the brochure for full layout, amenities, and investment details."
             />
           </Reveal>
@@ -106,15 +106,15 @@ export default function ProjectBangaloreEastVillas() {
 
               <div className="mt-6 grid gap-3">
                 <LinkButton
-                  href={VANAM_BROCHURE_HREF}
-                  download="Vanam_Premium_Brochure_Property_Path.pdf"
+                  href={ARANYA_BROCHURE_HREF}
+                  download="Aranya_Premium_Brochure_Property_Path.pdf"
                   variant="primary"
                   className="w-full"
                 >
-                  Download Vanam Brochure <Download className="h-4 w-4" />
+                  Download Aranya Brochure <Download className="h-4 w-4" />
                 </LinkButton>
                 <LinkButton
-                  href="mailto:info@property-path.in?subject=Site%20Visit%20Request%20-%20Vanam%20Bangalore%20East"
+                  href="mailto:info@property-path.in?subject=Site%20Visit%20Request%20-%20Aranya%20Bangalore%20East"
                   variant="secondary"
                   className="w-full"
                 >

@@ -371,7 +371,7 @@ export default function Home() {
               <Reveal>
                 <SectionHeading
                   eyebrow="PROJECTS"
-                  title="Vanam — Featured 5-Acre Premium Villa Community, Bangalore East"
+                  title="Aranya — Featured 9-Acre Premium Villa Community, Bangalore East"
                   description="Our flagship boutique villa development for families seeking space, greenery, and long-term appreciation. Explore details or download the latest brochure."
                 />
               </Reveal>
@@ -386,15 +386,15 @@ export default function Home() {
                     <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
                       LATEST BROCHURE
                     </p>
-                    <p className="mt-2 text-sm font-semibold text-ink-950">Vanam Premium Brochure</p>
+                    <p className="mt-2 text-sm font-semibold text-ink-950">Aranya Premium Brochure</p>
                     <p className="mt-1 text-sm leading-7 text-ink-950/70">
                       Layouts, amenities, connectivity, and investment highlights — ready to
                       download.
                     </p>
                     <div className="mt-4">
                       <LinkButton
-                        href="/brochures/vanam-premium-brochure.pdf"
-                        download="Vanam_Premium_Brochure_Property_Path.pdf"
+                        href="/brochures/aranya-premium-brochure.pdf"
+                        download="Aranya_Premium_Brochure_Property_Path.pdf"
                         variant="primary"
                         className="w-full sm:w-auto"
                       >
@@ -454,15 +454,15 @@ export default function Home() {
                       View Full Project Details <ArrowRight className="h-4 w-4" />
                     </LinkButton>
                     <LinkButton
-                      href="/brochures/vanam-premium-brochure.pdf"
-                      download="Vanam_Premium_Brochure_Property_Path.pdf"
+                      href="/brochures/aranya-premium-brochure.pdf"
+                      download="Aranya_Premium_Brochure_Property_Path.pdf"
                       variant="secondary"
                       className="w-full sm:w-auto"
                     >
                       Download Brochure <Download className="h-4 w-4" />
                     </LinkButton>
                     <LinkButton
-                      href="mailto:info@property-path.in?subject=Interested%20in%20Vanam%20Bangalore%20East"
+                      href="mailto:info@property-path.in?subject=Interested%20in%20Aranya%20Bangalore%20East"
                       variant="ghost"
                       className="w-full sm:w-auto"
                     >
