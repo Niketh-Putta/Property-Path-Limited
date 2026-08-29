@@ -3,15 +3,17 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import AuthCodeHandler from './AuthCodeHandler'
+import { cn } from '../lib/cn'
 
 export default function Layout() {
   const location = useLocation()
   const reduceMotion = useReducedMotion()
+  const isVanamLanding = location.pathname.toLowerCase() === '/vanam'
 
   return (
     <div className="min-h-screen max-w-[100vw] overflow-x-hidden">
       <div id="top" />
-      <div className="pointer-events-none fixed inset-0 -z-10">
+      <div className={cn('pointer-events-none fixed inset-0 -z-10', isVanamLanding && 'hidden')}>
         <div className="absolute inset-0 bg-gradient-to-b from-canvas-50 via-canvas-50 to-canvas-100" />
         <div className="botanical absolute inset-0 opacity-90" />
         <div className="noise absolute inset-0 opacity-40" />
@@ -20,8 +22,8 @@ export default function Layout() {
         <div className="absolute bottom-0 left-0 h-40 w-full bg-gradient-to-r from-ink-950 via-ink-900 to-gold-300 opacity-[0.12]" />
       </div>
 
-      <Navbar />
-      <main className="min-w-0 overflow-x-hidden">
+      {isVanamLanding ? null : <Navbar />}
+      <main className={cn('min-w-0 overflow-x-hidden', isVanamLanding && 'bg-white')}>
         <AuthCodeHandler />
         <AnimatePresence mode="wait">
           <motion.div
@@ -39,7 +41,7 @@ export default function Layout() {
           </motion.div>
         </AnimatePresence>
       </main>
-      <Footer />
+      {isVanamLanding ? null : <Footer />}
     </div>
   )
 }

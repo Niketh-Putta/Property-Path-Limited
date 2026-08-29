@@ -1,66 +1,52 @@
-import {
-  ArrowRight,
-  BadgeCheck,
-  Download,
-  MapPin,
-  Trees,
-} from 'lucide-react'
-import Reveal from '../components/Reveal'
-import SectionHeading from '../components/SectionHeading'
-import LinkButton from '../components/LinkButton'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ChevronRight, Globe, Mail, MapPin, Phone } from 'lucide-react'
+import VanamLeadForm from '../components/VanamLeadForm'
 
-const VANAM_BROCHURE_HREF = '/brochures/vanam-premium-brochure.pdf'
-
-const heroStats = [
-  { label: 'Phase size', value: '2.5 Acres' },
-  { label: 'Starting from', value: '₹2,799 / sqft' },
-  { label: 'Open spaces', value: '45%' },
+const amenityTiles = [
+  { icon: '/vanam/pine-tree.png', title: '800-Acre Forest Adjacency' },
+  { icon: '/vanam/road.png', title: '30 Ft. CC Roads' },
+  { icon: '/vanam/park.png', title: '45% Open Spaces' },
+  { icon: '/vanam/villa.png', title: 'Villa-Community Amenity' },
 ]
 
-const lifestyleHighlights = [
-  { title: '800-Acre Forest Adjacency', body: 'Live beside expansive greenery with a calm, nature-first setting.' },
-  { title: '30 Ft. CC Roads', body: 'Wide cement-concrete internal roads designed for everyday ease.' },
-  { title: '45% Open Spaces', body: 'Generous open areas for light, air, and community living.' },
-  { title: 'Villa-Community Amenity', body: 'Enjoy township-scale amenities with the freedom of a private plot.' },
+const valueTiles = [
+  { icon: '/vanam/verified.png', title: 'MPA Approved Properties' },
+  { icon: '/vanam/land-plot.png', title: 'Premium Plotted Phase' },
+  { icon: '/vanam/loan.png', title: 'Easy Bank Loans' },
+  { icon: '/vanam/growth.png', title: 'In Growing Whitefield' },
+  { icon: '/vanam/road-2.png', title: 'Access to Bengaluru-Chennai Express Way' },
+  { icon: '/vanam/briefcase.png', title: 'Industries in Commuting Distance' },
+  { icon: '/vanam/road.png', title: 'Near Satellite Town Ring Road' },
+  { icon: '/vanam/township.png', title: '50 Acre Integrated Township' },
 ]
 
-const valuePoints = [
-  'MPA approved properties',
-  'Premium plotted phase',
-  'Easy bank loans',
-  'In growing Whitefield',
-  'Access to Bengaluru–Chennai Expressway',
-  'Industries in commuting distance',
-  'Near Satellite Town Ring Road (STRR)',
-  'Part of a larger integrated township vision',
-]
-
-const layoutFeatures = [
-  '30 Ft. CC roads',
-  'Landscaped avenues',
-  'Underground utilities',
-  'Street lighting',
-  'Water infrastructure',
-  'Rainwater harvesting',
-  'Gated security',
-  '45% open spaces',
-  '5,000 Sq. Ft. club house',
-  'Basketball court',
-  "Children's play zone",
-  "Swimming pool & kid's pool",
-  'Cricket practice nets',
-  'Jogging & yoga zone',
-  'Fully equipped gym',
-  'Outdoor amphitheatre',
-  'Party lawn',
-  'Tennis & badminton courts',
-  "Senior citizens' wellness garden",
-  'Indoor games lounge',
+const layoutAmenities = [
+  '30 Ft. CC Roads',
+  'Landscaped Avenues',
+  'Underground Utilities',
+  'Street Lighting',
+  'Water Infrastructure',
+  'Rainwater Harvesting',
+  'Gated Security',
+  '45% Open Spaces',
+  '5,000 Sq. Ft. Club House',
+  'Basketball Court',
+  "Children's Play Zone",
+  "Swimming Pool & Kid's Pool",
+  'Cricket Practice Nets',
+  'Jogging & Yoga Zone',
+  'Fully Equipped Gym',
+  'Outdoor Amphitheatre',
+  'Party Lawn',
+  'Tennis & Badminton Courts',
+  "Senior Citizens' Wellness Garden",
+  'Indoor Games Lounge',
 ]
 
 const connectivity = [
   {
-    title: 'Schools',
+    title: 'SCHOOLS',
     items: [
       'Bangalore International Academy — 15 Min',
       'Shri Ram Global School — 25 Min',
@@ -74,7 +60,7 @@ const connectivity = [
     ],
   },
   {
-    title: 'Colleges',
+    title: 'COLLEGES',
     items: [
       'Christ College of Science and Management — 11 Min',
       'MVJ College of Engineering — 22 Min',
@@ -82,7 +68,7 @@ const connectivity = [
     ],
   },
   {
-    title: 'Hospitals',
+    title: 'HOSPITALS',
     items: [
       'MVJ Hospital — 15 Min',
       'RKB Sanjeevini Hospital — 10 Min',
@@ -94,7 +80,7 @@ const connectivity = [
     ],
   },
   {
-    title: 'IT Parks',
+    title: 'IT PARKS',
     items: [
       'International Tech Park Bangalore — 29 Min',
       'Brigade Tech Gardens — 40 Min',
@@ -103,7 +89,7 @@ const connectivity = [
     ],
   },
   {
-    title: 'Shopping',
+    title: 'SHOPPING',
     items: [
       'Nexus Whitefield — 35 Min',
       'Phoenix Marketcity — 45 Min',
@@ -115,230 +101,217 @@ const connectivity = [
 ]
 
 export default function ProjectVanam() {
+  const [openGroup, setOpenGroup] = useState('SCHOOLS')
+
   return (
-    <div>
-      <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16 lg:py-20">
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
-          <div className="min-w-0 lg:col-span-7">
-            <Reveal>
-              <p className="inline-flex max-w-full items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-[10px] font-medium tracking-[0.08em] text-ink-950/70 ring-1 ring-ink-950/10 sm:text-xs sm:tracking-[0.12em]">
-                ONGOING PROJECT · VANAM
-              </p>
-              <SectionHeading
-                className="mt-4"
-                eyebrow="MORE THAN A PLOT"
-                title="Vanam — A Complete Lifestyle"
-                description="Premium plotted development — the initial phase of an integrated township near STRR & Whitefield Extension. Land. Lifestyle. Location."
-              />
-            </Reveal>
-
-            <Reveal delay={0.06}>
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {heroStats.map((item) => (
-                  <div
-                    key={item.label}
-                    className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:p-5"
-                  >
-                    <p className="text-xs font-semibold tracking-[0.16em] text-ink-950/55">
-                      {item.label.toUpperCase()}
-                    </p>
-                    <p className="mt-2 text-sm font-semibold text-ink-950">{item.value}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div className="mt-6 rounded-2xl border border-gold-300/40 bg-gradient-to-br from-gold-50/80 to-white/90 p-4 sm:p-5">
-                <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
-                  PROJECT SNAPSHOT
-                </p>
-                <p className="mt-2 text-sm leading-7 text-ink-950/75">
-                  2.5 Acre premium plotted development — initial phase of an 11.5 acre integrated
-                  township. A premium plotted address designed for buyers who want nature,
-                  connectivity, and long-term value.
-                </p>
-                <div className="mt-4 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
-                  <LinkButton
-                    href={VANAM_BROCHURE_HREF}
-                    download="Vanam_Premium_Brochure_Property_Path.pdf"
-                    variant="primary"
-                    className="w-full sm:w-auto"
-                  >
-                    Download Brochure <Download className="h-4 w-4" />
-                  </LinkButton>
-                  <LinkButton
-                    to="/consultation"
-                    variant="secondary"
-                    className="w-full sm:w-auto"
-                  >
-                    Schedule a Site Visit <ArrowRight className="h-4 w-4" />
-                  </LinkButton>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-
-          <div className="min-w-0 lg:col-span-5">
-            <Reveal delay={0.08}>
-              <div className="rounded-2xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-4 shadow-soft sm:rounded-3xl sm:p-6">
-                <p className="text-sm font-semibold text-ink-950">Why Vanam</p>
-                <ul className="mt-4 grid gap-3">
-                  {lifestyleHighlights.map((item) => (
-                    <li
-                      key={item.title}
-                      className="rounded-2xl border border-ink-950/10 bg-canvas-100 p-4"
-                    >
-                      <div className="flex items-start gap-3">
-                        <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-ink-950/[0.05] ring-1 ring-ink-950/10">
-                          <Trees className="h-4 w-4 text-gold-300/90" />
-                        </span>
-                        <div className="min-w-0">
-                          <p className="text-sm font-semibold text-ink-950">{item.title}</p>
-                          <p className="mt-1 text-sm leading-6 text-ink-950/65">{item.body}</p>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
+    <div className="bg-white text-[#1a1a1a]">
+      <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:py-16">
+        <div>
+          <img src="/vanam/logo.webp" alt="Property Path" className="h-14 w-auto sm:h-16" />
+          <h1 className="mt-8 font-serif text-6xl font-semibold tracking-tight text-ink-950 sm:text-7xl">
+            VANAM
+          </h1>
+          <p className="mt-4 text-lg font-semibold tracking-wide text-ink-950 sm:text-xl">
+            MORE THAN A PLOT. A COMPLETE LIFESTYLE
+          </p>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-ink-950/70 sm:text-base">
+            Premium Plotted Development – The Initial Phase of an 11.5-Acre Integrated Township
+            near STRR & Whitefield Extension
+          </p>
+          <p className="mt-6 inline-flex rounded-full border border-ink-950/70 px-5 py-2 text-sm font-medium">
+            Plots Starting from ₹2,799 / SQ. FT.
+          </p>
+        </div>
+        <div id="vanam-brochure">
+          <VanamLeadForm />
         </div>
       </section>
 
-      <section className="border-t border-ink-950/10">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="LAND · LIFESTYLE · LOCATION"
-              title="Built for nature, connectivity, and long-term value"
-              description="The freedom of a plot with the lifestyle of a larger community — strategically positioned in Bengaluru East, close to STRR, Hosakote, Whitefield, and the broader employment corridor."
+      <section className="bg-gradient-to-b from-[#163d24] via-[#1d4d2d] to-[#245c36] py-12 sm:py-16">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="text-white">
+            <img
+              src="/vanam/logo-white.webp"
+              alt="Property Path"
+              className="h-12 w-auto brightness-0 invert sm:h-14"
             />
-          </Reveal>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {valuePoints.map((point, idx) => (
-              <Reveal key={point} delay={0.03 * idx}>
-                <div className="h-full rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft">
-                  <span className="inline-flex items-start gap-2 text-sm text-ink-950/75">
-                    <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold-300/90" />
-                    <span className="leading-6">{point}</span>
-                  </span>
-                </div>
-              </Reveal>
+            <h2 className="mt-8 font-serif text-5xl font-semibold tracking-tight sm:text-6xl">
+              VANAM
+            </h2>
+            <p className="mt-4 text-lg font-semibold tracking-wide">
+              MORE THAN A PLOT. A COMPLETE LIFESTYLE
+            </p>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-white/85 sm:text-base">
+              2.5 Acre Premium Plotted Development Initial Phase of a 50-Acre Integrated Township
+            </p>
+            <p className="mt-6 inline-flex rounded-full border border-white/80 px-5 py-2 text-sm font-medium">
+              Plots Starting from ₹2,799 / SQ. FT.
+            </p>
+          </div>
+          <VanamLeadForm variant="light" />
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {amenityTiles.map((item) => (
+            <div key={item.title} className="text-center">
+              <img src={item.icon} alt="" className="mx-auto h-20 w-20 object-contain" />
+              <p className="mt-4 text-sm font-semibold leading-6 text-ink-950">{item.title}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-[#f7f4ec] py-14">
+        <div className="mx-auto max-w-6xl px-5 text-center sm:px-8">
+          <h2 className="font-serif text-5xl font-semibold tracking-tight text-ink-950">VANAM</h2>
+          <p className="mt-3 text-lg font-semibold tracking-[0.14em] text-ink-950">
+            LAND. LIFESTYLE. LOCATION
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-ink-950/70">
+            A premium plotted address designed for buyers who want nature, connectivity and
+            long-term value.
+          </p>
+          <a
+            href="#vanam-brochure"
+            className="mt-6 inline-block text-sm font-semibold tracking-[0.12em] uppercase text-ink-950 underline underline-offset-4"
+          >
+            Get your Free Brochure
+          </a>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {valueTiles.map((item) => (
+              <div key={item.title} className="rounded-2xl bg-white px-4 py-6 shadow-soft">
+                <img src={item.icon} alt="" className="mx-auto h-16 w-16 object-contain" />
+                <p className="mt-4 text-sm font-semibold leading-6 text-ink-950">{item.title}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-ink-950/10">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-          <div className="grid gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-5">
-              <Reveal>
-                <SectionHeading
-                  eyebrow="LAYOUT PLAN"
-                  title="Thoughtfully planned plotted living"
-                  description="Roads, utilities, open spaces, and club amenities designed for everyday comfort and long-term community living."
-                />
-              </Reveal>
-            </div>
-            <div className="lg:col-span-7">
-              <Reveal delay={0.06}>
-                <div className="rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:rounded-3xl sm:p-6">
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {layoutFeatures.map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-2xl border border-ink-950/10 bg-canvas-100 p-4 text-sm text-ink-950/75"
-                      >
-                        <span className="flex items-start gap-2">
-                          <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-300/90" />
-                          <span className="min-w-0 leading-6">{item}</span>
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+      <section className="bg-gradient-to-b from-[#8fbf7a] via-[#cfe3c4] to-white py-10">
+        <h2 className="text-center font-serif text-3xl font-semibold tracking-wide text-ink-950 sm:text-4xl">
+          VANAM LAYOUT PLAN
+        </h2>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-6 sm:px-8">
+        <img
+          src="/vanam/map.webp"
+          alt="Vanam layout plan"
+          className="mx-auto w-full max-w-4xl rounded-xl object-contain"
+        />
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {layoutAmenities.map((item) => (
+            <p key={item} className="flex items-start gap-2 text-sm leading-6 text-ink-950/80">
+              <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ink-950 text-[10px] text-white">
+                <ChevronRight className="h-3 w-3" />
+              </span>
+              {item}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
+        <div className="flex items-center justify-center gap-4">
+          <img src="/vanam/pine-tree.png" alt="" className="h-8 w-8 object-contain" />
+          <p className="text-center font-serif text-xl font-semibold tracking-wide text-ink-950 sm:text-2xl">
+            THE FREEDOM OF A PLOT. THE LIFESTYLE OF A LARGER COMMUNITY
+          </p>
+        </div>
+        <img
+          src="/vanam/project-view.webp"
+          alt="Vanam project view"
+          className="mt-10 w-full rounded-xl object-cover"
+        />
+      </section>
+
+      <section className="mx-auto grid max-w-6xl gap-10 px-5 py-10 sm:px-8 lg:grid-cols-2 lg:py-16">
+        <div>
+          <h2 className="font-serif text-5xl font-semibold tracking-tight text-ink-950">VANAM</h2>
+          <p className="mt-3 text-lg font-semibold tracking-wide text-ink-950">
+            CONNECTED TO EVERYTHING THAT MATTERS.
+          </p>
+          <p className="mt-4 max-w-lg text-sm leading-7 text-ink-950/70">
+            Strategically Positioned with Bengaluru East – Close to STRR, Hosakote, Whitefield and
+            the broader Employment & Infrastructure Corridor
+          </p>
+          <img
+            src="/vanam/landmark.webp"
+            alt="Vanam location landmarks"
+            className="mt-8 w-full object-contain"
+          />
+        </div>
+        <div>
+          <p className="text-sm font-semibold tracking-[0.16em] text-ink-950/80">
+            WELL CONNECTED · WELL LOCATED
+          </p>
+          <div className="mt-4 divide-y divide-ink-950/15 border border-ink-950/15">
+            {connectivity.map((group) => {
+              const open = openGroup === group.title
+              return (
+                <div key={group.title}>
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold tracking-wide"
+                    onClick={() => setOpenGroup(open ? '' : group.title)}
+                  >
+                    <span>
+                      {open ? '−' : '+'} {group.title}
+                    </span>
+                  </button>
+                  {open ? (
+                    <ul className="space-y-1 px-8 pb-4 text-sm leading-7 text-ink-950/75">
+                      {group.items.map((item) => (
+                        <li key={item}>• {item}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </div>
-              </Reveal>
-            </div>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-ink-950/10">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="WELL CONNECTED · WELL LOCATED"
-              title="Connected to everything that matters"
-              description="Strategically positioned in Bengaluru East — close to STRR, Hosakote, Whitefield, and the broader employment & infrastructure corridor."
-            />
-          </Reveal>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {connectivity.map((group, idx) => (
-              <Reveal key={group.title} delay={0.04 * idx}>
-                <div className="h-full rounded-2xl border border-ink-950/10 bg-white/80 p-4 shadow-soft sm:p-5">
-                  <p className="text-sm font-semibold text-ink-950">{group.title}</p>
-                  <ul className="mt-4 grid gap-2 text-sm text-ink-950/70">
-                    {group.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-300/80" />
-                        <span className="leading-7">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
+      <footer className="border-t border-ink-950/10 bg-white py-12">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 lg:grid-cols-2">
+          <div>
+            <p className="font-serif text-5xl font-semibold text-[#c5a059]">VANAM</p>
+            <p className="mt-3 text-sm text-ink-950/70">— Presented & Marketed by —</p>
+            <img src="/vanam/logo.webp" alt="Property Path" className="mt-4 h-14 w-auto" />
+          </div>
+          <div className="grid gap-3 text-sm leading-7 text-ink-950/80">
+            <p className="flex items-start gap-2">
+              <MapPin className="mt-1 h-4 w-4 shrink-0" />
+              Office: F1 & F2, Sarovi #72, 1st Floor, Sunshine Paradise Layout Whitefield, Bengaluru
+              - 560049.
+            </p>
+            <p className="flex items-start gap-2">
+              <Mail className="mt-1 h-4 w-4 shrink-0" />
+              propertypath9@gmail.com / sales@property-path.in
+            </p>
+            <p className="flex items-start gap-2">
+              <Globe className="mt-1 h-4 w-4 shrink-0" />
+              <a href="https://www.property-path.in" className="hover:underline">
+                www.property-path.in
+              </a>
+            </p>
+            <p className="flex items-start gap-2">
+              <Phone className="mt-1 h-4 w-4 shrink-0" />
+              +91 6364 467944 | +91 6364 467941 | +91 6364 467942
+            </p>
+            <Link
+              to="/consultation"
+              className="mt-2 inline-flex text-sm font-semibold tracking-[0.14em] uppercase"
+            >
+              SCHEDULE A SITE VISIT
+            </Link>
           </div>
         </div>
-      </section>
-
-      <section className="border-t border-ink-950/10">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:pb-20 sm:pt-16">
-          <Reveal>
-            <div className="rounded-2xl border border-ink-950/10 bg-gradient-to-br from-white/80 to-canvas-100 p-5 shadow-soft sm:rounded-3xl sm:p-8">
-              <p className="text-[11px] font-semibold tracking-[0.14em] text-gold-500 sm:text-xs sm:tracking-[0.16em]">
-                PRESENTED & MARKETED BY PROPERTYPATH
-              </p>
-              <h2 className="mt-3 font-serif text-2xl font-semibold tracking-tight text-ink-950 sm:text-3xl">
-                Schedule a site visit
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-ink-950/70">
-                Plots starting from ₹2,799 / sqft. Speak with the PropertyPath team for brochure
-                details, inventory updates, and a guided visit.
-              </p>
-              <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <LinkButton
-                  href="https://wa.me/919989544728?text=Hi%20PropertyPath%2C%20I%27d%20like%20details%20on%20Vanam."
-                  external
-                  variant="primary"
-                  className="w-full sm:w-auto"
-                >
-                  WhatsApp Us <ArrowRight className="h-4 w-4" />
-                </LinkButton>
-                <LinkButton href="tel:+916364467941" variant="secondary" className="w-full sm:w-auto">
-                  Call +91 6364467941
-                </LinkButton>
-                <LinkButton
-                  href={VANAM_BROCHURE_HREF}
-                  download="Vanam_Premium_Brochure_Property_Path.pdf"
-                  variant="ghost"
-                  className="w-full sm:w-auto"
-                >
-                  Get Your Brochure <Download className="h-4 w-4" />
-                </LinkButton>
-              </div>
-              <div className="mt-6">
-                <LinkButton to="/" variant="ghost" className="w-full sm:w-auto">
-                  Back to Home
-                </LinkButton>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      </footer>
     </div>
   )
 }
