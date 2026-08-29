@@ -151,7 +151,7 @@ export default function ProjectSkhEchium() {
 
               <div className="mt-6 grid gap-3">
                 <LinkButton
-                  href="https://wa.me/916364467941?text=Hi%20PropertyPath%2C%20I%27m%20interested%20in%20SKH%20Echium%20resale."
+                  href="https://wa.me/919989544728?text=Hi%20PropertyPath%2C%20I%27m%20interested%20in%20SKH%20Echium%20resale."
                   external
                   variant="primary"
                   className="w-full"

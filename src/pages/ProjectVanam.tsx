@@ -311,7 +311,7 @@ export default function ProjectVanam() {
               </p>
               <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <LinkButton
-                  href="https://wa.me/916364467941?text=Hi%20PropertyPath%2C%20I%27d%20like%20details%20on%20Vanam."
+                  href="https://wa.me/919989544728?text=Hi%20PropertyPath%2C%20I%27d%20like%20details%20on%20Vanam."
                   external
                   variant="primary"
                   className="w-full sm:w-auto"
